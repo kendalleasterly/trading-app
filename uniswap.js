@@ -1,6 +1,3 @@
-const {ethers, providers, BigNumber} = require("ethers");
-const {Token, TradeType, CurrencyAmount, Percent} = require("@uniswap/sdk-core");
-const {Pool, Route, Trade} = require("@uniswap/v3-sdk");
 const {
 	abi: IUniswapV3Pool,
 } = require("@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json");
@@ -10,6 +7,10 @@ const {
 const {
 	abi: IUniswapV3Factory,
 } = require("@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Factory.sol/IUniswapV3Factory.json");
+
+const {ethers, BigNumber} = require("ethers");
+const {Token, TradeType, CurrencyAmount, Percent} = require("@uniswap/sdk-core");
+const {Pool, Route, Trade} = require("@uniswap/v3-sdk");
 const {AlphaRouter, ChainId} = require("@uniswap/smart-order-router");
 
 const dotenv = require("dotenv")
@@ -18,11 +19,9 @@ dotenv.config()
 const privateKey = process.env.WALET_PRIVATE_KEY
 const infuraUrl = process.env.INFURA_POLYGON_URL
 
-//setup
 const provider = new ethers.providers.JsonRpcProvider(
 	infuraUrl
-);
-
+)
 const signer = new ethers.Wallet(
 	privateKey,
 	provider
@@ -67,10 +66,10 @@ async function getPoolState(poolContract) {
 	);
 }
 
-async function makeTrade(amountIn) {
+async function makeTrade(amountIn, pool) {
 	const [immutables, state] = await Promise.all([
-		getPoolImmutables(),
-		getPoolState(),
+		getPoolImmutables(pool),
+		getPoolState(pool),
 	]);
 
 	const quoterAddress = "0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6";
