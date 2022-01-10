@@ -1,0 +1,17 @@
+{
+  "name": "flash",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "hardhat": "^2.8.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kendall Easterly",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.4.1"
+  }
+}
