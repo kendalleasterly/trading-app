@@ -7,7 +7,7 @@ const {autoRoute, swapExactInputSingle} = require("./uniswap");
 const dotenv = require("dotenv");
 const { ChainId } = require("@uniswap/smart-order-router");
 const { ethers } = require("ethers");
-const main = require("./liquidity-advisor");
+const main = require("../liquidity/liquidity-advisor");
 dotenv.config()
 
 const port = process.env.PORT || 4000;
