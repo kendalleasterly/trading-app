@@ -42,7 +42,13 @@ app.get("/prices", async (req, res) => {
 
 	const queryData = `
 		token0Price
+		token0 {
+			symbol
+		}
     	token1Price
+		token1 {
+			symbol
+		}
 		feeTier
     `;
 
