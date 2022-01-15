@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.4",
     "hardhat": "^2.8.2"
   },
   "scripts": {
