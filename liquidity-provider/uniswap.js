@@ -47,7 +47,7 @@ function getInfo() {
 
 		const percentage = localPrice / localHighest;
 
-		if (percentage < 0.25 || percentage > 0.75) {
+		if (percentage <= 0.275 || percentage >= 0.725) {
 			//create a new position
 		} else {
 			console.log("good range!");
