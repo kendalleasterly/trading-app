@@ -29,4 +29,12 @@ const USDT = new Token(
 	"Tether USD"
 )
 
-module.exports = {WETH, MATIC, DAI, USDT}
+const WBTC = new Token(
+	137,
+	"0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6",
+	8,
+	"WBTC",
+	"Wrapped BTC"
+)
+
+module.exports = {WETH, MATIC, DAI, USDT, WBTC}

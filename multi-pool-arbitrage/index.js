@@ -2,7 +2,7 @@ const app = require("express")();
 const {TradeType, CurrencyAmount} = require("@uniswap/sdk-core");
 
 const {tokens, testTokens} = require("./constants");
-const {autoRoute, swapExactInputSingle} = require("./uniswap");
+const {autoRoute, swapExactInputSingle, getPool} = require("./uniswap");
 
 const dotenv = require("dotenv");
 const {ChainId} = require("@uniswap/smart-order-router");
@@ -139,6 +139,12 @@ app.get("/liquidity-advisor", async (req, res) => {
 
 	res.send("");
 });
+
+app.get("/route", async (req, res) => {
+	const pool = await getPool(tokens.USDC, tokens.WETH)
+
+	console.log(pool)
+})
 
 app.listen(port, () => {
 	console.log(`Listening on port ${port}!`);

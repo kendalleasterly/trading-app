@@ -144,6 +144,8 @@ async function autoRoute(amount, quoteCurrency, tradeType, provider, chainID) {
 	const finalRoute = route.trade.swaps[0].route
 	const pool = finalRoute.pools[0]
 
+	
+
 	console.log(
 		pool.token0.name,
 		finalRoute.midPrice.toSignificant(6)

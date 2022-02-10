@@ -1,15 +1,16 @@
 const { default: axios } = require("axios")
 const { Position, Pool, nearestUsableTick, NonfungiblePositionManager } = require("@uniswap/v3-sdk")
 const { ethers, BigNumber } = require("ethers")
-const {USDT, DAI} = require("./uniswap-tokens")
+const Web3 = require("web3")
+const {USDT, DAI, WETH, WBTC} = require("./uniswap-tokens")
 const dotenv = require("dotenv")
 const { Percent } = require("@uniswap/sdk-core")
+const Web3httpProvider = require("web3-providers-http")
 const {abi: INonfungiblePositionManagerABI} = require("@uniswap/v3-periphery/artifacts/contracts/interfaces/INonfungiblePositionManager.sol/INonfungiblePositionManager.json")
 
 const {
 	abi: IUniswapV3PoolABI,
 } = require("@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json")
-
 
 dotenv.config()
 
@@ -17,10 +18,13 @@ const apiURL =
 	"https://api.thegraph.com/subgraphs/name/ianlapham/uniswap-v3-polygon"
 
 const provider = new ethers.providers.JsonRpcProvider(process.env.INFURA_URL)
-let wallet = new ethers.Wallet(process.env.PRIVATE_KEY)
-wallet = wallet.connect(provider)
+const web3Provider = new Web3httpProvider(process.env.INFURA_URL)
+const {eth} = new Web3(web3Provider)
+// let wallet = new ethers.Wallet(process.env.PRIVATE_KEY)
+// wallet = wallet.connect(provider)
 
-function getInfo() {
+async function getInfo() {
+
 	const positionID = 45010
 
 	const query = `
@@ -61,48 +65,73 @@ function getInfo() {
 }
 
 async function mintPosition() {
-	const poolAddress = "0x42f0530351471dab7ec968476d19bd36af9ec52d"
-	const [POOL, immutables, state] = await getPool(USDT, DAI, poolAddress)
+
+	await eth.accounts.wallet.add(process.env.PRIVATE_KEY)
+
+	const USDT_DAI_ADDRESS = "0x42f0530351471dab7ec968476d19bd36af9ec52d" 
+	const WBTC_WETH_ADDRESS = "0x50eaedb835021e4a108b7290636d62e9765cc6d7"
+	const [POOL, immutables, state] = await getPool(WETH, WBTC, WBTC_WETH_ADDRESS)
 	
-	const position = new Position({
+	const newPosition = Position.fromAmount0({
 		pool: POOL,
-		liquidity: state.liquidity * 0.0002,
 		tickLower: nearestUsableTick(state.tick, immutables.tickSpacing) - immutables.tickSpacing * 10,
-		tickUpper: nearestUsableTick(state.tick, immutables.tickSpacing) + immutables.tickSpacing * 10
+		tickUpper: nearestUsableTick(state.tick, immutables.tickSpacing) + immutables.tickSpacing * 10,
+		amount0: ethers.utils.parseUnits("0.01", 8),
+		useFullPrecision: true
 	})
 
-	const blockNumber =  await wallet.provider.getBlockNumber()
+	// console.log(newPosition)
+	// console.log(ethers.utils.formatUnits(newPosition.amount0.quotient.toString(), WBTC.decimals))
+	// console.log(ethers.utils.formatUnits(newPosition.amount1.quotient.toString(), WETH.decimals))
 
-	const data = {
+	const blockNumber =  await eth.getBlockNumber()
+	const account = eth.accounts.wallet["0"]
+	
+
+	const {calldata, value} = NonfungiblePositionManager.addCallParameters(newPosition, {
 		slippageTolerance: new Percent(50, 1000),
-		recipient: wallet.address,
+		recipient: account.address,
 		deadline: blockNumber + 200
-	}
+	})
 
-	const {calldata, value} = NonfungiblePositionManager.addCallParameters(position, data)
+	
 
 	const NFPManagerAddress = "0xC36442b4a4522E871399CD717aBDD847Ab11FE88"
-	// const NFPManager = new ethers.Contract(
+
+	let txn = {
+		to: NFPManagerAddress,
+		data: calldata,
+		value
+	}
+
+	const gasPrice = await provider.getGasPrice()
+	// const nonce = await wallet.getTransactionCount()
+
+	// const PositionManagerContract = new ethers.Contract(
 	// 	NFPManagerAddress,
 	// 	INonfungiblePositionManagerABI,
 	// 	wallet
 	// )
 
-	const gasPrice = await provider.getGasPrice()
-	const nonce = await wallet.getTransactionCount()
-	console.log(nonce)
+	console.log(calldata)
 
-	const tx = await wallet.sendTransaction({
-		from: wallet.address,
-		to: NFPManagerAddress,
-		value: value,
-		data: calldata,
-		gasPrice: gasPrice,
-		nonce: nonce,
-		gasLimit: 2100000
-	})
+	// eth.sendTransaction({
+	// 	...txn,
+	// 	from: account.address,
+	// 	gas: 800000
+	// })
+	// .on("transactionHash", hash => console.log(hash))
+	// .then(result => {
+	// 	console.log(result)
+	// })
 
-	console.log(tx)
+	// const tx = await wallet.sendTransaction({
+	// 	...txn,
+	// 	gasPrice,
+	// 	gasLimit: 489000
+	// })
+
+	// console.log(tx)
 }
 
 //MARK: Helpers
@@ -180,4 +209,25 @@ async function getPoolState(poolAddress) {
 	return PoolState
 }
 
-module.exports = { getInfo, mintPosition }
+const {
+	abi: IUniswapV3FactoryABI
+} = require("@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Factory.sol/IUniswapV3Factory.json")
+// const provider = new ethers.providers.JsonRpcProvider(process.env.INFURA_URL)
+
+async function getPool(token0, token1, fee) {
+	const factoryContract = new ethers.Contract(
+		"0x1F98431c8aD98523631AE4a59f267346ea31F984",
+		IUniswapV3FactoryABI,
+		provider
+	);
+
+	const pool = await factoryContract.getPool(token0.address, token1.address, fee)
+	const functions = await factoryContract.functions
+
+	console.log(functions.getPool)
+
+	return pool.toString().toLowerCase()
+}
+
+
+module.exports = { getInfo, mintPosition, getPool }
