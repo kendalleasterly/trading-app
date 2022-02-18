@@ -1,4 +1,4 @@
-const { Token } = require("@uniswap/sdk-core")
+const { Token, NativeCurrency } = require("@uniswap/sdk-core")
 
 const WETH = new Token(
 	137,
@@ -7,13 +7,38 @@ const WETH = new Token(
 	"WETH",
 	"Wrapped Ether"
 )
-const MATIC = new Token(
+
+class MaticNativeCurrency extends NativeCurrency {
+	equals(other) {
+	  return other.isNative && other.chainId === this.chainId
+	}
+  
+	get wrapped() {
+	  if (!isMatic(this.chainId)) throw new Error('Not matic')
+	  return WMATIC
+	}
+  
+ 	constructor(chainId) {
+	  if (!isMatic(chainId)) throw new Error('Not matic')
+	  super(chainId, 18, 'MATIC', 'Polygon Matic')
+	}
+  }
+
+
+  function isMatic(chainId) {
+	return chainId === 137
+  }
+
+const WMATIC = new Token(
 	137,
-	"0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270",
+	"0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
 	18,
 	"WMATIC",
 	"Wrapped Matic"
 )
+
+const MATIC = new MaticNativeCurrency(137)
+
 const DAI = new Token(
 	137,
 	"0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",

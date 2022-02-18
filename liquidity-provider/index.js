@@ -1,7 +1,7 @@
 const app = require("express")()
 
 const dotenv = require("dotenv")
-const { getInfo, getPool, mintPosition } = require("./uniswap")
+const { getInfo, mintPosition, addLiquidity, quoteCollectAmounts } = require("./uniswap")
 const { MATIC, WETH } = require("./uniswap-tokens")
 dotenv.config()
 
@@ -17,9 +17,18 @@ app.post("/mint", (req, res) => {
     res.send("")
 })
 
-app.get("/pool", async (req, res) => {
-   const pool = await getPool(WETH, MATIC, 3000)
-   console.log(pool.toString().toLowerCase())
+app.post("/add", (req, res) => {
+    addLiquidity()
+    res.send("")
+})
+
+app.get("/pool", (req, res) => {
+    getPoolAddress()
+})
+
+app.post("/remove", (req, res) => {
+    res.send("200")
+    quoteCollectAmounts(45010)
 })
 
 app.listen(port, () => {
