@@ -11,7 +11,12 @@ const { ethers, BigNumber } = require("ethers")
 const Web3 = require("web3")
 const { USDT, DAI, WETH, WBTC, MATIC } = require("./uniswap-tokens")
 const dotenv = require("dotenv")
-const { Percent, CurrencyAmount, NativeCurrency } = require("@uniswap/sdk-core")
+const {
+	Percent,
+	CurrencyAmount,
+	NativeCurrency,
+	Fraction,
+} = require("@uniswap/sdk-core")
 const Web3httpProvider = require("web3-providers-http")
 const {
 	abi: INonfungiblePositionManagerABI,
@@ -26,6 +31,8 @@ dotenv.config()
 const apiURL =
 	"https://api.thegraph.com/subgraphs/name/ianlapham/uniswap-v3-polygon"
 const NFPManagerAddress = "0xc36442b4a4522e871399cd717abdd847ab11fe88"
+const V3_SWAP_ROUTER_ADDRESS = "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45"
+
 const DAI_USDT_ADDRESS = "0x42f0530351471dab7ec968476d19bd36af9ec52d"
 const WBTC_WETH_ADDRESS = "0x50eaedb835021e4a108b7290636d62e9765cc6d7"
 const MATIC_WETH_ADDRESS = "0x167384319B41F7094e62f7506409Eb38079AbfF8"
@@ -34,9 +41,10 @@ const provider = new ethers.providers.JsonRpcProvider(process.env.INFURA_URL)
 let wallet = new ethers.Wallet(process.env.PRIVATE_KEY)
 wallet = wallet.connect(provider)
 
-async function getInfo() {
-	const positionID = 45010
-
+const tickLower = -81480
+const tickUpper = -67620
+const liquidity = BigNumber.from("248353757460663988")
+const positionID = async function getInfo() {
 	const query = `
   {
     position(id: ${positionID}) {
@@ -80,12 +88,12 @@ async function mintPosition() {
 		WETH,
 		MATIC_WETH_ADDRESS
 	)
-	const amount0 = ethers.utils.parseUnits("1", POOL.token0.decimals)
+	const amount0 = ethers.utils.parseUnits("0.1", POOL.token0.decimals)
 
 	const position = new Position.fromAmount0({
 		pool: POOL,
-		tickLower: -81480,
-		tickUpper: -67620,
+		tickLower,
+		tickUpper,
 		amount0: amount0,
 		useFullPrecision: true,
 	})
@@ -112,31 +120,66 @@ async function mintPosition() {
 	sendTransaction(txn)
 }
 
-async function addLiquidity() {
-	// 	const [POOL, immutables, state] = await getPool(MATIC, WETH, MATIC_WETH_ADDRESS)
-	// 	const amount0 = ethers.utils.parseUnits("47", DAI.decimals)
-	// 	console.log(POOL.token0.isNative)
-	// 	console.log(POOL.token1.isNative)
-	//     const newPosition = new Position.fromAmount0({
-	//         pool: POOL,
-	//         tickLower: -276340,
-	//         tickUpper: -276320,
-	//         amount0: amount0,
-	//     })
-	// 	// const blockNumber =  await wallet.provider.getBlockNumber()
-	// 	const {calldata ,value} = NonfungiblePositionManager.addCallParameters(newPosition, {
-	//         slippageTolerance: new Percent(50, 10_000),
-	//         deadline:  Date.now() + 300,
-	//         tokenId: 57877
-	//         });
-	// 	let txn = {
-	// 		to: NFPManagerAddress,
-	// 		data: calldata,
-	// 		value
-	// 	}
-	// 	// await approve(POOL.token0, NFPManagerAddress, newPosition.amount0.quotient.toString())
-	// 	// await approve(POOL.token1, NFPManagerAddress, newPosition.amount1.quotient.toString())
-	// 	sendTransaction(txn)
+async function swapAndAdd() {
+	const [POOL, immutables, state] = await getPool(
+		MATIC.wrapped,
+		WETH,
+		MATIC_WETH_ADDRESS
+	)
+
+	const router = new AlphaRouter({ chainId: 137, provider })
+
+		console.log(ethers.utils.parseUnits("3", MATIC.decimals).toString())
+		console.log(ethers.utils.parseUnits("0.002", WETH.decimals).toString())
+
+	const MATICBalance = CurrencyAmount.fromRawAmount(
+		MATIC,
+		ethers.utils.parseUnits("3", MATIC.decimals)
+	)
+	const WETHBalance = CurrencyAmount.fromRawAmount(
+		WETH,
+		ethers.utils.parseUnits("0.002", WETH.decimals)
+	)
+
+	const position = new Position({
+		pool: POOL,
+		liquidity,
+		tickLower,
+		tickUpper,
+	})
+
+	// await approve(MATIC.wrapped, V3_SWAP_ROUTER_ADDRESS, MATICBalance.quotient.toString())
+	// await approve(WETH, V3_SWAP_ROUTER_ADDRESS, WETHBalance.quotient.toString())
+
+	const response = await router.routeToRatio(
+		MATICBalance,
+		WETHBalance,
+		position,
+		{
+			ratioErrorTolerance: new Fraction(1, 100),
+			maxIterations: 3,
+		},
+		{
+			swapOptions: {
+				recipient: wallet.address,
+				slippageTolerance: new Percent(5, 1_000),
+				deadline: Date.now() + 300,
+			},
+		}
+	)
+
+	if (response.status == SwapToRatioStatus.SUCCESS) {
+		const route = response.result
+		const txn = {
+			data: route.methodParameters.calldata,
+			to: V3_SWAP_ROUTER_ADDRESS,
+			value: BigNumber.from(route.methodParameters.value),
+		}
+
+		// sendTransaction(txn)
+	} else {
+		console.log(response.error)
+	}
 }
 
 async function removeLiquidity() {
@@ -148,30 +191,42 @@ async function removeLiquidity() {
 		MATIC_WETH_ADDRESS
 	)
 
-		console.log(POOL.token0.decimals, POOL.token1.decimals)
+	console.log(POOL.token0.decimals, POOL.token1.decimals)
 
 	const amount0 = ethers.utils.parseUnits("10", POOL.token0.decimals)
 
-	const position = new Position.fromAmount0({
+	const position = new Position({
 		pool: POOL,
-		tickLower: -81480,
-		tickUpper: -67620,
-		amount0: amount0,
-		useFullPrecision: true,
+		tickLower,
+		tickUpper,
+		liquidity,
 	})
 
+	console.log(position.liquidity.toString())
+
+	console.log(position)
+
 	const [expectedOut0, expectedOut1] = await quoteCollectAmounts(tokenId)
+	const fee0 = new CurrencyAmount.fromRawAmount(MATIC, expectedOut0.toString())
+	const fee1 = new CurrencyAmount.fromRawAmount(WETH, expectedOut1.toString())
+
+	console.log(
+		expectedOut0,
+		expectedOut1,
+		ethers.utils.formatUnits(fee0.quotient.toString(), POOL.token0.decimals),
+		ethers.utils.formatUnits(fee1.quotient.toString(), POOL.token1.decimals)
+	)
 
 	const { calldata, value } = NonfungiblePositionManager.removeCallParameters(
 		position,
 		{
-			tokenId: tokenId,
-			liquidityPercentage: new Percent(100),
+			tokenId: tokenId.toString(),
+			liquidityPercentage: new Percent(100, 100),
 			slippageTolerance: new Percent(50, 10_000),
-			deadline: Date.now() + 300,
+			deadline: (Date.now() + 300).toString(),
 			collectOptions: {
-				expectedCurrencyOwed0: new CurrencyAmount.fromRawAmount(POOL.token0, expectedOut0),
-				expectedCurrencyOwed1: new CurrencyAmount.fromRawAmount(POOL.token0, expectedOut0),
+				expectedCurrencyOwed0: fee0,
+				expectedCurrencyOwed1: fee1,
 				recipient: wallet.address,
 			},
 		}
@@ -182,11 +237,6 @@ async function removeLiquidity() {
 		data: calldata,
 		value,
 	}
-
-	console.log(calldata)
-
-	// await approve(POOL.token0, NFPManagerAddress, newPosition.amount0.quotient.toString())
-	// await approve(POOL.token1, NFPManagerAddress, newPosition.amount1.quotient.toString())
 
 	sendTransaction(txn)
 }
@@ -214,7 +264,8 @@ async function quoteCollectAmounts(tokenID) {
 				{ from: wallet.address }
 			)
 			.then((results) => {
-				resolve([results.amount0, results.amount1]) 
+				console.log({ results })
+				resolve([results.amount0, results.amount1])
 			})
 	})
 }
@@ -229,15 +280,27 @@ async function getPoolAddress(token0, token1) {
 }
 
 async function approve(token, spender, amount) {
-	const gasPrice = await provider.getGasPrice()
 
-	const tokenContract = new ethers.Contract(token.address, ERC20ABI, wallet)
+	return new Promise(async (resolve, reject) => {
+		
+		const gasPrice = await provider.getGasPrice()
 
-	const tx = await tokenContract.approve(spender, amount, {
-		gasLimit: 800000,
-		gasPrice: gasPrice,
+		const tokenContract = new ethers.Contract(token.address, ERC20ABI, wallet)
+
+		const tx = await tokenContract.approve(spender, amount, {
+			gasLimit: 800000,
+			gasPrice: gasPrice,
+		})
+
+		console.log(tx)
+
+		tx.wait(1).then((value) => {
+			console.log(value)
+			resolve()
+		})
+
+		
 	})
-	console.log(tx)
 }
 
 async function sendTransaction(txn) {
@@ -330,12 +393,15 @@ async function getPoolState(poolAddress) {
 const {
 	abi: IUniswapV3FactoryABI,
 } = require("@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Factory.sol/IUniswapV3Factory.json")
+const {
+	AlphaRouter,
+	SwapToRatioStatus,
+} = require("@uniswap/smart-order-router")
 // const provider = new ethers.providers.JsonRpcProvider(process.env.INFURA_URL)
 
 module.exports = {
-	getInfo,
 	mintPosition,
-	addLiquidity,
 	getPoolAddress,
 	removeLiquidity,
+	swapAndAdd,
 }
