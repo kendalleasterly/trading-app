@@ -42,10 +42,10 @@ const provider = new ethers.providers.JsonRpcProvider(process.env.INFURA_URL);
 let wallet = new ethers.Wallet(process.env.PRIVATE_KEY);
 wallet = wallet.connect(provider);
 
-const tickLower = -81480;
-const tickUpper = -67620;
-const tokenId = 58746;
-const liquidity = BigNumber.from("248353757460663988");
+const tickLower = -74460;
+const tickUpper = -73380;
+const tokenId = 27030;
+const liquidity = BigNumber.from("4889607957839538409");
 const positionID = async function getInfo() {
 	const query = `
   {
@@ -90,20 +90,28 @@ async function mintPosition() {
 		WETH,
 		MATIC_WETH_ADDRESS
 	);
+
+	console.log(MATIC_WETH_ADDRESS);
+
 	const amount0 = ethers.utils.parseUnits("0.1", POOL.token0.decimals);
+
+	const nearestTick = nearestUsableTick(state.tick, immutables.tickSpacing)
 
 	const position = new Position.fromAmount0({
 		pool: POOL,
-		tickLower,
-		tickUpper,
+		tickLower: nearestTick - immutables.tickSpacing,
+		tickUpper: nearestTick + immutables.tickSpacing,
 		amount0: amount0,
 		useFullPrecision: true,
 	});
 
+	console.log(ethers.utils.formatUnits(position.amount1.quotient.toString(), POOL.token1.decimals));
+	console.log(position)
+
 	const {calldata, value} = NonfungiblePositionManager.addCallParameters(
 		position,
 		{
-			slippageTolerance: new Percent(5, 10_000),
+			slippageTolerance: new Percent(50, 10_000),
 			recipient: wallet.address,
 			deadline: Date.now() + 1000 * 60 * 2,
 			useNative: MATIC,
@@ -116,10 +124,10 @@ async function mintPosition() {
 		value,
 	};
 
-	// await approve(POOL.token0, NFPManagerAddress, newPosition.amount0.quotient.toString())
-	// await approve(POOL.token1, NFPManagerAddress, newPosition.amount1.quotient.toString())
+	// await approve(POOL.token0, NFPManagerAddress, position.amount0.quotient.toString())
+	// await approve(POOL.token1, NFPManagerAddress, position.amount1.quotient.toString())
 
-	sendTransaction(txn);
+	// sendTransaction(txn);
 }
 
 async function swapAndAdd() {
@@ -161,7 +169,7 @@ async function swapAndAdd() {
 		{
 			swapOptions: {
 				recipient: wallet.address,
-				slippageTolerance: new Percent(5, 1_000),
+				slippageTolerance: new Percent(50, 1_000),
 				deadline: Date.now() + 1000 * 60 * 2,
 				//INPUT TOKEN PERMIT
 			},
@@ -188,8 +196,6 @@ async function swapAndAdd() {
 
 async function removeLiquidity() {
 	const [POOL] = await getPool(MATIC.wrapped, WETH, MATIC_WETH_ADDRESS);
-
-	console.log(POOL.token0.decimals, POOL.token1.decimals);
 
 	const position = new Position({
 		pool: POOL,
@@ -246,7 +252,6 @@ async function swapAndMint() {
 		MATIC_WETH_ADDRESS
 	);
 
-	console.log(immutables.tickSpacing);
 	const nearestTick = nearestUsableTick(state.tick, immutables.tickSpacing);
 	console.log(state.tick, nearestTick);
 	console.log(
@@ -260,15 +265,15 @@ async function swapAndMint() {
 	const position = new Position({
 		pool: POOL,
 		liquidity: 1,
-		tickLower: nearestTick - immutables.tickSpacing,
-		tickUpper: nearestTick + immutables.tickSpacing,
+		tickLower: nearestTick - (immutables.tickSpacing * 2),
+		tickUpper: nearestTick + (immutables.tickSpacing * 2),
 	});
 
-	// await approve(POOL.token0, V3_SWAP_ROUTER_ADDRESS, amount0);
-	// await approve(POOL.token1, V3_SWAP_ROUTER_ADDRESS, amount1);
-
-	const currencyAmount0 = new CurrencyAmount.fromRawAmount(MATIC.wrapped,amount0)
-	const currencyAmount1 = new CurrencyAmount.fromRawAmount(WETH,amount1)
+	const currencyAmount0 = new CurrencyAmount.fromRawAmount(
+		MATIC.wrapped,
+		amount0
+	);
+	const currencyAmount1 = new CurrencyAmount.fromRawAmount(WETH, amount1);
 
 	const routeToRatioResponse = await router.routeToRatio(
 		currencyAmount0,
@@ -281,11 +286,11 @@ async function swapAndMint() {
 		{
 			swapOptions: {
 				recipient: wallet.address,
-				slippageTolerance: new Percent(5, 10_000),
+				slippageTolerance: new Percent(50, 10_000),
 				deadline: Date.now() + 1000 * 60 * 2,
 			},
 			addLiquidityOptions: {
-				slippageTolerance: new Percent(5, 10_000),
+				slippageTolerance: new Percent(50, 10_000),
 				recipient: wallet.address,
 				deadline: Date.now() + 1000 * 60 * 2,
 				useNative: MATIC,
@@ -295,6 +300,33 @@ async function swapAndMint() {
 
 	if (routeToRatioResponse.status == SwapToRatioStatus.SUCCESS) {
 		const route = routeToRatioResponse.result;
+		console.log(route.trade.routes);
+		console.log(
+			ethers.utils.formatUnits(
+				route.trade.inputAmount.quotient.toString(),
+				route.trade.routes[0].input.decimals
+			)
+		);
+		console.log(
+			ethers.utils.formatUnits(
+				route.trade.outputAmount.quotient.toString(),
+				route.trade.routes[0].output.decimals
+			)
+		);
+
+		// await approve(
+		// 	POOL.token0,
+		// 	V3_SWAP_ROUTER_ADDRESS,
+		// 	position.amount0.multiply(new Fraction(8, 5)).quotient.toString()
+		// );
+		// await approve(
+		// 	POOL.token1,
+		// 	V3_SWAP_ROUTER_ADDRESS,
+		// 	position.amount1.multiply(new Fraction(8, 5)).quotient.toString()
+		// );
+
+		// await approve(POOL.token0, NFPManagerAddress, position.amount0.multiply(new Fraction(8, 5)).quotient.toString())
+		// await approve(POOL.token1, NFPManagerAddress, position.amount1.multiply(new Fraction(8, 5)).quotient.toString())
 
 		const txn = {
 			data: route.methodParameters.calldata,
@@ -302,11 +334,15 @@ async function swapAndMint() {
 			value: BigNumber.from(route.methodParameters.value),
 		};
 
-		sendTransaction(txn)
+		sendTransaction(txn);
 	} else {
 		console.log("error routing to ratio");
 		console.log(routeToRatioResponse.error);
 	}
+}
+
+function swap() {
+	
 }
 
 //MARK: Helpers

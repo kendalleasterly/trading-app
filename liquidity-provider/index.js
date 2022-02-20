@@ -28,7 +28,7 @@ app.get("/pool", (req, res) => {
 
 app.post("/remove", (req, res) => {
     res.send("200")
-    removeLiquidity(45010)
+    removeLiquidity()
 })
 
 app.post("/swap", (req, res) => {
