@@ -40,7 +40,7 @@ async function approve(token, spender, amount) {
 
 		console.log(tx);
 
-		tx.wait(1).then((value) => {
+		tx.wait(16).then((value) => {
 			console.log(value);
 			resolve();
 		});

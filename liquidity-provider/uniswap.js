@@ -91,22 +91,17 @@ async function mintPosition() {
 		MATIC_WETH_ADDRESS
 	);
 
-	console.log(MATIC_WETH_ADDRESS);
-
 	const amount0 = ethers.utils.parseUnits("0.1", POOL.token0.decimals);
 
 	const nearestTick = nearestUsableTick(state.tick, immutables.tickSpacing)
 
 	const position = new Position.fromAmount0({
 		pool: POOL,
-		tickLower: nearestTick - immutables.tickSpacing,
-		tickUpper: nearestTick + immutables.tickSpacing,
+		tickLower: nearestTick - (immutables.tickSpacing * 2),
+		tickUpper: nearestTick + (immutables.tickSpacing * 2),
 		amount0: amount0,
 		useFullPrecision: true,
 	});
-
-	console.log(ethers.utils.formatUnits(position.amount1.quotient.toString(), POOL.token1.decimals));
-	console.log(position)
 
 	const {calldata, value} = NonfungiblePositionManager.addCallParameters(
 		position,
@@ -118,6 +113,13 @@ async function mintPosition() {
 		}
 	);
 
+	console.log({
+		slippageTolerance: new Percent(50, 10_000),
+		recipient: wallet.address,
+		deadline: Date.now() + 1000 * 60 * 2,
+		useNative: MATIC,
+	});
+
 	let txn = {
 		to: NFPManagerAddress,
 		data: calldata,
@@ -127,7 +129,7 @@ async function mintPosition() {
 	// await approve(POOL.token0, NFPManagerAddress, position.amount0.quotient.toString())
 	// await approve(POOL.token1, NFPManagerAddress, position.amount1.quotient.toString())
 
-	// sendTransaction(txn);
+	sendTransaction(txn);
 }
 
 async function swapAndAdd() {

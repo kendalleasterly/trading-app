@@ -132,15 +132,15 @@ async function mintPosition(pool) {
 			pool.address
 		);
 
-		const amount0 = ethers.utils.parseUnits("0.2", poolObject.token0.decimals);
+		const amount0 = ethers.utils.parseUnits("0.1", poolObject.token0.decimals);
 
 		const nearestTick = nearestUsableTick(state.tick, immutables.tickSpacing);
 
 		//TODO: adjust the actual ticks to prevent an bad sub-range
 		const position = new Position.fromAmount0({
 			pool: poolObject,
-			tickLower: nearestTick - (immutables.tickSpacing * 3),
-			tickUpper: nearestTick + (immutables.tickSpacing * 3),
+			tickLower: nearestTick - (immutables.tickSpacing),
+			tickUpper: nearestTick + (immutables.tickSpacing),
 			amount0: amount0,
 			useFullPrecision: true,
 		});
@@ -161,6 +161,9 @@ async function mintPosition(pool) {
 			value,
 		};
 
+
+
+
 		// await approve(
 		// 	poolObject.token0,
 		// 	POSITION_MANAGER_ADDRESS,
@@ -174,27 +177,29 @@ async function mintPosition(pool) {
 
 		sendTransaction(txn).then((receipt) => {
 
-			let id = 0
+			console.log(receipt)
+			let id = 0;
+			let liquidity = 1;
 
-			receipt.logs.forEach(log => {
+			const iface = new ethers.utils.Interface(INonfungiblePositionManagerABI);
 
-				console.log(log.topics)
+			receipt.logs.forEach((log) => {
+				if (log.address == POSITION_MANAGER_ADDRESS) {
+					const parsedLog = iface.parseLog(log);
 
-				if (log.topics.includes("0x3067048beee31b25b2f1681f88dac838c8bba36af25bfb2b7cf7473a5847e35f")) {
-					id = log.topics[1]
+					if (parsedLog.name == "IncreaseLiquidity") {
+
+						id = parsedLog.args[0].toString();
+						liquidity = parsedLog.args[1].toString();
+
+						console.log(
+							`Position ${id}: Minted with ${position.tickLower} and ${position.tickUpper} (liquidity: ${liquidity})`
+						);
+						resolve([position.tickLower, position.tickUpper, liquidity, id]);
+					}
 				}
-			})
-
-			console.log(
-				`Position ${id}: Minted with ${position.tickLower} and ${
-					position.tickUpper
-				}`
-			);
-			resolve([position.tickLower, position.tickUpper, position.liquidity.toString(), id]);
-
-			console.log(position.liquidity);
-			console.log(position.liquidity.toString());
-			console.log(position.liquidity.quotient.toString());
+				
+			});
 		});
 	});
 }
