@@ -16,8 +16,19 @@ function addPosition({id, liquidity, pool, tickLower, tickUpper}) {
             pool,
             tickLower,
             tickUpper,
-            creationTime: FieldValue.serverTimestamp()
+            creationTime: FieldValue.serverTimestamp(),
+            fee0: "",
+            fee1: "",
         })
+
+}
+
+function updateWithFees(id, fee0, fee1) {
+
+    db.collection("positions").doc(id.toString()).update({
+        fee0,
+        fee1
+    })
 
 }
 
@@ -40,4 +51,4 @@ function getMostRecentPosition() {
     }) 
 }
 
-module.exports = {addPosition, getMostRecentPosition};
+module.exports = {addPosition, getMostRecentPosition, updateWithFees};

@@ -2,9 +2,9 @@ const cron = require("node-cron");
 
 const {tokens} = require("./constants/tokens");
 const firebase = require("./firebase");
-const {getPoolInfo} = require("./uniswap");
+const {getPoolInfo, removeLiquidity, mintPosition} = require("./uniswap");
 
-function getCurrentRangePercentage() {
+async function getPositionAndStatus() {
 	return new Promise((resolve, reject) => {
 		firebase.getMostRecentPosition().then((position) => {
 			const token0 = tokens[position.pool.token0.address];
@@ -18,40 +18,61 @@ function getCurrentRangePercentage() {
 
 				const percentage = (relativeTickCurrent / relativeTickUpper) * 100;
 
-                console.log(`Position ${position.id}: At ${percentage}%. At ${pool.tickCurrent}, from ${position.tickLower} to ${position.tickUpper} `);
-				resolve(percentage);
+				console.log(
+					`Position ${position.id}: At ${percentage}%. At ${pool.tickCurrent}, from ${position.tickLower} to ${position.tickUpper} `
+				);
+				resolve([position, percentage]) 
 			});
 		});
 	});
 }
 
-function main() {
-	getCurrentRangePercentage().then((percentage) => {
-		if ((percentage) < 25 || percentage > 75) {
-            // begin the fixing process
-		}
-	});
+async function main() {
+	const intermediate = await getPositionAndStatus();
+	const [position, percentage] = intermediate;
+
+	if (percentage < 25 || percentage > 75) {
+		// begin the fixing process
+
+		//remove the liquidity from the position
+		// console.log("Removing Liquidity...");
+
+		// const [fee0, fee1] = await removeLiquidity(position);
+		// firebase.updateWithFees(position.id, fee0, fee1);
+
+        console.log("Minting new position...")
+
+		const [newTickLower, newTickUpper, liquidity, newId] = await mintPosition(position.pool);
+        firebase.addPosition({
+					id: newId,
+                    pool,
+                    tickLower: newTickLower,
+                    tickUpper: newTickUpper,
+                    liquidity: liquidity
+				});
+
+	}
 
 	// firebase.addPosition({
-	// 	id: 10001,
-	// 	liquidity: 1223,
+	// 	id: "60149",
 	// 	pool: {
-	//         address: "0x167384319B41F7094e62f7506409Eb38079AbfF8",
+	// 		token1: {
+	// 			address: "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619",
+	// 			symbol: "WETH",
+	// 		},
 	// 		token0: {
 	// 			symbol: "WMATIC",
 	// 			address: "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
 	// 		},
-	// 		token1: {
-	// 			symbol: "WETH",
-	// 			address: "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619",
-	// 		},
 	// 		fee: 3000,
+	// 		address: "0x167384319B41F7094e62f7506409Eb38079AbfF8",
 	// 	},
-	// 	tickLower: -1120,
-	// 	tickUpper: 1920,
+	// 	tickLower: -74400,
+	// 	tickUpper: -74280,
+	// 	liquidity: "561577419116765556",
 	// });
 }
 
 main();
 
-cron.schedule("*/5 * * * *", main);
+// cron.schedule("*/5 * * * *", main);
