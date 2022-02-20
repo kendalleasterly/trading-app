@@ -31,27 +31,25 @@ async function main() {
 
 	const [position, percentage] = await getPositionAndStatus();
 
-	if (percentage < 25 || percentage > 75) {
+	// if (percentage < 25 || percentage > 75) {
 		// begin the fixing process
 
 		// remove the liquidity from the position
-		console.log("Removing Liquidity...");
+		
 
-		const [fee0, fee1] = await removeLiquidity(position);
-		firebase.updateWithFees(position.id, fee0, fee1);
-
-        console.log("Minting new position...")
+		// const [fee0, fee1] = await removeLiquidity(position);
+		// firebase.updateWithFees(position.id, fee0, fee1);
 
 		const [newTickLower, newTickUpper, liquidity, newId] = await mintPosition(position.pool);
-        firebase.addPosition({
-					id: newId,
-                    pool: position.pool,
-                    tickLower: newTickLower,
-                    tickUpper: newTickUpper,
-                    liquidity: liquidity
-				});
+        // firebase.addPosition({
+		// 			id: newId,
+        //             pool: position.pool,
+        //             tickLower: newTickLower,
+        //             tickUpper: newTickUpper,
+        //             liquidity: liquidity
+		// 		});
 
-	}
+	// }
 }
 
 main();
