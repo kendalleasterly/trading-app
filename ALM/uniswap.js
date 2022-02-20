@@ -1,6 +1,10 @@
 const ethers = require("ethers")
 const {Pool} = require("@uniswap/v3-sdk")
 
+const IUniswapV3PoolJSON = require("@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json");
+const { provider } = require("./constants/ethers");
+const IUniswapV3PoolABI = IUniswapV3PoolJSON.abi;
+
 async function getPoolInfo(tokenA, tokenB, poolAddress) {
 	const [immutables, state] = await Promise.all([
 		getPoolImmutables(poolAddress),

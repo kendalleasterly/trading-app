@@ -31,8 +31,6 @@ function getMostRecentPosition() {
 
                 const data = doc.data()
 
-                console.log("in func", id, data)
-
                 resolve({
                     id,
                     ...data
