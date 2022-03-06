@@ -1,0 +1,19 @@
+{
+  "name": "almanager-contracts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kendall Easterly",
+  "license": "ISC",
+  "devDependencies": {
+    "hardhat": "^2.9.1"
+  },
+  "dependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.5",
+    "@uniswap/v3-periphery": "^1.4.0",
+    "dotenv": "^16.0.0"
+  }
+}
