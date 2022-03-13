@@ -1,3 +1,321 @@
+				    								await test("0x6eED5f2904b53A7111ea0d8feeF26A4b64CF78d3");
+				    								}
+				    								console.log(tx);
+				    							});
+				    						gasLimit: 210000,
+				    				gasPrice,
+				    		const tx = await Swapper.callStatic.swapExactInputSingle(daiAmount, {
+				    	const gasPrice = await ethers.provider.getGasPrice();
+				    // await approve()
+				await approve(DAI, Swapper.address, daiAmount);
+			const daiAmount = ethers.utils.parseUnits("1", 18);
+		Swapper = await Swapper.attach(contractAddr);
+	let Swapper = await ethers.getContractFactory("Swapper");
+async function test(contractAddr) {
+.load scripts/testSwapper.js
+    	                                                                await test("0x1fC287091D36fdC2c78f37d1b4a5b46D13358ffa");
+    	                                                                }
+    	                                                                console.log(tx)
+    	                                                            });
+    	                                                        gasPrice
+    	                                                gasLimit: 210000,
+    	                                        let tx = await Manager.callStatic.mintNewPosition([wethAmount, daiAmount, WETH_DAI_POOL], {
+    	                                    const gasPrice = await ethers.provider.getGasPrice()
+    	                                //call the function with max values of both（and pool)
+    	                            const WETH_DAI_POOL = "0x6baD0f9a89Ca403bb91d253D385CeC1A2b6eca97";
+    	                        // await approve(DAI, Manager.address, daiAmount);
+    	                    // await approve(WETH, Manager.address, wethAmount)
+    	                //approve both tokens
+    	        const daiAmount = ethers.utils.parseUnits("1", 18);
+    	    const wethAmount = ethers.utils.parseUnits("0.04428", 18);
+    	Manager = await Manager.attach(contractAddr);
+    let Manager = await ethers.getContractFactory("PositionManager");
+async function test(contractAddr) {
+// const { ethers } = require("hardhat");
+.load scripts/testManager.js
+test("")
+async function test(contractAddr) {console.log("bruh")}
+    	                                                                await test("0x1fC287091D36fdC2c78f37d1b4a5b46D13358ffa");
+    	                                                                }
+    	                                                                console.log(tx)
+    	                                                            });
+    	                                                        gasPrice
+    	                                                gasLimit: 210000,
+    	                                        let tx = await Manager.callStatic.mintNewPosition([wethAmount, daiAmount, WETH_DAI_POOL, 100], {
+    	                                    const gasPrice = await ethers.provider.getGasPrice()
+    	                                //call the function with max values of both（and pool)
+    	                            const WETH_DAI_POOL = "0x6baD0f9a89Ca403bb91d253D385CeC1A2b6eca97";
+    	                        // await approve(DAI, Manager.address, daiAmount);
+    	                    // await approve(WETH, Manager.address, wethAmount)
+    	                //approve both tokens
+    	        const daiAmount = ethers.utils.parseUnits("1", 18);
+    	    const wethAmount = ethers.utils.parseUnits("0.04428", 18);
+    	Manager = await Manager.attach(contractAddr);
+    let Manager = await ethers.getContractFactory("PositionManager");
+async function test(contractAddr) {
+// const { ethers } = require("hardhat");
+.load scripts/testManager.js
+let c = await deployedContract()
+																										}
+																										return contract;
+																									const contract = await Contract.attach(address);
+																								const Contract = await ethers.getContractFactory(name);
+																							async function getContract(name, address) {
+																							}
+																							return interactableContract;
+																						const interactableContract = await getContract(name, contract.address);
+																					console.log(name, "deployed to:", contract.address);
+																				await contract.deployed();
+																			);
+																		WETH
+																factory,
+														NonfungiblePositionManager,
+												const contract = await Contract.deploy(
+											console.log(`Deploying ${name}...`);
+										const Contract = await ethers.getContractFactory(name);
+									// We get the contract to deploy
+								"0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
+						const NonfungiblePositionManager =
+					const WETH = "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619";
+				const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
+			const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
+		// const routerAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
+	const name = "PositionManager";
+async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
+.load scripts/deployContract.js
+.help
+.exit
+    	                                                                await test("0x905c2B5E5BE53E974Acb927f73fc64B9B1f56915");
+    	                                                                }
+    	                                                                console.log(tx)
+    	                                                            });
+    	                                                        gasPrice
+    	                                                gasLimit: 210000,
+    	                                        let tx = await Manager.mintNewPosition([wethAmount, daiAmount, WETH_DAI_POOL, 100], {
+    	                                    const gasPrice = await ethers.provider.getGasPrice()
+    	                                //call the function with max values of both（and pool)
+    	                            const WETH_DAI_POOL = "0x6baD0f9a89Ca403bb91d253D385CeC1A2b6eca97";
+    	                        // await approve(DAI, Manager.address, daiAmount);
+    	                    // await approve(WETH, Manager.address, wethAmount)
+    	                //approve both tokens
+    	        const daiAmount = ethers.utils.parseUnits("1", 18);
+    	    const wethAmount = ethers.utils.parseUnits("0.04428", 18);
+    	Manager = await Manager.attach(contractAddr);
+    let Manager = await ethers.getContractFactory("PositionManager");
+async function test(contractAddr) {
+// const { ethers } = require("hardhat");
+.load scripts/testManager.js
+let b = await deployedContract()
+																										}
+																										return contract;
+																									const contract = await Contract.attach(address);
+																								const Contract = await ethers.getContractFactory(name);
+																							async function getContract(name, address) {
+																							}
+																							return interactableContract;
+																						const interactableContract = await getContract(name, contract.address);
+																					console.log(name, "deployed to:", contract.address);
+																				await contract.deployed();
+																			);
+																		WETH
+																factory,
+														NonfungiblePositionManager,
+												const contract = await Contract.deploy(
+											console.log(`Deploying ${name}...`);
+										const Contract = await ethers.getContractFactory(name);
+									// We get the contract to deploy
+								"0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
+						const NonfungiblePositionManager =
+					const WETH = "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619";
+				const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
+			const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
+		// const routerAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
+	const name = "PositionManager";
+async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
+.load scripts/deployContract.js
+    	                                                                await test("0xd451e7E05273144bbaEEbB335118104DD9819B5C");
+    	                                                                }
+    	                                                                console.log(tx)
+    	                                                            });
+    	                                                        gasPrice
+    	                                                gasLimit: 210000,
+    	                                        let tx = await Manager.mintNewPosition([wethAmount, daiAmount, WETH_DAI_POOL], {
+    	                                    const gasPrice = await ethers.provider.getGasPrice()
+    	                                //call the function with max values of both（and pool)
+    	                            const WETH_DAI_POOL = "0x6baD0f9a89Ca403bb91d253D385CeC1A2b6eca97";
+    	                        // await approve(DAI, Manager.address, daiAmount);
+    	                    // await approve(WETH, Manager.address, wethAmount)
+    	                //approve both tokens
+    	        const daiAmount = ethers.utils.parseUnits("1", 18);
+    	    const wethAmount = ethers.utils.parseUnits("0.04428", 18);
+    	Manager = await Manager.attach(contractAddr);
+    let Manager = await ethers.getContractFactory("PositionManager");
+async function test(contractAddr) {
+// const { ethers } = require("hardhat");
+.load scripts/testManager.js
+    	                                                                await test("0xd451e7E05273144bbaEEbB335118104DD9819B5C");
+    	                                                                }
+    	                                                                console.log(tx)
+    	                                                            });
+    	                                                        gasPrice
+    	                                                gasLimit: 210000,
+    	                                        let tx = await Manager.callStatic.mintNewPosition([wethAmount, daiAmount, WETH_DAI_POOL], {
+    	                                    const gasPrice = await ethers.provider.getGasPrice()
+    	                                //call the function with max values of both（and pool)
+    	                            const WETH_DAI_POOL = "0x6baD0f9a89Ca403bb91d253D385CeC1A2b6eca97";
+    	                        // await approve(DAI, Manager.address, daiAmount);
+    	                    // await approve(WETH, Manager.address, wethAmount)
+    	                //approve both tokens
+    	        const daiAmount = ethers.utils.parseUnits("1", 18);
+    	    const wethAmount = ethers.utils.parseUnits("0.04428", 18);
+    	Manager = await Manager.attach(contractAddr);
+    let Manager = await ethers.getContractFactory("PositionManager");
+async function test(contractAddr) {
+// const { ethers } = require("hardhat");
+.load scripts/testManager.js
+let c = await deployedContract()
+																										}
+																										return contract;
+																									const contract = await Contract.attach(address);
+																								const Contract = await ethers.getContractFactory(name);
+																							async function getContract(name, address) {
+																							}
+																							return interactableContract;
+																						const interactableContract = await getContract(name, contract.address);
+																					console.log(name, "deployed to:", contract.address);
+																				await contract.deployed();
+																			);
+																		WETH
+																factory,
+														NonfungiblePositionManager,
+												const contract = await Contract.deploy(
+											console.log(`Deploying ${name}...`);
+										const Contract = await ethers.getContractFactory(name);
+									// We get the contract to deploy
+								"0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
+						const NonfungiblePositionManager =
+					const WETH = "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619";
+				const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
+			const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
+		// const routerAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
+	const name = "PositionManager";
+async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
+.load scripts/deployContract.js
+    	                                                                await test("0x9319384f32F6e104aD318256ed67EbbE68a9c49d");
+    	                                                                }
+    	                                                                console.log(tx)
+    	                                                            });
+    	                                                        gasPrice
+    	                                                gasLimit: 210000,
+    	                                        let tx = await Manager.callStatic.mintNewPosition([wethAmount, daiAmount, WETH_DAI_POOL], {
+    	                                    const gasPrice = await ethers.provider.getGasPrice()
+    	                                //call the function with max values of both（and pool)
+    	                            const WETH_DAI_POOL = "0x6baD0f9a89Ca403bb91d253D385CeC1A2b6eca97";
+    	                        // await approve(DAI, Manager.address, daiAmount);
+    	                    // await approve(WETH, Manager.address, wethAmount)
+    	                //approve both tokens
+    	        const daiAmount = ethers.utils.parseUnits("1", 18);
+    	    const wethAmount = ethers.utils.parseUnits("0.04428", 18);
+    	Manager = await Manager.attach(contractAddr);
+    let Manager = await ethers.getContractFactory("PositionManager");
+async function test(contractAddr) {
+// const { ethers } = require("hardhat");
+.load scripts/testManager.js
+    	                                        await test("0x9319384f32F6e104aD318256ed67EbbE68a9c49d");
+    	                                        }
+    	                                        console.log(tx)
+    	                                    let tx = await Manager.callStatic.mintNewPosition([wethAmount, daiAmount, WETH_DAI_POOL]);
+    	                                //call the function with max values of both（and pool)
+    	                            const WETH_DAI_POOL = "0x6baD0f9a89Ca403bb91d253D385CeC1A2b6eca97";
+    	                        // await approve(DAI, Manager.address, daiAmount);
+    	                    // await approve(WETH, Manager.address, wethAmount)
+    	                //approve both tokens
+    	        const daiAmount = ethers.utils.parseUnits("1", 18);
+    	    const wethAmount = ethers.utils.parseUnits("0.04428", 18);
+    	Manager = await Manager.attach(contractAddr);
+    let Manager = await ethers.getContractFactory("PositionManager");
+async function test(contractAddr) {
+.load scripts/testManager.js
+    	                                        await test("0x9319384f32F6e104aD318256ed67EbbE68a9c49d");
+    	                                        }
+    	                                        console.log(tx)
+    	                                    let tx = await Manager.callStatic.mintNewPosition(wethAmount, daiAmount, WETH_DAI_POOL);
+    	                                //call the function with max values of both（and pool)
+    	                            const WETH_DAI_POOL = "0x6baD0f9a89Ca403bb91d253D385CeC1A2b6eca97";
+    	                        await approve(DAI, Manager.address, daiAmount);
+    	                    await approve(WETH, Manager.address, wethAmount)
+    	                //approve both tokens
+    	        const daiAmount = ethers.utils.parseUnits("1", 18);
+    	    const wethAmount = ethers.utils.parseUnits("0.04428", 18);
+    	Manager = await Manager.attach(contractAddr);
+    let Manager = await ethers.getContractFactory("PositionManager");
+async function test(contractAddr) {
+.load scripts/testManager.js
+signer
+.exit
+signer
+DAI
+approve
+    	                                        await test("0x9319384f32F6e104aD318256ed67EbbE68a9c49d");
+    	                                        }
+    	                                        console.log(tx)
+    	                                    let tx = await Manager.callStatic.mintNewPosition(wethAmount, daiAmount, WETH_DAI_POOL);
+    	                                //call the function with max values of both（and pool)
+    	                            const WETH_DAI_POOL = "0x6baD0f9a89Ca403bb91d253D385CeC1A2b6eca97";
+    	                        await approve(DAI, Manager.address, daiAmount);
+    	                    await approve(WETH, Manager.address, wethAmount)
+    	                //approve both tokens
+    	        const daiAmount = ethers.utils.parseUnits("1", 18);
+    	    const wethAmount = ethers.utils.parseUnits("0.04428", 18);
+    	Manager = await Manager.attach(contractAddr);
+    let Manager = await ethers.getContractFactory("PositionManager");
+async function test(contractAddr) {
+.load scripts/testManager.js
+.exit
+    	    await test("0x9319384f32F6e104aD318256ed67EbbE68a9c49d");
+    	    }
+    	    console.log(Manager.functions);
+    	Manager = await Manager.attach(contractAddr);
+    let Manager = await ethers.getContractFactory("PositionManager");
+async function test(contractAddr) {
+// const { ethers } = require("hardhat");
+.load scripts/testManager.js
+    	    await test("0x9319384f32F6e104aD318256ed67EbbE68a9c49d");
+    	    }
+    	    Manager.functions
+    	Manager = await Manager.attach(contractAddr);
+    let Manager = await ethers.getContractFactory("PositionManager");
+async function test(contractAddr) {
+// const { ethers } = require("hardhat");
+.load scripts/testManager.js
+let minter = await deployedContract()
+																									}
+																									return contract;
+																								const contract = await Contract.attach(address);
+																							const Contract = await ethers.getContractFactory(name);
+																						async function getContract(name, address) {
+																						}
+																						return interactableContract;
+																					const interactableContract = await getContract(name, contract.address);
+																				console.log(name, "deployed to:", contract.address);
+																			await contract.deployed();
+																		);
+																	WMATIC
+															factory,
+													NonfungiblePositionManager,
+											const contract = await Contract.deploy(
+										console.log(`Deploying ${name}...`);
+									const Contract = await ethers.getContractFactory(name);
+								// We get the contract to deploy
+							"0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
+					const NonfungiblePositionManager =
+				const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
+			const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
+		// const routerAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
+	const name = "PositionManager";
+async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
+.load scripts/deployContract.js
+.exit
     																													    																					    								await test("0x6eED5f2904b53A7111ea0d8feeF26A4b64CF78d3");
     																													    																					    								}
     																													    																					    								console.log(tx);
@@ -679,130 +997,5 @@ async function test() {
 // const { ethers } = require("ethers")
 .load scripts/testSwapper.js
                                 test()
-                                }
-                                // console.log(tx)
-                            // const tx = await Swapper.swapExactInputSingle(daiAmount, {})
+                                }                          const tx = await Swapper.swapExactInputSingle(daiAmount, {})
                         console.log(Swapper.functions)
-                    await Swapper.connect(signer)
-                let Swapper = await ethers.getContractFactory("Swapper")
-            const daiAmount = ethers.utils.parseUnits("1", 18);
-    const signer = await ethers.getSigner();
-async function test() {
-// const { ethers } = require("ethers")
-.load scripts/testSwapper.js
-                                test()
-                                }
-                                console.log(tx)
-                            const tx = await Swapper.swapExactInputSingle(daiAmount, {})
-                        console.log(Swapper.functions)
-                    Swapper.connect(signer)
-                let Swapper = await ethers.getContractFactory("Swapper")
-            const daiAmount = ethers.utils.parseUnits("1", 18);
-    const signer = await ethers.getSigner();
-async function test() {
-// const { ethers } = require("ethers")
-.load scripts/testSwapper.js
-Swapper
-.exit
-)
-Swapper.connect(
-Swapper.functions
-let Swapper = await ethers.getContractFactory("Swapper")
-.exit
-.clear
-Contract = Contract.then()
-Contract
-let Contract = ethers.getContractFactory("Swapper")
-.exit
-process.env
-                    			                        		            test()
-                    			                        		            }
-                    			                        		            // console.log(tx)
-                    			                        		        // const tx = await Swapper.swapExactInputSingle(daiAmount, {})
-                    			                        		    console.log(Swapper.functions)
-                    			                        		);
-                    			                        signer
-                    			            SwapperABI,
-                    			"0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D",
-                    let Swapper = new ethers.Contract(
-                const daiAmount = ethers.utils.parseUnits("1", 18);
-        const signer = await ethers.getSigner();
-    const SwapperABI = require("../artifacts/contracts/Swapper.sol/Swapper.json").abi;
-async function test() {
-// const { ethers } = require("ethers")
-.load scripts/testSwapper.js
-                    test()
-                    }
-                    console.log(tx)
-                const tx = await Swapper.swapExactInputSingle(daiAmount)
-            const daiAmount = ethers.utils.parseUnits("1", 18);
-    const signer = await ethers.getSigner();
-async function test() {
-// const { ethers } = require("ethers")
-.load scripts/testSwapper.js
-Swapper.functions
-let Swapper = await deployedContract()
-																	}
-																	return contract;
-																const contract = await Contract.attach(address);
-															const Contract = await ethers.getContractFactory(name);
-														async function getContract(name, address) {
-														}
-														return interactableContract;
-													const interactableContract = await getContract(name, contract.address);
-												console.log(name, "deployed to:", contract.address);
-											await contract.deployed();
-										);
-									swapRouterAddress,
-							const contract = await Contract.deploy(
-						console.log(`Deploying ${name}...`);
-					const Contract = await ethers.getContractFactory(name);
-				// We get the contract to deploy
-			// const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
-		const swapRouterAddress = "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45";
-	const name = "Swapper";
-async function deployedContract() {
-.load scripts/deployContract.js
-.exit
-        test()
-        }
-        console.log(daiAmount)
-    const daiAmount = ethers.utils.parseUnits("1", 18);
-function test() {
-// const { ethers } = require("ethers")
-.load scripts/testSwapper.js
-.load scripts/test.js
-ethers.utils.parseUnits("1", 18)
-await signer.provider.getBlockNumber()
-const signer = await ethers.getSigner()
-await Swapper.swapExactInputSingle("10000000000000000")
-await Swapper.swapExactInputSingle(10000000000000000)
-Swapper.functions
-const Swapper = await deployedContract()
-																	}
-																	return contract;
-																const contract = await Contract.attach(address);
-															const Contract = await ethers.getContractFactory(name);
-														async function getContract(name, address) {
-														}
-														return interactableContract;
-													const interactableContract = await getContract(name, contract.address);
-												console.log(name, "deployed to:", contract.address);
-											await contract.deployed();
-										);
-									swapRouterAddress,
-							const contract = await Contract.deploy(
-						console.log(`Deploying ${name}...`);
-					const Contract = await ethers.getContractFactory(name);
-				// We get the contract to deploy
-			// const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
-		const swapRouterAddress = "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45";
-	const name = "Swapper";
-async function deployedContract() {
-.load scripts/deployContract.js
-await ethers.provider.getBlockNumber()
-ethers.provider
-provider
-signer
-wallet
-block

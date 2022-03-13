@@ -34,9 +34,9 @@ contract Swapper {
                     tokenOut: WETH,
                     fee: poolFee,
                     recipient: msg.sender,
-                    deadline: block.timestamp + (30 * 1000), // 30 seconds
+                    deadline: block.timestamp + (30), // 30 seconds
                     amountIn: amountIn,
-                    amountOutMinimum: 0, //TODO: make this not zero
+                    amountOutMinimum: 0, //TODO: make this not zero (this is the .5 slippage tolerance)
                     sqrtPriceLimitX96: 0
                 });
 
