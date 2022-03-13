@@ -1,3 +1,780 @@
+    																													    																					    								await test("0x6eED5f2904b53A7111ea0d8feeF26A4b64CF78d3");
+    																													    																					    								}
+    																													    																					    								console.log(tx);
+    																													    																					    							});
+    																													    																					    						gasLimit: 210000,
+    																													    																					    				gasPrice,
+    																													    																					    		const tx = await Swapper.swapExactInputSingle(daiAmount, {
+    																													    																					    	const gasPrice = await ethers.provider.getGasPrice();
+    																													    																					    // await approve()
+    																													    																					await approve(DAI, Swapper.address, daiAmount);
+    																													    																				const daiAmount = ethers.utils.parseUnits("1", 18);
+    																													    																			Swapper = await Swapper.attach(contractAddr);
+    																													    																		let Swapper = await ethers.getContractFactory("Swapper");
+    																													    																	};
+    																													    															name: "Dai Stablecoin",
+    																													    												symbol: "DAI",
+    																													    									decimals: 18,
+    																													    						address: "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+    																													    			chainId: 137,
+    																													    const DAI = {
+    																													async function test(contractAddr) {
+    																													}
+    																													});
+    																												});
+    																										resolve();
+    																							currentTransaction = null;
+    																				console.log(`Approved ${token.symbol}`);
+    																	tx.wait(4).then((value) => {
+    															});
+    													gasPrice,
+    										gasLimit: 800000,
+    							const tx = await tokenContract.approve(spender, amount, {
+    					const tokenContract = new ethers.Contract(token.address, ERC20ABI, signer);
+    			const gasPrice = await signer.provider.getGasPrice();
+    	return new Promise(async (resolve, reject) => {
+    let signer = await ethers.getSigner()
+async function approve(token, spender, amount) {
+.load scripts/testSwapper.js
+    																													    																					    								await test("0x6eED5f2904b53A7111ea0d8feeF26A4b64CF78d3");
+    																													    																					    								}
+    																													    																					    								console.log(tx);
+    																													    																					    							});
+    																													    																					    						gasLimit: 210000,
+    																													    																					    				gasPrice,
+    																													    																					    		const tx = await Swapper.callStatic.swapExactInputSingle(daiAmount, {
+    																													    																					    	const gasPrice = await ethers.provider.getGasPrice();
+    																													    																					    // await approve()
+    																													    																					await approve(DAI, Swapper.address, daiAmount);
+    																													    																				const daiAmount = ethers.utils.parseUnits("1", 18);
+    																													    																			Swapper = await Swapper.attach(contractAddr);
+    																													    																		let Swapper = await ethers.getContractFactory("Swapper");
+    																													    																	};
+    																													    															name: "Dai Stablecoin",
+    																													    												symbol: "DAI",
+    																													    									decimals: 18,
+    																													    						address: "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+    																													    			chainId: 137,
+    																													    const DAI = {
+    																													async function test(contractAddr) {
+    																													}
+    																													});
+    																												});
+    																										resolve();
+    																							currentTransaction = null;
+    																				console.log(`Approved ${token.symbol}`);
+    																	tx.wait(4).then((value) => {
+    															});
+    													gasPrice,
+    										gasLimit: 800000,
+    							const tx = await tokenContract.approve(spender, amount, {
+    					const tokenContract = new ethers.Contract(token.address, ERC20ABI, signer);
+    			const gasPrice = await signer.provider.getGasPrice();
+    	return new Promise(async (resolve, reject) => {
+    let signer = await ethers.getSigner()
+async function approve(token, spender, amount) {
+.load scripts/testSwapper.js
+txn = await c.callStatic.swapExactInputSingle("1000000000", {gasLimit: 210000, gasPrice: gasPrice})
+txn = await c.callStatic.swapExactInputSingle("1000000000", {gasLimit: 210000, gasPrice})
+let gasPrice = await ethers.provider.getGasPrice()
+txn = await c.callStatic.swapExactInputSingle("1000000000", {gasLimit: 210000})
+let txn = await c.callStatic.swapExactInputSingle("1000000000", {gasLimit: 210000})
+let txn = await c.callStatic.swapExactInputSingle("1000000000")
+c.functions
+    																													    																					    								await test("0x6eED5f2904b53A7111ea0d8feeF26A4b64CF78d3");
+    																													    																					    								}
+    																													    																					    								console.log(tx);
+    																													    																					    							});
+    																													    																					    						gasLimit: 210000,
+    																													    																					    				gasPrice,
+    																													    																					    		const tx = await Swapper.swapExactInputSingle(daiAmount, {
+    																													    																					    	const gasPrice = await ethers.provider.getGasPrice();
+    																													    																					    // await approve()
+    																													    																					// await approve(DAI, Swapper.address, daiAmount);
+    																													    																				const daiAmount = ethers.utils.parseUnits("1", 18);
+    																													    																			Swapper = await Swapper.attach(contractAddr);
+    																													    																		let Swapper = await ethers.getContractFactory("Swapper");
+    																													    																	};
+    																													    															name: "Dai Stablecoin",
+    																													    												symbol: "DAI",
+    																													    									decimals: 18,
+    																													    						address: "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+    																													    			chainId: 137,
+    																													    const DAI = {
+    																													async function test(contractAddr) {
+    																													}
+    																													});
+    																												});
+    																										resolve();
+    																							currentTransaction = null;
+    																				console.log(`Approved ${token.symbol}`);
+    																	tx.wait(4).then((value) => {
+    															});
+    													gasPrice,
+    										gasLimit: 800000,
+    							const tx = await tokenContract.approve(spender, amount, {
+    					const tokenContract = new ethers.Contract(token.address, ERC20ABI, signer);
+    			const gasPrice = await signer.provider.getGasPrice();
+    	return new Promise(async (resolve, reject) => {
+    let signer = await ethers.getSigner()
+async function approve(token, spender, amount) {
+.load scripts/testSwapper.js
+let c = await deployedContract()
+																		}
+																		return contract;
+																	const contract = await Contract.attach(address);
+																const Contract = await ethers.getContractFactory(name);
+															async function getContract(name, address) {
+															}
+															return interactableContract;
+														const interactableContract = await getContract(name, contract.address);
+													console.log(name, "deployed to:", contract.address);
+												await contract.deployed();
+											);
+										swapRouterAddress,
+								const contract = await Contract.deploy(
+							console.log(`Deploying ${name}...`);
+						const Contract = await ethers.getContractFactory(name);
+					// We get the contract to deploy
+				// const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
+			const swapRouterAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
+		// const swapRouterAddress = "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45";
+	const name = "Swapper";
+async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
+.load scripts/deployContract.js
+.exit
+    																													    																					    								await test();
+    																													    																					    								}
+    																													    																					    								console.log(tx);
+    																													    																					    							});
+    																													    																					    						gasLimit: 210000,
+    																													    																					    				gasPrice,
+    																													    																					    		const tx = await Swapper.swapExactInputSingle(daiAmount, {
+    																													    																					    	const gasPrice = await ethers.provider.getGasPrice();
+    																													    																					    // await approve()
+    																													    																					// await approve(DAI, Swapper.address, daiAmount);
+    																													    																				const daiAmount = ethers.utils.parseUnits("1", 18);
+    																													    																			Swapper = await Swapper.attach("0x84F56c0aD32Ed3AA6Bd2544E90b73b02935c3beB");
+    																													    																		let Swapper = await ethers.getContractFactory("Swapper");
+    																													    																	};
+    																													    															name: "Dai Stablecoin",
+    																													    												symbol: "DAI",
+    																													    									decimals: 18,
+    																													    						address: "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+    																													    			chainId: 137,
+    																													    const DAI = {
+    																													async function test() {
+    																													}
+    																													});
+    																												});
+    																										resolve();
+    																							currentTransaction = null;
+    																				console.log(`Approved ${token.symbol}`);
+    																	tx.wait(4).then((value) => {
+    															});
+    													gasPrice,
+    										gasLimit: 800000,
+    							const tx = await tokenContract.approve(spender, amount, {
+    					const tokenContract = new ethers.Contract(token.address, ERC20ABI, signer);
+    			const gasPrice = await signer.provider.getGasPrice();
+    	return new Promise(async (resolve, reject) => {
+    let signer = await ethers.getSigner()
+async function approve(token, spender, amount) {
+.load scripts/testSwapper.js
+    																													    																					    								await test();
+    																													    																					    								}
+    																													    																					    								console.log(tx);
+    																													    																					    							});
+    																													    																					    						gasLimit: 210000,
+    																													    																					    				gasPrice,
+    																													    																					    		const tx = await Swapper.swapExactInputSingle(daiAmount, {
+    																													    																					    	const gasPrice = await ethers.provider.getGasPrice();
+    																													    																					    await approve()
+    																													    																					await approve(DAI, Swapper.address, daiAmount);
+    																													    																				const daiAmount = ethers.utils.parseUnits("1", 18);
+    																													    																			Swapper = await Swapper.attach("0x84F56c0aD32Ed3AA6Bd2544E90b73b02935c3beB");
+    																													    																		let Swapper = await ethers.getContractFactory("Swapper");
+    																													    																	};
+    																													    															name: "Dai Stablecoin",
+    																													    												symbol: "DAI",
+    																													    									decimals: 18,
+    																													    						address: "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+    																													    			chainId: 137,
+    																													    const DAI = {
+    																													async function test() {
+    																													}
+    																													});
+    																												});
+    																										resolve();
+    																							currentTransaction = null;
+    																				console.log(`Approved ${token.symbol}`);
+    																	tx.wait(4).then((value) => {
+    															});
+    													gasPrice,
+    										gasLimit: 800000,
+    							const tx = await tokenContract.approve(spender, amount, {
+    					const tokenContract = new ethers.Contract(token.address, ERC20ABI, signer);
+    			const gasPrice = await signer.provider.getGasPrice();
+    	return new Promise(async (resolve, reject) => {
+    let signer = await ethers.getSigner()
+async function approve(token, spender, amount) {
+.load scripts/testSwapper.js
+    																													    																													await test();
+    																													    																													}
+    																													    																													console.log(tx);
+    																													    																												});
+    																													    																											gasLimit: 210000,
+    																													    																									gasPrice,
+    																													    																							const tx = await Swapper.swapExactInputSingle(daiAmount, {
+    																													    																						const gasPrice = await ethers.provider.getGasPrice();
+    																													    																					await approve(DAI, Swapper.address, daiAmount);
+    																													    																				const daiAmount = ethers.utils.parseUnits("1", 18);
+    																													    																			Swapper = await Swapper.attach("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D");
+    																													    																		let Swapper = await ethers.getContractFactory("Swapper");
+    																													    																	};
+    																													    															name: "Dai Stablecoin",
+    																													    												symbol: "DAI",
+    																													    									decimals: 18,
+    																													    						address: "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+    																													    			chainId: 137,
+    																													    const DAI = {
+    																													async function test() {
+    																													}
+    																													});
+    																												});
+    																										resolve();
+    																							currentTransaction = null;
+    																				console.log(`Approved ${token.symbol}`);
+    																	tx.wait(4).then((value) => {
+    															});
+    													gasPrice,
+    										gasLimit: 800000,
+    							const tx = await tokenContract.approve(spender, amount, {
+    					const tokenContract = new ethers.Contract(token.address, ERC20ABI, signer);
+    			const gasPrice = await signer.provider.getGasPrice();
+    	return new Promise(async (resolve, reject) => {
+    let signer = await ethers.getSigner()
+async function approve(token, spender, amount) {
+.load scripts/testSwapper.js
+    																													    																													await test();
+    																													    																													}
+    																													    																													console.log(tx);
+    																													    																												});
+    																													    																											gasLimit: 210000,
+    																													    																									gasPrice,
+    																													    																							const tx = await Swapper.swapExactInputSingle(daiAmount, {
+    																													    																						const gasPrice = await ethers.provider.getGasPrice();
+    																													    																					await approve(DAI, Swapper.address, daiAmount);
+    																													    																				const daiAmount = ethers.utils.parseUnits("10", 18);
+    																													    																			Swapper = await Swapper.attach("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D");
+    																													    																		let Swapper = await ethers.getContractFactory("Swapper");
+    																													    																	};
+    																													    															name: "Dai Stablecoin",
+    																													    												symbol: "DAI",
+    																													    									decimals: 18,
+    																													    						address: "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+    																													    			chainId: 137,
+    																													    const DAI = {
+    																													async function test() {
+    																													}
+    																													});
+    																												});
+    																										resolve();
+    																							currentTransaction = null;
+    																				console.log(`Approved ${token.symbol}`);
+    																	tx.wait(4).then((value) => {
+    															});
+    													gasPrice,
+    										gasLimit: 800000,
+    							const tx = await tokenContract.approve(spender, amount, {
+    					const tokenContract = new ethers.Contract(token.address, ERC20ABI, signer);
+    			const gasPrice = await signer.provider.getGasPrice();
+    	return new Promise(async (resolve, reject) => {
+    let signer = await ethers.getSigner()
+async function approve(token, spender, amount) {
+.load scripts/testSwapper.js
+let donda = await deployedContract()
+let bruh = await deployedContract()
+																	}
+																	return contract;
+																const contract = await Contract.attach(address);
+															const Contract = await ethers.getContractFactory(name);
+														async function getContract(name, address) {
+														}
+														return interactableContract;
+													const interactableContract = await getContract(name, contract.address);
+												console.log(name, "deployed to:", contract.address);
+											await contract.deployed();
+										);
+									swapRouterAddress,
+							const contract = await Contract.deploy(
+						console.log(`Deploying ${name}...`);
+					const Contract = await ethers.getContractFactory(name);
+				// We get the contract to deploy
+			// const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
+		const swapRouterAddress = "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45";
+	const name = "Swapper";
+async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
+.load scripts/deployContract.js
+    																													    																													await test();
+    																													    																													}
+    																													    																													console.log(tx);
+    																													    																												});
+    																													    																											gasLimit: 210000,
+    																													    																									gasPrice,
+    																													    																							const tx = await Swapper.swapExactInputSingle(daiAmount, {
+    																													    																						const gasPrice = await ethers.provider.getGasPrice();
+    																													    																					await approve(DAI, Swapper.address, daiAmount);
+    																													    																				const daiAmount = ethers.utils.parseUnits("1", 18);
+    																													    																			Swapper = await Swapper.attach("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D");
+    																													    																		let Swapper = await ethers.getContractFactory("Swapper");
+    																													    																	};
+    																													    															name: "Dai Stablecoin",
+    																													    												symbol: "DAI",
+    																													    									decimals: 18,
+    																													    						address: "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+    																													    			chainId: 137,
+    																													    const DAI = {
+    																													async function test() {
+    																													}
+    																													});
+    																												});
+    																										resolve();
+    																							currentTransaction = null;
+    																				console.log(`Approved ${token.symbol}`);
+    																	tx.wait(4).then((value) => {
+    															});
+    													gasPrice,
+    										gasLimit: 800000,
+    							const tx = await tokenContract.approve(spender, amount, {
+    					const tokenContract = new ethers.Contract(token.address, ERC20ABI, signer);
+    			const gasPrice = await signer.provider.getGasPrice();
+    	return new Promise(async (resolve, reject) => {
+    let signer = await ethers.getSigner()
+async function approve(token, spender, amount) {
+.load scripts/testSwapper.js
+.exit
+network
+solidity
+ERC20ABI
+ERC20ABi
+    																													    																													await test();
+    																													    																													}
+    																													    																													console.log(tx);
+    																													    																												});
+    																													    																											gasLimit: 210000,
+    																													    																									gasPrice,
+    																													    																							const tx = await Swapper.swapExactInputSingle(daiAmount, {
+    																													    																						const gasPrice = await ethers.provider.getGasPrice();
+    																													    																					await approve(DAI, Swapper.address, daiAmount);
+    																													    																				const daiAmount = ethers.utils.parseUnits("1", 18);
+    																													    																			Swapper = await Swapper.attach("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D");
+    																													    																		let Swapper = await ethers.getContractFactory("Swapper");
+    																													    																	};
+    																													    															name: "Dai Stablecoin",
+    																													    												symbol: "DAI",
+    																													    									decimals: 18,
+    																													    						address: "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+    																													    			chainId: 137,
+    																													    const DAI = {
+    																													async function test() {
+    																													}
+    																													});
+    																												});
+    																										resolve();
+    																							currentTransaction = null;
+    																				console.log(`Approved ${token.symbol}`);
+    																	tx.wait(4).then((value) => {
+    															});
+    													gasPrice,
+    										gasLimit: 800000,
+    							const tx = await tokenContract.approve(spender, amount, {
+    					const tokenContract = new ethers.Contract(token.address, ERC20ABI, signer);
+    			const gasPrice = await signer.provider.getGasPrice();
+    	return new Promise(async (resolve, reject) => {
+    let signer = await ethers.getSigner()
+async function approve(token, spender, amount) {
+// const { ethers } = require("hardhat");
+.load scripts/testSwapper.js
+.exit
+let signer = await ethers.getSigner()
+signer
+    																													    																													await test();
+    																													    																													}
+    																													    																													console.log(tx);
+    																													    																												});
+    																													    																											gasLimit: 210000,
+    																													    																									gasPrice,
+    																													    																							const tx = await Swapper.swapExactInputSingle(daiAmount, {
+    																													    																						const gasPrice = await ethers.provider.getGasPrice();
+    																													    																					await approve(DAI, Swapper.address, daiAmount);
+    																													    																				const daiAmount = ethers.utils.parseUnits("1", 18);
+    																													    																			Swapper = await Swapper.attach("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D");
+    																													    																		let Swapper = await ethers.getContractFactory("Swapper");
+    																													    																	};
+    																													    															name: "Dai Stablecoin",
+    																													    												symbol: "DAI",
+    																													    									decimals: 18,
+    																													    						address: "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+    																													    			chainId: 137,
+    																													    const DAI = {
+    																													async function test() {
+    																													}
+    																													});
+    																												});
+    																										resolve();
+    																							currentTransaction = null;
+    																				console.log(`Approved ${token.symbol}`);
+    																	tx.wait(4).then((value) => {
+    															});
+    													gasPrice,
+    										gasLimit: 800000,
+    							const tx = await tokenContract.approve(spender, amount, {
+    					const tokenContract = new ethers.Contract(token.address, ERC20ABI, signer);
+    			const gasPrice = await provider.getGasPrice();
+    	return new Promise(async (resolve, reject) => {
+    let signer = await ethers.getSigner()
+async function approve(token, spender, amount) {
+// const { ethers } = require("hardhat");
+.load scripts/testSwapper.js
+.exit
+                                                                            																																									await test();
+                                                                            																																									}
+                                                                            																																									console.log(tx);
+                                                                            																																								});
+                                                                            																																							gasLimit: 210000,
+                                                                            																																					gasPrice,
+                                                                            																																			const tx = await Swapper.swapExactInputSingle(daiAmount, {
+                                                                            																																		const gasPrice = await ethers.provider.getGasPrice();
+                                                                            																																	await approve(DAI, Swapper.address, daiAmount);
+                                                                            																																const daiAmount = ethers.utils.parseUnits("1", 18);
+                                                                            																															Swapper = await Swapper.attach("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D");
+                                                                            																														let Swapper = await ethers.getContractFactory("Swapper");
+                                                                            																													async function test() {
+                                                                            																													}
+                                                                            																													});
+                                                                            																												});
+                                                                            																										resolve();
+                                                                            																							currentTransaction = null;
+                                                                            																				console.log(`Approved ${token.symbol}`);
+                                                                            																	tx.wait(4).then((value) => {
+                                                                            															});
+                                                                            													gasPrice,
+                                                                            										gasLimit: 800000,
+                                                                            							const tx = await tokenContract.approve(spender, amount, {
+                                                                            					const tokenContract = new ethers.Contract(token.address, ERC20ABI, signer);
+                                                                            			const gasPrice = await provider.getGasPrice();
+                                                                            	return new Promise(async (resolve, reject) => {
+                                                                            let signer = await ethers.getSigner()
+                                                                        };
+                                                                name: "Dai Stablecoin",
+                                                    symbol: "DAI",
+                                        decimals: 18,
+                            address: "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+                chainId: 137,
+    const DAI = {
+async function approve(token, spender, amount) {
+// const { ethers } = require("hardhat");
+.load scripts/testSwapper.js
+.exit
+DAI
+					    																																									await test();
+					    																																									}
+					    																																									console.log(tx);
+					    																																								});
+					    																																							gasLimit: 210000,
+					    																																					gasPrice,
+					    																																			const tx = await Swapper.swapExactInputSingle(daiAmount, {
+					    																																		const gasPrice = await ethers.provider.getGasPrice();
+					    																																	await approve(DAI, Swapper.address, daiAmount);
+					    																																const daiAmount = ethers.utils.parseUnits("1", 18);
+					    																															Swapper = await Swapper.attach("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D");
+					    																														let Swapper = await ethers.getContractFactory("Swapper");
+					    																													async function test() {
+					    																													}
+					    																													});
+					    																												});
+					    																										resolve();
+					    																							currentTransaction = null;
+					    																				console.log(`Approved ${token.symbol}`);
+					    																	tx.wait(4).then((value) => {
+					    															});
+					    													gasPrice,
+					    										gasLimit: 800000,
+					    							const tx = await tokenContract.approve(spender, amount, {
+					    					const tokenContract = new ethers.Contract(token.address, ERC20ABI, signer);
+					    			const gasPrice = await provider.getGasPrice();
+					    	return new Promise(async (resolve, reject) => {
+					    let signer = await ethers.getSigner()
+					async function approve(token, spender, amount) {
+					}
+					name: "Dai Stablecoin"
+				symbol: "DAI",
+			decimals: 18,
+		address: "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+	chainId: 137,
+const DAI = {
+// const { ethers } = require("hardhat");
+.load scripts/testSwapper.js
+.load scripts/testSwaper.js
+					    																																										await test();
+					    																																										}
+					    																																										console.log(tx);
+					    																																									});
+					    																																								gasLimit: 210000,
+					    																																						gasPrice,
+					    																																				const tx = await Swapper.swapExactInputSingle(daiAmount, {
+					    																																			const gasPrice = await ethers.provider.getGasPrice();
+					    																																		await approve(DAI, Swapper.address, daiAmount);
+					    																																	const daiAmount = ethers.utils.parseUnits("1", 18);
+					    																																Swapper = await Swapper.attach("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D");
+					    																															let Swapper = await ethers.getContractFactory("Swapper");
+					    																														// const ethers = require("ethers");
+					    																													async function test() {
+					    																													}
+					    																													});
+					    																												});
+					    																										resolve();
+					    																							currentTransaction = null;
+					    																				console.log(`Approved ${token.symbol}`);
+					    																	tx.wait(4).then((value) => {
+					    															});
+					    													gasPrice,
+					    										gasLimit: 800000,
+					    							const tx = await tokenContract.approve(spender, amount, {
+					    					const tokenContract = new ethers.Contract(token.address, ERC20ABI, signer);
+					    			const gasPrice = await provider.getGasPrice();
+					    	return new Promise(async (resolve, reject) => {
+					    let signer = await ethers.getSigner()
+					async function approve(token, spender, amount) {
+					}
+					name: "Dai Stablecoin"
+				symbol: "DAI",
+			decimals: 18,
+		address: "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+	chainId: 137,
+const DAI = {
+const { ethers } = require("hardhat");
+.load scripts/testSwapper.js
+					    																																										await test();
+					    																																										}
+					    																																										console.log(tx);
+					    																																									});
+					    																																								gasLimit: 210000,
+					    																																						gasPrice,
+					    																																				const tx = await Swapper.swapExactInputSingle(daiAmount, {
+					    																																			const gasPrice = await ethers.provider.getGasPrice();
+					    																																		await approve(DAI, Swapper.address, daiAmount);
+					    																																	const daiAmount = ethers.utils.parseUnits("1", 18);
+					    																																Swapper = await Swapper.attach("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D");
+					    																															let Swapper = await ethers.getContractFactory("Swapper");
+					    																														// const ethers = require("ethers");
+					    																													async function test() {
+					    																													}
+					    																													});
+					    																												});
+					    																										resolve();
+					    																							currentTransaction = null;
+					    																				console.log(`Approved ${token.symbol}`);
+					    																	tx.wait(4).then((value) => {
+					    															});
+					    													gasPrice,
+					    										gasLimit: 800000,
+					    							const tx = await tokenContract.approve(spender, amount, {
+					    					const tokenContract = new ethers.Contract(token.address, ERC20ABI, signer);
+					    			const gasPrice = await provider.getGasPrice();
+					    	return new Promise(async (resolve, reject) => {
+					    let signer = await ethers.getSigner()
+					async function approve(token, spender, amount) {
+					);
+					"Dai Stablecoin"
+				"DAI",
+			18,
+		"0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+	137,
+const DAI = new Token(
+const { ethers } = require("hardhat");
+.load scripts/testSwapper.js
+                                                    await test()
+                                                    }
+                                                    console.log(tx)
+                                                })
+                                            gasLimit: 210000
+                                    gasPrice,
+                            const tx = await Swapper.swapExactInputSingle(daiAmount, {
+                        const gasPrice = await ethers.provider.getGasPrice()
+                    const daiAmount = ethers.utils.parseUnits("1", 18);
+            Swapper = await Swapper.attach("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D");
+        let Swapper = await ethers.getContractFactory("Swapper")
+    const signer = await ethers.getSigner();
+async function test() {
+// const { ethers } = require("ethers")
+// const { ethers } = require("ethers");
+.load scripts/testSwapper.js
+.exit
+                                                    await test()
+                                                    }
+                                                    console.log(tx)
+                                                })
+                                            gasLimit: 210000
+                                    gasPrice,
+                            const tx = await Swapper.swapExactInputSingle(daiAmount, {
+                        const gasPrice = await ethers.provider.getGasPrice()
+                    const daiAmount = ethers.utils.parseUnits("1", 18);
+            Swapper = await Swapper.attach("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D");
+        let Swapper = await ethers.getContractFactory("Swapper")
+    const signer = await ethers.getSigner();
+async function test() {
+// const { ethers } = require("ethers")
+const { ethers } = require("ethers");
+.load scripts/testSwapper.js
+                                    await test()
+                                    }
+                                    // console.log(tx)
+                                // const tx = await Swapper.swapExactInputSingle(daiAmount, {})
+                            console.log(Swapper.functions)
+                    Swapper = await Swapper.attach("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D");
+                let Swapper = await ethers.getContractFactory("Swapper")
+            const daiAmount = ethers.utils.parseUnits("1", 18);
+    const signer = await ethers.getSigner();
+async function test() {
+// const { ethers } = require("ethers")
+.load scripts/testSwapper.js
+.exit
+Contract.functions
+Contract = await Contract.attach("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D")
+let Contract = await ethers.getContractFactory("Swapper")
+Contract
+Swapper
+await Swapper.connect(wallet)
+Swapper.functions
+await Swapper.attach("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D")
+let Swapper = await ethers.getContractFactory("Swapper")
+let wallet = await ethers.getSigner()
+const signer = await ethers.getSigner
+                                    await test()
+                                    }
+                                    // console.log(tx)
+                                // const tx = await Swapper.swapExactInputSingle(daiAmount, {})
+                            console.log(Swapper.functions)
+                        await Swapper.connect(signer)
+                    await Swapper.attach("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D");
+                let Swapper = await ethers.getContractFactory("Swapper")
+            const daiAmount = ethers.utils.parseUnits("1", 18);
+    const signer = await ethers.getSigner();
+async function test() {
+// const { ethers } = require("ethers")
+.load scripts/testSwapper.js
+                                    await test()
+                                    }
+                                    // console.log(tx)
+                                // const tx = await Swapper.swapExactInputSingle(daiAmount, {})
+                            console.log(Swapper.functions)
+                        await Swapper.connect(signer)
+                    await Swapper.attatch("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D");
+                let Swapper = await ethers.getContractFactory("Swapper")
+            const daiAmount = ethers.utils.parseUnits("1", 18);
+    const signer = await ethers.getSigner();
+async function test() {
+// const { ethers } = require("ethers")
+.load scripts/testSwapper.js
+                                test()
+                                }
+                                // console.log(tx)
+                            // const tx = await Swapper.swapExactInputSingle(daiAmount, {})
+                        console.log(Swapper.functions)
+                    await Swapper.connect(signer)
+                let Swapper = await ethers.getContractFactory("Swapper")
+            const daiAmount = ethers.utils.parseUnits("1", 18);
+    const signer = await ethers.getSigner();
+async function test() {
+// const { ethers } = require("ethers")
+.load scripts/testSwapper.js
+                                test()
+                                }
+                                console.log(tx)
+                            const tx = await Swapper.swapExactInputSingle(daiAmount, {})
+                        console.log(Swapper.functions)
+                    Swapper.connect(signer)
+                let Swapper = await ethers.getContractFactory("Swapper")
+            const daiAmount = ethers.utils.parseUnits("1", 18);
+    const signer = await ethers.getSigner();
+async function test() {
+// const { ethers } = require("ethers")
+.load scripts/testSwapper.js
+Swapper
+.exit
+)
+Swapper.connect(
+Swapper.functions
+let Swapper = await ethers.getContractFactory("Swapper")
+.exit
+.clear
+Contract = Contract.then()
+Contract
+let Contract = ethers.getContractFactory("Swapper")
+.exit
+process.env
+                    			                        		            test()
+                    			                        		            }
+                    			                        		            // console.log(tx)
+                    			                        		        // const tx = await Swapper.swapExactInputSingle(daiAmount, {})
+                    			                        		    console.log(Swapper.functions)
+                    			                        		);
+                    			                        signer
+                    			            SwapperABI,
+                    			"0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D",
+                    let Swapper = new ethers.Contract(
+                const daiAmount = ethers.utils.parseUnits("1", 18);
+        const signer = await ethers.getSigner();
+    const SwapperABI = require("../artifacts/contracts/Swapper.sol/Swapper.json").abi;
+async function test() {
+// const { ethers } = require("ethers")
+.load scripts/testSwapper.js
+                    test()
+                    }
+                    console.log(tx)
+                const tx = await Swapper.swapExactInputSingle(daiAmount)
+            const daiAmount = ethers.utils.parseUnits("1", 18);
+    const signer = await ethers.getSigner();
+async function test() {
+// const { ethers } = require("ethers")
+.load scripts/testSwapper.js
+Swapper.functions
+let Swapper = await deployedContract()
+																	}
+																	return contract;
+																const contract = await Contract.attach(address);
+															const Contract = await ethers.getContractFactory(name);
+														async function getContract(name, address) {
+														}
+														return interactableContract;
+													const interactableContract = await getContract(name, contract.address);
+												console.log(name, "deployed to:", contract.address);
+											await contract.deployed();
+										);
+									swapRouterAddress,
+							const contract = await Contract.deploy(
+						console.log(`Deploying ${name}...`);
+					const Contract = await ethers.getContractFactory(name);
+				// We get the contract to deploy
+			// const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
+		const swapRouterAddress = "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45";
+	const name = "Swapper";
+async function deployedContract() {
+.load scripts/deployContract.js
+.exit
+        test()
+        }
+        console.log(daiAmount)
+    const daiAmount = ethers.utils.parseUnits("1", 18);
+function test() {
+// const { ethers } = require("ethers")
+.load scripts/testSwapper.js
+.load scripts/test.js
+ethers.utils.parseUnits("1", 18)
+await signer.provider.getBlockNumber()
+const signer = await ethers.getSigner()
 await Swapper.swapExactInputSingle("10000000000000000")
 await Swapper.swapExactInputSingle(10000000000000000)
 Swapper.functions

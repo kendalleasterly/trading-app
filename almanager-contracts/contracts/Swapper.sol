@@ -6,6 +6,7 @@ import '@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol';
 import '@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol';
 
 contract Swapper {
+    //hardcode the owner as my address. only run any function if msg.sender == owner
 
     ISwapRouter public immutable swapRouter;
     address public constant WETH = 0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619;
@@ -18,7 +19,7 @@ contract Swapper {
     }
 
     function swapExactInputSingle(uint256 amountIn) external returns (uint256 amountOut) {
-        // msg.sender must approve this contract
+        // msg.sender must approve this contract to use dai
 
         // Transfer the specified amount of DAI to this contract.
         TransferHelper.safeTransferFrom(DAI, msg.sender, address(this), amountIn);
@@ -40,6 +41,7 @@ contract Swapper {
                 });
 
         amountOut = swapRouter.exactInputSingle(params);
+
     }
 
 }
