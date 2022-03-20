@@ -1,3 +1,110 @@
+await daiContract.balanceOf(signer.address)
+daiContract.functions
+signer.provider)
+ERC20ABI,
+DAI,
+let daiContract = new ethers.Contract(
+ERC20ABI,
+DAI
+let daiContract = new ethers.Contract(
+													await test("0x6eED5f2904b53A7111ea0d8feeF26A4b64CF78d3");
+													}
+													console.log(tx);
+												});
+											gasLimit: 210000,
+									gasPrice,
+							const tx = await Swapper.swapExactInputSingle(daiAmount, {
+						const gasPrice = await ethers.provider.getGasPrice();
+					await approve(DAI, Swapper.address, daiAmount);
+				const daiAmount = ethers.utils.parseUnits("1", 18);
+			const approveAmount = ethers.utils.parseUnits("2", 18);
+		Swapper = await Swapper.attach(contractAddr);
+	let Swapper = await ethers.getContractFactory("Swapper");
+async function test(contractAddr) {
+.load scripts/testSwapper.js
+let signer = await ethers.getSigner()
+await signer.getBalance()
+let signer = await ethers.getSigner()
+signer
+await signer
+DAI
+													await test("0x6eED5f2904b53A7111ea0d8feeF26A4b64CF78d3");
+													}
+													console.log(tx);
+												});
+											gasLimit: 210000,
+									gasPrice,
+							const tx = await Swapper.swapExactInputSingle(daiAmount, {
+						const gasPrice = await ethers.provider.getGasPrice();
+					await approve(DAI, Swapper.address, daiAmount);
+				const daiAmount = ethers.utils.parseUnits("1", 18);
+			const approveAmount = ethers.utils.parseUnits("2", 18);
+		Swapper = await Swapper.attach(contractAddr);
+	let Swapper = await ethers.getContractFactory("Swapper");
+async function test(contractAddr) {
+.load scripts/testSwapper.js
+hre.ethers.provider
+													await test("0x6eED5f2904b53A7111ea0d8feeF26A4b64CF78d3");
+													}
+													console.log(tx);
+												});
+											gasLimit: 210000,
+									gasPrice,
+							const tx = await Swapper.swapExactInputSingle(daiAmount, {
+						const gasPrice = await ethers.provider.getGasPrice();
+					await approve(DAI, Swapper.address, daiAmount);
+				const daiAmount = ethers.utils.parseUnits("1", 18);
+			const approveAmount = ethers.utils.parseUnits("2", 18);
+		Swapper = await Swapper.attach(contractAddr);
+	let Swapper = await ethers.getContractFactory("Swapper");
+async function test(contractAddr) {
+.load scripts/testSwapper.js
+.load scripts/testSwaper.js
+.exit
+DAI
+												await test("0x6eED5f2904b53A7111ea0d8feeF26A4b64CF78d3");
+												}
+												console.log(tx);
+											});
+										gasLimit: 210000,
+								gasPrice,
+						const tx = await Swapper.swapExactInputSingle(daiAmount, {
+					const gasPrice = await ethers.provider.getGasPrice();
+				await approve(DAI, Swapper.address, daiAmount);
+			const daiAmount = ethers.utils.parseUnits("1", 18);
+		Swapper = await Swapper.attach(contractAddr);
+	let Swapper = await ethers.getContractFactory("Swapper");
+async function test(contractAddr) {
+.load scripts/testSwapper.js
+												await test("0x6eED5f2904b53A7111ea0d8feeF26A4b64CF78d3");
+												}
+												console.log(tx);
+											});
+										gasLimit: 210000,
+								gasPrice,
+						const tx = await Swapper.callStatic.swapExactInputSingle(daiAmount, {
+					const gasPrice = await ethers.provider.getGasPrice();
+				await approve(DAI, Swapper.address, daiAmount);
+			const daiAmount = ethers.utils.parseUnits("1", 18);
+		Swapper = await Swapper.attach(contractAddr);
+	let Swapper = await ethers.getContractFactory("Swapper");
+async function test(contractAddr) {
+.load scripts/testSwapper.js
+				    								await test("0x6eED5f2904b53A7111ea0d8feeF26A4b64CF78d3");
+				    								}
+				    								console.log(tx);
+				    							});
+				    						gasLimit: 210000,
+				    				gasPrice,
+				    		const tx = await Swapper.callStatic.swapExactInputSingle(daiAmount, {
+				    	const gasPrice = await ethers.provider.getGasPrice();
+				    // await approve()
+				await approve(DAI, Swapper.address, daiAmount);
+			const daiAmount = ethers.utils.parseUnits("1", 18);
+		Swapper = await Swapper.attach(contractAddr);
+	let Swapper = await ethers.getContractFactory("Swapper");
+async function test(contractAddr) {
+.load scripts/testSwapper.js
 				    								await test("0x6eED5f2904b53A7111ea0d8feeF26A4b64CF78d3");
 				    								}
 				    								console.log(tx);
@@ -890,112 +997,4 @@ const { ethers } = require("hardhat");
 					    																													async function test() {
 					    																													}
 					    																													});
-					    																												});
-					    																										resolve();
-					    																							currentTransaction = null;
-					    																				console.log(`Approved ${token.symbol}`);
-					    																	tx.wait(4).then((value) => {
-					    															});
-					    													gasPrice,
-					    										gasLimit: 800000,
-					    							const tx = await tokenContract.approve(spender, amount, {
-					    					const tokenContract = new ethers.Contract(token.address, ERC20ABI, signer);
-					    			const gasPrice = await provider.getGasPrice();
-					    	return new Promise(async (resolve, reject) => {
-					    let signer = await ethers.getSigner()
-					async function approve(token, spender, amount) {
-					);
-					"Dai Stablecoin"
-				"DAI",
-			18,
-		"0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
-	137,
-const DAI = new Token(
-const { ethers } = require("hardhat");
-.load scripts/testSwapper.js
-                                                    await test()
-                                                    }
-                                                    console.log(tx)
-                                                })
-                                            gasLimit: 210000
-                                    gasPrice,
-                            const tx = await Swapper.swapExactInputSingle(daiAmount, {
-                        const gasPrice = await ethers.provider.getGasPrice()
-                    const daiAmount = ethers.utils.parseUnits("1", 18);
-            Swapper = await Swapper.attach("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D");
-        let Swapper = await ethers.getContractFactory("Swapper")
-    const signer = await ethers.getSigner();
-async function test() {
-// const { ethers } = require("ethers")
-// const { ethers } = require("ethers");
-.load scripts/testSwapper.js
-.exit
-                                                    await test()
-                                                    }
-                                                    console.log(tx)
-                                                })
-                                            gasLimit: 210000
-                                    gasPrice,
-                            const tx = await Swapper.swapExactInputSingle(daiAmount, {
-                        const gasPrice = await ethers.provider.getGasPrice()
-                    const daiAmount = ethers.utils.parseUnits("1", 18);
-            Swapper = await Swapper.attach("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D");
-        let Swapper = await ethers.getContractFactory("Swapper")
-    const signer = await ethers.getSigner();
-async function test() {
-// const { ethers } = require("ethers")
-const { ethers } = require("ethers");
-.load scripts/testSwapper.js
-                                    await test()
-                                    }
-                                    // console.log(tx)
-                                // const tx = await Swapper.swapExactInputSingle(daiAmount, {})
-                            console.log(Swapper.functions)
-                    Swapper = await Swapper.attach("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D");
-                let Swapper = await ethers.getContractFactory("Swapper")
-            const daiAmount = ethers.utils.parseUnits("1", 18);
-    const signer = await ethers.getSigner();
-async function test() {
-// const { ethers } = require("ethers")
-.load scripts/testSwapper.js
-.exit
-Contract.functions
-Contract = await Contract.attach("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D")
-let Contract = await ethers.getContractFactory("Swapper")
-Contract
-Swapper
-await Swapper.connect(wallet)
-Swapper.functions
-await Swapper.attach("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D")
-let Swapper = await ethers.getContractFactory("Swapper")
-let wallet = await ethers.getSigner()
-const signer = await ethers.getSigner
-                                    await test()
-                                    }
-                                    // console.log(tx)
-                                // const tx = await Swapper.swapExactInputSingle(daiAmount, {})
-                            console.log(Swapper.functions)
-                        await Swapper.connect(signer)
-                    await Swapper.attach("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D");
-                let Swapper = await ethers.getContractFactory("Swapper")
-            const daiAmount = ethers.utils.parseUnits("1", 18);
-    const signer = await ethers.getSigner();
-async function test() {
-// const { ethers } = require("ethers")
-.load scripts/testSwapper.js
-                                    await test()
-                                    }
-                                    // console.log(tx)
-                                // const tx = await Swapper.swapExactInputSingle(daiAmount, {})
-                            console.log(Swapper.functions)
-                        await Swapper.connect(signer)
-                    await Swapper.attatch("0xa77535c214BbB7b03d2fA2d96dDb322A2138c19D");
-                let Swapper = await ethers.getContractFactory("Swapper")
-            const daiAmount = ethers.utils.parseUnits("1", 18);
-    const signer = await ethers.getSigner();
-async function test() {
-// const { ethers } = require("ethers")
-.load scripts/testSwapper.js
-                                test()
-                                }                          const tx = await Swapper.swapExactInputSingle(daiAmount, {})
-                        console.log(Swapper.functions)
+					    																												}););											currentTransaction = null;													console.log(`Approved ${token.symbol}`);																	tx.wait(4).then((value) => {	    															});			gasLimit: 800000,		    							const tx = await tokenContract.approve(spender, amount, {w ethers.Contract(token.address, ERC20ABI, signer);,                const tx = await Swapper.swapExactInputSingle(daiAmount, {                     const gasPrice = await ethers.provider.getGasPrice()  })

@@ -7,11 +7,9 @@ async function test(contractAddr) {
 
 	await approve(DAI, Swapper.address, daiAmount);
 
-    // await approve()
-
 	const gasPrice = await ethers.provider.getGasPrice();
 
-	const tx = await Swapper.callStatic.swapExactInputSingle(daiAmount, {
+	const tx = await Swapper.swapExactInputSingle(daiAmount, {
 		gasPrice,
 		gasLimit: 210000,
 	});
