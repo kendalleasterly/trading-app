@@ -1,3 +1,5 @@
+// const { tenderly } = require("hardhat");
+
 async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
 	const name = "PositionManager";
 
@@ -14,10 +16,15 @@ async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
 	const contract = await Contract.deploy(
 		NonfungiblePositionManager,
 		factory,
-		WETH
+		WMATIC
 	);
 	await contract.deployed();
 	console.log(name, "deployed to:", contract.address);
+
+	tenderly.verify({
+		name,
+		address: contract.address
+	})
 
 	const interactableContract = await getContract(name, contract.address);
 	return interactableContract;

@@ -10,6 +10,8 @@ import '@uniswap/v3-periphery/contracts/interfaces/INonfungiblePositionManager.s
 import '@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol';
 import '@uniswap/v3-periphery/contracts/base/LiquidityManagement.sol';
 
+import "hardhat/console.sol";
+
 contract PositionManager is IERC721Receiver, LiquidityManagement {
 
     //this contract has custody of the nft. 
@@ -51,10 +53,10 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
     struct MintParams {
         uint256 amount0ToMint;
         uint256 amount1ToMint;
-        IUniswapV3Pool pool;
+        address pool;
         }
 
-    function mintNewPosition(MintParams calldata mintParams)
+    function mintNewPosition(MintParams memory mintParams)
         external
         returns (
             uint256 tokenId,
@@ -63,14 +65,19 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
             uint256 amount1
             ) 
     {
+
+        IUniswapV3Pool pool = IUniswapV3Pool(mintParams.pool);
         
-        (, int24 tick, , , , , ) = mintParams.pool.slot0(); 
-        uint24 poolFee = mintParams.pool.fee();
-        address token0 = mintParams.pool.token0();
-        address token1 = mintParams.pool.token1();
-        int24 tickSpacing = mintParams.pool.tickSpacing();
+        (, int24 tick, , , , , ) = pool.slot0(); 
+        uint24 poolFee = pool.fee();
+        address token0 = pool.token0();
+        address token1 = pool.token1();
+        int24 tickSpacing = pool.tickSpacing();
 
         int24 nearestTick = _nearestUsableTick(tick, tickSpacing);
+
+        _safeApprove(token0, address(nonfungiblePositionManager), mintParams.amount0ToMint);
+        _safeApprove(token1, address(nonfungiblePositionManager), mintParams.amount1ToMint);
         
         INonfungiblePositionManager.MintParams memory params = 
             INonfungiblePositionManager.MintParams({
@@ -87,8 +94,6 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
                 deadline: block.timestamp + 30 //30 seconds
             });
 
-        _safeApprove(token0, address(nonfungiblePositionManager), mintParams.amount0ToMint);
-        _safeApprove(token1, address(nonfungiblePositionManager), mintParams.amount1ToMint);
         
         (tokenId, liquidity, amount0, amount1) = nonfungiblePositionManager.mint(params);
 
