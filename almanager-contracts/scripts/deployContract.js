@@ -21,11 +21,6 @@ async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
 	await contract.deployed();
 	console.log(name, "deployed to:", contract.address);
 
-	tenderly.verify({
-		name,
-		address: contract.address
-	})
-
 	const interactableContract = await getContract(name, contract.address);
 	return interactableContract;
 }

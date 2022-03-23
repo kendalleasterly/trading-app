@@ -31,9 +31,6 @@ async function test(contractAddr) {
 
     console.log(tx)
 
-    await approve(WETH, Manager.address, wethAmount)
-    await approve(DAI, Manager.address, daiAmount);
-
 }
 
-await test("0x6641752eb82ba265a829fd2fcBdE7933ad1481E5");
+await test("0xdd55e66629f1e2f4f725b115b371bf059e7d3436");

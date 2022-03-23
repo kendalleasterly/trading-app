@@ -184,8 +184,8 @@
       ]
     },
     "/Users/kendalleasterly/Documents/Web3 Development/trading-app/almanager-contracts/contracts/PositionManager.sol": {
-      "lastModificationDate": 1648064670557,
-      "contentHash": "5edf03c5a52fd6f80a65067cb762b403",
+      "lastModificationDate": 1648064953243,
+      "contentHash": "f31e40b1e128537ac9d5759508b78fba",
       "sourceName": "contracts/PositionManager.sol",
       "solcConfig": {
         "version": "0.7.6",
