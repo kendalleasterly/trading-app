@@ -42,6 +42,10 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
         nonfungiblePositionManager = _nonfungiblePositionManager;
     }
 
+    function refund(address token, uint256 amount) external {
+        _safeTransfer(token, msg.sender, amount);
+    }
+
     function onERC721Received(
         address, 
         address, 
