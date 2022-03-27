@@ -15,6 +15,7 @@
   "dependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",
     "@uniswap/v3-periphery": "^1.4.0",
+    "@uniswap/v3-sdk": "^3.8.2",
     "dotenv": "^16.0.0",
     "ethers": "^5.6.0"
   }

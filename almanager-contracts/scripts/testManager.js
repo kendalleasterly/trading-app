@@ -1,28 +1,56 @@
 // const { ethers } = require("hardhat");
 
+async function getPoolImmutables(poolAddress) {
+	const poolContract = new ethers.Contract(
+		poolAddress,
+		IUniswapV3PoolABI,
+		ethers.provider
+	);
+
+	const [factory, token0, token1, fee, tickSpacing, maxLiquidityPerTick] =
+		await Promise.all([
+			poolContract.factory(),
+			poolContract.token0(),
+			poolContract.token1(),
+			poolContract.fee(),
+			poolContract.tickSpacing(),
+			poolContract.maxLiquidityPerTick(),
+		]);
+
+	const immutables = {
+		factory,
+		token0,
+		token1,
+		fee,
+		tickSpacing,
+		maxLiquidityPerTick,
+	};
+	return immutables;
+}
 
 async function test(contractAddr) {
-    
+
     let Manager = await ethers.getContractFactory("PositionManager");
 	Manager = await Manager.attach(contractAddr);
 
-    const wethAmount = ethers.utils.parseUnits("0.01", 18);
-    const daiAmount = ethers.utils.parseUnits("1", 18);
+    const wethAmount = ethers.utils.parseUnits("0.005", 18);
+    const token1Amount = ethers.utils.parseUnits(".5", 18);
     
     //approve both tokens
 
     await approve(WETH, Manager.address, wethAmount)
-    await approve(DAI, Manager.address, daiAmount);
+    await approve(WMATIC, Manager.address, token1Amount);
     await transfer(WETH, Manager.address, wethAmount);
-	await transfer(DAI, Manager.address, daiAmount);
+	await transfer(WMATIC, Manager.address, token1Amount);
 
-    const WETH_DAI_POOL = "0x6baD0f9a89Ca403bb91d253D385CeC1A2b6eca97";
+    const poolAddress = "0x167384319B41F7094e62f7506409Eb38079AbfF8";
 
-    //call the function with max values of both（and pool)
+    const immutables = await getPoolImmutables(poolAddress)
 
     const gasPrice = await ethers.provider.getGasPrice()
+    
 
-    const functionData = [wethAmount, daiAmount, WETH_DAI_POOL]
+    const functionData = [wethAmount, token1Amount, poolAddress, immutables.fee, immutables.token0, immutables.token1, immutables.tickSpacing]
 
     let tx = await Manager.mintNewPosition(functionData, {
         gasLimit: 840000,
@@ -33,4 +61,4 @@ async function test(contractAddr) {
 
 }
 
-await test("0xdd55e66629f1e2f4f725b115b371bf059e7d3436");
+await test("0x6D560772A92125Cb85c0d1c8d54702749eBa4a96");

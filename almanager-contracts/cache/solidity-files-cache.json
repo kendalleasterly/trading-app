@@ -184,8 +184,8 @@
       ]
     },
     "/Users/kendalleasterly/Documents/Web3 Development/trading-app/almanager-contracts/contracts/PositionManager.sol": {
-      "lastModificationDate": 1648069020372,
-      "contentHash": "0b04bf98a0af1735d85ff3635c850997",
+      "lastModificationDate": 1648343786938,
+      "contentHash": "87c40e9081e9de38792b8f74305c37c7",
       "sourceName": "contracts/PositionManager.sol",
       "solcConfig": {
         "version": "0.7.6",
@@ -218,7 +218,8 @@
         "@uniswap/v3-periphery/contracts/interfaces/INonfungiblePositionManager.sol",
         "@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol",
         "@uniswap/v3-periphery/contracts/base/LiquidityManagement.sol",
-        "hardhat/console.sol"
+        "hardhat/console.sol",
+        "./RatioCalculator.sol"
       ],
       "versionPragmas": [
         "=0.7.6"
@@ -1323,6 +1324,191 @@
       ],
       "artifacts": [
         "console"
+      ]
+    },
+    "/Users/kendalleasterly/Documents/Web3 Development/trading-app/almanager-contracts/node_modules/@uniswap/v3-core/contracts/libraries/SqrtPriceMath.sol": {
+      "lastModificationDate": 1646938414877,
+      "contentHash": "dc0b39d55d9f0e5acf5656940b4af512",
+      "sourceName": "@uniswap/v3-core/contracts/libraries/SqrtPriceMath.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./LowGasSafeMath.sol",
+        "./SafeCast.sol",
+        "./FullMath.sol",
+        "./UnsafeMath.sol",
+        "./FixedPoint96.sol"
+      ],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "SqrtPriceMath"
+      ]
+    },
+    "/Users/kendalleasterly/Documents/Web3 Development/trading-app/almanager-contracts/node_modules/@uniswap/v3-core/contracts/libraries/LowGasSafeMath.sol": {
+      "lastModificationDate": 1646938414865,
+      "contentHash": "ff4d506a22d90b314ab325b437ff7729",
+      "sourceName": "@uniswap/v3-core/contracts/libraries/LowGasSafeMath.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.0"
+      ],
+      "artifacts": [
+        "LowGasSafeMath"
+      ]
+    },
+    "/Users/kendalleasterly/Documents/Web3 Development/trading-app/almanager-contracts/node_modules/@uniswap/v3-core/contracts/libraries/SafeCast.sol": {
+      "lastModificationDate": 1646938414873,
+      "contentHash": "c89128b97d009587db99cae7763cfef0",
+      "sourceName": "@uniswap/v3-core/contracts/libraries/SafeCast.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "SafeCast"
+      ]
+    },
+    "/Users/kendalleasterly/Documents/Web3 Development/trading-app/almanager-contracts/node_modules/@uniswap/v3-core/contracts/libraries/UnsafeMath.sol": {
+      "lastModificationDate": 1646938414893,
+      "contentHash": "c2d88847ec7741938f1cecdfc808ee3b",
+      "sourceName": "@uniswap/v3-core/contracts/libraries/UnsafeMath.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "UnsafeMath"
+      ]
+    },
+    "/Users/kendalleasterly/Documents/Web3 Development/trading-app/almanager-contracts/contracts/RatioCalculator.sol": {
+      "lastModificationDate": 1648344200061,
+      "contentHash": "5ef67cc0e650433469fc5eb28780119a",
+      "sourceName": "contracts/RatioCalculator.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@uniswap/v3-core/contracts/libraries/TickMath.sol",
+        "@uniswap/v3-core/contracts/libraries/SqrtPriceMath.sol",
+        "hardhat/console.sol"
+      ],
+      "versionPragmas": [
+        "=0.7.6"
+      ],
+      "artifacts": [
+        "RatioCalculator"
       ]
     }
   }

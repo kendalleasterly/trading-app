@@ -11,6 +11,7 @@ import '@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol';
 import '@uniswap/v3-periphery/contracts/base/LiquidityManagement.sol';
 
 import "hardhat/console.sol";
+import "./RatioCalculator.sol";
 
 contract PositionManager is IERC721Receiver, LiquidityManagement {
 
@@ -58,6 +59,10 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
         uint256 amount0ToMint;
         uint256 amount1ToMint;
         address pool;
+        uint24 poolFee;
+        address token0;
+        address token1;
+        int24 tickSpacing;
         }
 
     function mintNewPosition(MintParams memory mintParams)
@@ -72,24 +77,33 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
 
         IUniswapV3Pool pool = IUniswapV3Pool(mintParams.pool);
         
-        (, int24 tick, , , , , ) = pool.slot0(); 
-        uint24 poolFee = pool.fee();
-        address token0 = pool.token0();
-        address token1 = pool.token1();
-        int24 tickSpacing = pool.tickSpacing();
+        (uint160 sqrtPriceX96, int24 tick, , , , , ) = pool.slot0(); 
+        console.log(sqrtPriceX96);
 
-        int24 nearestTick = _nearestUsableTick(tick, tickSpacing);
+        //can be put in call params
+        // uint24 poolFee = pool.fee();
+        // address token0 = pool.token0();
+        // address token1 = pool.token1();
+        // int24 tickSpacing = pool.tickSpacing();
 
-        _safeApprove(token0, address(nonfungiblePositionManager), mintParams.amount0ToMint);
-        _safeApprove(token1, address(nonfungiblePositionManager), mintParams.amount1ToMint);
+        // int24 nearestTick = 
+
+        (uint256 amount0Desired, uint256 amount1Desired) = swap(
+            _nearestUsableTick(tick, mintParams.tickSpacing) + mintParams.tickSpacing, 
+            _nearestUsableTick(tick, mintParams.tickSpacing) - mintParams.tickSpacing, 
+            sqrtPriceX96
+            );
+
+        _safeApprove(mintParams.token0, address(nonfungiblePositionManager), mintParams.amount0ToMint);
+        _safeApprove(mintParams.token1, address(nonfungiblePositionManager), mintParams.amount1ToMint);
         
         INonfungiblePositionManager.MintParams memory params = 
             INonfungiblePositionManager.MintParams({
-                token0: token0,
-                token1: token1,
-                fee: poolFee,
-                tickLower: nearestTick - tickSpacing,
-                tickUpper: nearestTick + tickSpacing,
+                token0: mintParams.token0,
+                token1: mintParams.token1,
+                fee: mintParams.poolFee,
+                tickLower: _nearestUsableTick(tick, mintParams.tickSpacing) - mintParams.tickSpacing,
+                tickUpper: _nearestUsableTick(tick, mintParams.tickSpacing) + mintParams.tickSpacing,
                 amount0Desired: mintParams.amount0ToMint, //TODO: see that these values don't need to be exact in ratio
                 amount1Desired: mintParams.amount1ToMint,
                 amount0Min: 0, //TODO: Slippage tolerance the input value
@@ -101,8 +115,25 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
         
         (tokenId, liquidity, amount0, amount1) = nonfungiblePositionManager.mint(params);
 
-        deposits[tokenId] = Deposit({owner: msg.sender, liquidity: liquidity, token0: token0, token1: token1});
+        // deposits[tokenId] = Deposit({owner: msg.sender, liquidity: liquidity, token0: token0, token1: token1});
 
+        refund(amount0, amount1, mintParams, mintParams.token0, mintParams.token1);
+    }
+
+    function swap(int24 tickUpper, int24 tickLower, uint160 currentSqrtPriceX96) private returns (uint256 amount0Desired, uint256 amount1Desired) {
+         
+        RatioCalculator.Position memory ratioParams = 
+            RatioCalculator.Position({
+                tickUpper:tickUpper,
+                tickLower:tickLower,
+                currentSqrtPriceX96:currentSqrtPriceX96
+            });
+
+        (amount0Desired, amount1Desired) = RatioCalculator.calculateOptimalRatio(ratioParams);
+
+    }
+
+    function refund(uint256 amount0, uint256 amount1, MintParams memory mintParams, address token0, address token1) private {
         if (amount0 < mintParams.amount0ToMint) {
 
             uint256 refund0 = mintParams.amount0ToMint - amount0;
@@ -114,18 +145,17 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
             uint256 refund1 = mintParams.amount1ToMint - amount1;
             _safeTransfer(token1, msg.sender, refund1);
         }
-
     }
 
-    function _safeTransfer(address token, address to, uint256 amount) internal {
+    function _safeTransfer(address token, address to, uint256 amount) private {
         TransferHelper.safeTransfer(token, to, amount);
     }
 
-    function _safeApprove(address token, address to, uint256 amount) internal {
+    function _safeApprove(address token, address to, uint256 amount) private {
         TransferHelper.safeApprove(token, to, amount);
     }
 
-    function _nearestUsableTick(int24 tick, int24 tickSpacing) internal pure returns (int24 nearestTick) {
+    function _nearestUsableTick(int24 tick, int24 tickSpacing) private pure returns (int24 nearestTick) {
 
         //find the difference between the upper nearest tick and the current tick, and the difference between the lower nearest tick and the current tick
         //see which difference is the least
