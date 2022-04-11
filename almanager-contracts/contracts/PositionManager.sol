@@ -78,7 +78,6 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
         IUniswapV3Pool pool = IUniswapV3Pool(mintParams.pool);
         
         (uint160 sqrtPriceX96, int24 tick, , , , , ) = pool.slot0(); 
-        console.log(sqrtPriceX96);
 
         //can be put in call params
         // uint24 poolFee = pool.fee();
@@ -88,11 +87,7 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
 
         // int24 nearestTick = 
 
-        (uint256 amount0Desired, uint256 amount1Desired) = swap(
-            _nearestUsableTick(tick, mintParams.tickSpacing) + mintParams.tickSpacing, 
-            _nearestUsableTick(tick, mintParams.tickSpacing) - mintParams.tickSpacing, 
-            sqrtPriceX96
-            );
+        (uint256 amount0Desired, uint256 amount1Desired) = swap(mintParams, tick, sqrtPriceX96);
 
         _safeApprove(mintParams.token0, address(nonfungiblePositionManager), mintParams.amount0ToMint);
         _safeApprove(mintParams.token1, address(nonfungiblePositionManager), mintParams.amount1ToMint);
@@ -104,7 +99,7 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
                 fee: mintParams.poolFee,
                 tickLower: _nearestUsableTick(tick, mintParams.tickSpacing) - mintParams.tickSpacing,
                 tickUpper: _nearestUsableTick(tick, mintParams.tickSpacing) + mintParams.tickSpacing,
-                amount0Desired: mintParams.amount0ToMint, //TODO: see that these values don't need to be exact in ratio
+                amount0Desired: mintParams.amount0ToMint, //these values don't need to be an exact ratio
                 amount1Desired: mintParams.amount1ToMint,
                 amount0Min: 0, //TODO: Slippage tolerance the input value
                 amount1Min: 0, //TODO: Slippage tolerance the input value,
@@ -120,17 +115,46 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
         refund(amount0, amount1, mintParams, mintParams.token0, mintParams.token1);
     }
 
-    function swap(int24 tickUpper, int24 tickLower, uint160 currentSqrtPriceX96) private returns (uint256 amount0Desired, uint256 amount1Desired) {
-         
+    function swap(MintParams memory mintParams, int24 tick, uint160 sqrtRatioX96) private returns (uint256 amount0Desired, uint256 amount1Desired) {
+
         RatioCalculator.Position memory ratioParams = 
             RatioCalculator.Position({
-                tickUpper:tickUpper,
-                tickLower:tickLower,
-                currentSqrtPriceX96:currentSqrtPriceX96
+                tickUpper: _nearestUsableTick(tick, mintParams.tickSpacing) + mintParams.tickSpacing,
+                tickLower: _nearestUsableTick(tick, mintParams.tickSpacing) - mintParams.tickSpacing,
+                currentSqrtPriceX96:sqrtRatioX96
             });
 
-        (amount0Desired, amount1Desired) = RatioCalculator.calculateOptimalRatio(ratioParams);
+        
 
+        //this function can assume zeroForOne is true, and we can do the inversion afterwards
+        uint256 ratioX64 = RatioCalculator.calculateOptimalRatio(ratioParams);
+
+        uint256 balanceRatioX64 = (mintParams.amount0ToMint * 2**64) / mintParams.amount1ToMint; 
+        bool zeroForOne = balanceRatioX64 > ratioX64;
+        console.log("ratioX64", ratioX64);
+        if (!zeroForOne) {
+            ratioX64 = uint256(2**128) / ratioX64;
+            
+        }
+        console.log("ratioX64 inverted", ratioX64);
+
+        (uint256 inputBalance, uint256 outputBalance) = zeroForOne ? (mintParams.amount0ToMint, mintParams.amount1ToMint) : (mintParams.amount1ToMint, mintParams.amount0ToMint);
+
+        // (5000000000000000000 - 12883500000000) / (1676510888887728230186266021 * 0.00025767) + 1
+        // (inputBalance - (optimalRatio * outputBalance)) / ((optimalRatio * inputTokenPrice) + 1))
+
+        //exchange rate will be calculated here using the sqrtPriceX96
+        uint256 exchangeRate = 2 ** 64 / uint256(sqrtRatioX96) ** 2;
+
+        console.log("input", inputBalance);
+        console.log("output", outputBalance);
+        console.log("exchange rate", exchangeRate);
+        console.log("sqrtRatioX96", uint256(sqrtRatioX96));
+        uint256 amountToSwap = (inputBalance - (ratioX64 * outputBalance / 2**64)) / (((ratioX64 * (2 ** 64 / uint256(sqrtRatioX96) ** 2)) / 2**64) + 1); //not that percise but i doubt it matters that much.
+        console.log("amount to swap", amountToSwap); 
+
+        amount0Desired = mintParams.amount0ToMint;
+        amount1Desired = mintParams.amount0ToMint;
     }
 
     function refund(uint256 amount0, uint256 amount1, MintParams memory mintParams, address token0, address token1) private {
@@ -160,9 +184,9 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
         //find the difference between the upper nearest tick and the current tick, and the difference between the lower nearest tick and the current tick
         //see which difference is the least
 
-        int24 lower = (tick / tickSpacing); //TODO: check that the factional value was removed...use local network and dummy contract
-        lower = lower * tickSpacing; 
-        int24 upper = lower + tickSpacing;
+        int24 upper = tick / tickSpacing; 
+        upper = upper * tickSpacing; 
+        int24 lower = upper - tickSpacing;
 
         if ((upper - tick) < (tick - lower)) {
             nearestTick = upper;

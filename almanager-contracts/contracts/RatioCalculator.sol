@@ -17,33 +17,29 @@ library RatioCalculator {
 
     }
 
-    function calculateOptimalRatio(Position memory position) internal view returns (uint256 numerator, uint256 denominator)  {
+    function calculateOptimalRatio(Position memory position) internal view returns (uint256 ratioX64)  {
 
         uint160 upperSqrtRatioX96 = TickMath.getSqrtRatioAtTick(position.tickUpper);
         uint160 lowerSqrtRatioX96 = TickMath.getSqrtRatioAtTick(position.tickLower);
 
-        console.log(position.currentSqrtPriceX96);
-        console.log(upperSqrtRatioX96);
-        console.log(lowerSqrtRatioX96);
-        
-
         uint128 usableLiquidity = 1000000000000000000; 
-        console.log(usableLiquidity);
 
-        numerator = SqrtPriceMath.getAmount0Delta(
+        uint256 numerator = SqrtPriceMath.getAmount0Delta(
             position.currentSqrtPriceX96, 
             upperSqrtRatioX96, 
             usableLiquidity, 
             true);
 
-        denominator = SqrtPriceMath.getAmount1Delta(
+        uint256 denominator = SqrtPriceMath.getAmount1Delta(
             position.currentSqrtPriceX96, 
             lowerSqrtRatioX96, 
             usableLiquidity, 
             true);
 
-        console.log(numerator);
-        console.log(denominator);
+        console.log("numerator", numerator);
+        console.log("denominator", denominator);
+
+        ratioX64 = (numerator * 2**64)  / (denominator); //percision is lackng 2^32
 
     }
 

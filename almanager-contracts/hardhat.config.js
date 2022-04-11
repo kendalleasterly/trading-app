@@ -3,14 +3,11 @@
  */
 const {extendEnvironment} = require("hardhat/config");
 require("@nomiclabs/hardhat-ethers");
-require("@tenderly/hardhat-tenderly");
 
 extendEnvironment(async hre => {
 
 	if (hre.network.name == "hardhat") {
 		hre.ethers.provider.send("evm_setIntervalMining", [1000]);
-
-		// await hre.tenderly.verify([])
 
 	}
 
@@ -31,14 +28,14 @@ extendEnvironment(async hre => {
 			const tokenContract = new ethers.Contract(tokenAddress, ERC20ABI, signer);
 
 			const balance = await tokenContract.balanceOf(signer.address);
-			console.log(balance);
+			// console.log(balance);
 
 			const tx = await tokenContract.transfer(spender, amount, {
 				gasLimit: 800000,
 				gasPrice,
 			});
 
-			tx.wait(4).then((value) => {
+			tx.wait(1).then((value) => {
 				console.log(`Transferred to ${tokenAddress}`);
 				currentTransaction = null;
 				resolve();
@@ -58,14 +55,14 @@ extendEnvironment(async hre => {
 			const tokenContract = new ethers.Contract(tokenAddress, ERC20ABI, signer);
 
 			const balance = await tokenContract.balanceOf(signer.address)
-			console.log(balance, tokenAddress)
+			// console.log(balance, tokenAddress)
 
 			const tx = await tokenContract.approve(spender, amount, {
 				gasLimit: 800000,
 				gasPrice,
 			});
 
-			tx.wait(4).then((value) => {
+			tx.wait(1).then((value) => {
 				console.log(`Approved ${spender}`);
 				currentTransaction = null;
 				resolve();
