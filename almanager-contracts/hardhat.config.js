@@ -77,7 +77,12 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 module.exports = {
-	solidity: "0.7.6",
+	solidity: {
+		version: "0.7.6",
+		settings: {
+			optimizer: { enabled: false, runs: 200 }
+		}
+	},
 	networks: {
 		localhost: {
 			accounts: [process.env.WALLET_PRIVATE_KEY],

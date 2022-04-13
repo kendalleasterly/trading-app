@@ -91,6 +91,9 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
 
         _safeApprove(mintParams.token0, address(nonfungiblePositionManager), mintParams.amount0ToMint);
         _safeApprove(mintParams.token1, address(nonfungiblePositionManager), mintParams.amount1ToMint);
+
+        console.logInt(_nearestUsableTick(tick, mintParams.tickSpacing) - mintParams.tickSpacing);
+        console.logInt(_nearestUsableTick(tick, mintParams.tickSpacing) + mintParams.tickSpacing);
         
         INonfungiblePositionManager.MintParams memory params = 
             INonfungiblePositionManager.MintParams({
@@ -134,23 +137,48 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
         console.log("ratioX64", ratioX64);
         if (!zeroForOne) {
             ratioX64 = uint256(2**128) / ratioX64;
-            
+            console.log("ratioX64 inverted", ratioX64);
         }
-        console.log("ratioX64 inverted", ratioX64);
 
         (uint256 inputBalance, uint256 outputBalance) = zeroForOne ? (mintParams.amount0ToMint, mintParams.amount1ToMint) : (mintParams.amount1ToMint, mintParams.amount0ToMint);
 
-        // (5000000000000000000 - 12883500000000) / (1676510888887728230186266021 * 0.00025767) + 1
-        // (inputBalance - (optimalRatio * outputBalance)) / ((optimalRatio * inputTokenPrice) + 1))
-
         //exchange rate will be calculated here using the sqrtPriceX96
-        uint256 exchangeRate = 2 ** 64 / uint256(sqrtRatioX96) ** 2;
+        console.log("sqrtRatioX96", uint256(sqrtRatioX96)); 
+        uint256 exchangeRateX64 = (uint256(sqrtRatioX96) ** 2 / 2 ** 128); //divided by X128 becuse 192 - 64 = 128
+        console.log("exchange rate", exchangeRateX64);
+        if (!zeroForOne) {
+            exchangeRateX64 = 2**128 / exchangeRateX64 ;
+            console.log("inverted exchange rate", exchangeRateX64);
+        }
+
+
+// 2177.57718448
+// 2174.19608647
+// 0.00045994
+// 0.00045923
+
+//0.00045994 bare math with sqrt: as clean as this gets
+// 0.00045923 what the sdk says
 
         console.log("input", inputBalance);
         console.log("output", outputBalance);
-        console.log("exchange rate", exchangeRate);
-        console.log("sqrtRatioX96", uint256(sqrtRatioX96));
-        uint256 amountToSwap = (inputBalance - (ratioX64 * outputBalance / 2**64)) / (((ratioX64 * (2 ** 64 / uint256(sqrtRatioX96) ** 2)) / 2**64) + 1); //not that percise but i doubt it matters that much.
+        
+        //ratio = 0.00031218
+        //exchangeRate = 2166.30091795
+
+        //outputBlanace = 5000000000000000000
+        //inputBalance = 50000000000000000        
+
+        //(inputBalance - (optimalRatio * outputBalance)) / ((optimalRatio * inputTokenPrice) + 1))
+        //(50000000000000000 - 1560900000000000) / ((0.67627582) + 1)
+
+
+        uint256 productX128 = ratioX64 * exchangeRateX64;
+
+        console.log("t2X128", productX128);
+        console.log("t3", (productX128 + 2**64) / 2**64);
+
+        uint256 amountToSwap = (inputBalance - (ratioX64 * outputBalance / 2**64)) * 2**128 / (productX128 + 2**128) ; //we add 2**128 to add 1 without it being outside of the parenthesis. 
         console.log("amount to swap", amountToSwap); 
 
         amount0Desired = mintParams.amount0ToMint;

@@ -63,15 +63,15 @@ async function getPoolImmutables(poolAddress) {
 async function test(contractAddr) {
 
     let Manager = await deployedContract()
-	console.log("got it")
+	console.log("transfer the tokens")
 
     const wethAmount = ethers.utils.parseUnits("0.05", 18);
-    const token1Amount = ethers.utils.parseUnits("5", 18);
+    const maticAmount = ethers.utils.parseUnits("5", 18);
     
     //approve both tokens
 
     await approve(WETH, Manager.address, wethAmount)
-    await approve(WMATIC, Manager.address, token1Amount);
+    await approve(WMATIC, Manager.address, maticAmount);
     // await transfer(WETH, Manager.address, wethAmount);
 	// await transfer(WMATIC, Manager.address, token1Amount);
 
@@ -82,7 +82,15 @@ async function test(contractAddr) {
     const gasPrice = await ethers.provider.getGasPrice()
     
 
-    const functionData = [wethAmount, token1Amount, poolAddress, immutables.fee, immutables.token0, immutables.token1, immutables.tickSpacing]
+    const functionData = [
+			maticAmount,
+			wethAmount,
+			poolAddress,
+			immutables.fee,
+			immutables.token0,
+			immutables.token1,
+			immutables.tickSpacing,
+		];
 
     let tx = await Manager.mintNewPosition(functionData, {
         gasLimit: 840000,
