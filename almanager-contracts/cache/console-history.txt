@@ -1,81 +1,678 @@
-																																																																								    	                            	                    																							                            await test();
-																																																																								    	                            	                    																							                            }
-																																																																								    	                            	                    																							                            console.log(tx)
-																																																																								    	                            	                    																							                        });
-																																																																								    	                            	                    																							                    gasPrice
-																																																																								    	                            	                    																							            gasLimit: 840000,
-																																																																								    	                            	                    																							    let tx = await Manager.mintNewPosition(functionData, {
-																																																																								    	                            	                    																							];
-																																																																								    	                            	                    																					immutables.tickSpacing,
-																																																																								    	                            	                    																		immutables.token1,
-																																																																								    	                            	                    															immutables.token0,
-																																																																								    	                            	                    												immutables.fee,
-																																																																								    	                            	                    									poolAddress,
-																																																																								    	                            	                    						wethAmount,
-																																																																								    	                            	                    			maticAmount,
-																																																																								    	                            	                    const functionData = [
-																																																																								    	                            	            const gasPrice = await ethers.provider.getGasPrice()
-																																																																								    	                            	        const immutables = await getPoolImmutables(poolAddress)
-																																																																								    	                            	    const poolAddress = "0x167384319B41F7094e62f7506409Eb38079AbfF8";
-																																																																								    	                            	// await transfer(WMATIC, Manager.address, token1Amount);
-																																																																								    	                            // await transfer(WETH, Manager.address, wethAmount);
-																																																																								    	                        await approve(WMATIC, Manager.address, maticAmount);
-																																																																								    	                    await approve(WETH, Manager.address, wethAmount)
-																																																																								    	                //approve both tokens
-																																																																								    	        const maticAmount = ethers.utils.parseUnits("5", 18);
-																																																																								    	    const wethAmount = ethers.utils.parseUnits("0.05", 18);
-																																																																								    	console.log("transfer the tokens")
-																																																																								    let Manager = await deployedContract()
-																																																																								async function test(contractAddr) {
-																																																																								}
-																																																																								return immutables;
-																																																																							};
-																																																																						maxLiquidityPerTick,
-																																																																				tickSpacing,
-																																																																		fee,
-																																																																token1,
-																																																														token0,
-																																																												factory,
-																																																										const immutables = {
-																																																									]);
-																																																							poolContract.maxLiquidityPerTick(),
-																																																				poolContract.tickSpacing(),
-																																																	poolContract.fee(),
-																																														poolContract.token1(),
-																																											poolContract.token0(),
-																																								poolContract.factory(),
-																																					await Promise.all([
-																																			const [factory, token0, token1, fee, tickSpacing, maxLiquidityPerTick] =
-																																		);
-																																	ethers.provider
-																															IUniswapV3PoolABI,
-																													poolAddress,
-																											const poolContract = new ethers.Contract(
-																										async function getPoolImmutables(poolAddress) {
-																										}
-																										return contract;
-																									const contract = await Contract.attach(address);
-																								const Contract = await ethers.getContractFactory(name);
-																							async function getContract(name, address) {
-																							}
-																							return interactableContract;
-																						const interactableContract = await getContract(name, contract.address);
-																					console.log(name, "deployed to:", contract.address);
-																				await contract.deployed();
-																			);
-																		WMATIC
-																factory,
-														NonfungiblePositionManager,
-												const contract = await Contract.deploy(
-											console.log(`Deploying ${name}...`);
-										const Contract = await ethers.getContractFactory(name);
-									// We get the contract to deploy
-								"0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
-						const NonfungiblePositionManager =
-					const WETH = "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619";
-				const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
-			const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
-		// const routerAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
+.exit
+let sldkf = await deployedContract()
+let positionManager = await deployedContract()
+																									}
+																									return contract;
+																								const contract = await Contract.attach(address);
+																							const Contract = await ethers.getContractFactory(name);
+																						async function getContract(name, address) {
+																						}
+																						return interactableContract;
+																					const interactableContract = await getContract(name, contract.address);
+																				console.log(name, "deployed to:", contract.address);
+																			await contract.deployed();
+																		);
+																	WMATIC
+															factory,
+													SwapRouter,
+											NonfungiblePositionManager,
+									const contract = await Contract.deploy(
+								console.log(`Deploying ${name}...`);
+							const Contract = await ethers.getContractFactory(name);
+						// We get the contract to deploy
+					const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
+				const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
+			const SwapRouter = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
+		const NonfungiblePositionManager = "0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
+	const name = "PositionManager";
+async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
+// const { tenderly } = require("hardhat");
+.load scripts/deployContract.js
+.exit
+																																																																							    	                            	                    																							                            await test();
+																																																																							    	                            	                    																							                            }
+																																																																							    	                            	                    																							                            console.log(tx)
+																																																																							    	                            	                    																							                        });
+																																																																							    	                            	                    																							                    gasPrice
+																																																																							    	                            	                    																							            gasLimit: 840000,
+																																																																							    	                            	                    																							    let tx = await Manager.mintNewPosition(functionData, {
+																																																																							    	                            	                    																							];
+																																																																							    	                            	                    																					immutables.tickSpacing,
+																																																																							    	                            	                    																		immutables.token1,
+																																																																							    	                            	                    															immutables.token0,
+																																																																							    	                            	                    												immutables.fee,
+																																																																							    	                            	                    									poolAddress,
+																																																																							    	                            	                    						wethAmount,
+																																																																							    	                            	                    			maticAmount,
+																																																																							    	                            	                    const functionData = [
+																																																																							    	                            	            const gasPrice = await ethers.provider.getGasPrice()
+																																																																							    	                            	        const immutables = await getPoolImmutables(poolAddress)
+																																																																							    	                            	    const poolAddress = "0x167384319B41F7094e62f7506409Eb38079AbfF8";
+																																																																							    	                            	await transfer(WMATIC, Manager.address, maticAmount);
+																																																																							    	                            await transfer(WETH, Manager.address, wethAmount);
+																																																																							    	                        await approve(WMATIC, Manager.address, maticAmount);
+																																																																							    	                    await approve(WETH, Manager.address, wethAmount)
+																																																																							    	                //approve both tokens
+																																																																							    	        const maticAmount = ethers.utils.parseUnits("5", 18);
+																																																																							    	    const wethAmount = ethers.utils.parseUnits("0.01", 18);
+																																																																							    	console.log("transfer the tokens")
+																																																																							    let Manager = await deployedContract()
+																																																																							async function test(contractAddr) {
+																																																																							}
+																																																																							return immutables;
+																																																																						};
+																																																																					maxLiquidityPerTick,
+																																																																			tickSpacing,
+																																																																	fee,
+																																																															token1,
+																																																													token0,
+																																																											factory,
+																																																									const immutables = {
+																																																								]);
+																																																						poolContract.maxLiquidityPerTick(),
+																																																			poolContract.tickSpacing(),
+																																																poolContract.fee(),
+																																													poolContract.token1(),
+																																										poolContract.token0(),
+																																							poolContract.factory(),
+																																				await Promise.all([
+																																		const [factory, token0, token1, fee, tickSpacing, maxLiquidityPerTick] =
+																																	);
+																																ethers.provider
+																														IUniswapV3PoolABI,
+																												poolAddress,
+																										const poolContract = new ethers.Contract(
+																									async function getPoolImmutables(poolAddress) {
+																									}
+																									return contract;
+																								const contract = await Contract.attach(address);
+																							const Contract = await ethers.getContractFactory(name);
+																						async function getContract(name, address) {
+																						}
+																						return interactableContract;
+																					const interactableContract = await getContract(name, contract.address);
+																				console.log(name, "deployed to:", contract.address);
+																			await contract.deployed();
+																		);
+																	WMATIC
+															factory,
+													SwapRouter,
+											NonfungiblePositionManager,
+									const contract = await Contract.deploy(
+								console.log(`Deploying ${name}...`);
+							const Contract = await ethers.getContractFactory(name);
+						// We get the contract to deploy
+					const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
+				const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
+			const SwapRouter = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
+		const NonfungiblePositionManager = "0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
+	const name = "PositionManager";
+async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
+// const { tenderly } = require("hardhat");
+.load scripts/testManager.js
+																																																																							    	                            	                    																							                            await test();
+																																																																							    	                            	                    																							                            }
+																																																																							    	                            	                    																							                            console.log(tx)
+																																																																							    	                            	                    																							                        });
+																																																																							    	                            	                    																							                    gasPrice
+																																																																							    	                            	                    																							            gasLimit: 840000,
+																																																																							    	                            	                    																							    let tx = await Manager.mintNewPosition(functionData, {
+																																																																							    	                            	                    																							];
+																																																																							    	                            	                    																					immutables.tickSpacing,
+																																																																							    	                            	                    																		immutables.token1,
+																																																																							    	                            	                    															immutables.token0,
+																																																																							    	                            	                    												immutables.fee,
+																																																																							    	                            	                    									poolAddress,
+																																																																							    	                            	                    						wethAmount,
+																																																																							    	                            	                    			maticAmount,
+																																																																							    	                            	                    const functionData = [
+																																																																							    	                            	            const gasPrice = await ethers.provider.getGasPrice()
+																																																																							    	                            	        const immutables = await getPoolImmutables(poolAddress)
+																																																																							    	                            	    const poolAddress = "0x167384319B41F7094e62f7506409Eb38079AbfF8";
+																																																																							    	                            	await transfer(WMATIC, Manager.address, maticAmount);
+																																																																							    	                            await transfer(WETH, Manager.address, wethAmount);
+																																																																							    	                        await approve(WMATIC, Manager.address, maticAmount);
+																																																																							    	                    await approve(WETH, Manager.address, wethAmount)
+																																																																							    	                //approve both tokens
+																																																																							    	        const maticAmount = ethers.utils.parseUnits("5", 18);
+																																																																							    	    const wethAmount = ethers.utils.parseUnits("0.01", 18);
+																																																																							    	console.log("transfer the tokens")
+																																																																							    let Manager = await deployedContract()
+																																																																							async function test(contractAddr) {
+																																																																							}
+																																																																							return immutables;
+																																																																						};
+																																																																					maxLiquidityPerTick,
+																																																																			tickSpacing,
+																																																																	fee,
+																																																															token1,
+																																																													token0,
+																																																											factory,
+																																																									const immutables = {
+																																																								]);
+																																																						poolContract.maxLiquidityPerTick(),
+																																																			poolContract.tickSpacing(),
+																																																poolContract.fee(),
+																																													poolContract.token1(),
+																																										poolContract.token0(),
+																																							poolContract.factory(),
+																																				await Promise.all([
+																																		const [factory, token0, token1, fee, tickSpacing, maxLiquidityPerTick] =
+																																	);
+																																ethers.provider
+																														IUniswapV3PoolABI,
+																												poolAddress,
+																										const poolContract = new ethers.Contract(
+																									async function getPoolImmutables(poolAddress) {
+																									}
+																									return contract;
+																								const contract = await Contract.attach(address);
+																							const Contract = await ethers.getContractFactory(name);
+																						async function getContract(name, address) {
+																						}
+																						return interactableContract;
+																					const interactableContract = await getContract(name, contract.address);
+																				console.log(name, "deployed to:", contract.address);
+																			await contract.deployed();
+																		);
+																	WMATIC
+															factory,
+													SwapRouter,
+											NonfungiblePositionManager,
+									const contract = await Contract.deploy(
+								console.log(`Deploying ${name}...`);
+							const Contract = await ethers.getContractFactory(name);
+						// We get the contract to deploy
+					const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
+				const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
+			const SwapRouter = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
+		const NonfungiblePositionManager = "0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
+	const name = "PositionManager";
+async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
+// const { tenderly } = require("hardhat");
+.load scripts/testManager.js
+																																																																							    	                            	                    																							                            await test();
+																																																																							    	                            	                    																							                            }
+																																																																							    	                            	                    																							                            console.log(tx)
+																																																																							    	                            	                    																							                        });
+																																																																							    	                            	                    																							                    gasPrice
+																																																																							    	                            	                    																							            gasLimit: 840000,
+																																																																							    	                            	                    																							    let tx = await Manager.mintNewPosition(functionData, {
+																																																																							    	                            	                    																							];
+																																																																							    	                            	                    																					immutables.tickSpacing,
+																																																																							    	                            	                    																		immutables.token1,
+																																																																							    	                            	                    															immutables.token0,
+																																																																							    	                            	                    												immutables.fee,
+																																																																							    	                            	                    									poolAddress,
+																																																																							    	                            	                    						wethAmount,
+																																																																							    	                            	                    			maticAmount,
+																																																																							    	                            	                    const functionData = [
+																																																																							    	                            	            const gasPrice = await ethers.provider.getGasPrice()
+																																																																							    	                            	        const immutables = await getPoolImmutables(poolAddress)
+																																																																							    	                            	    const poolAddress = "0x167384319B41F7094e62f7506409Eb38079AbfF8";
+																																																																							    	                            	await transfer(WMATIC, Manager.address, maticAmount);
+																																																																							    	                            await transfer(WETH, Manager.address, wethAmount);
+																																																																							    	                        await approve(WMATIC, Manager.address, maticAmount);
+																																																																							    	                    await approve(WETH, Manager.address, wethAmount)
+																																																																							    	                //approve both tokens
+																																																																							    	        const maticAmount = ethers.utils.parseUnits("5", 18);
+																																																																							    	    const wethAmount = ethers.utils.parseUnits("0.01", 18);
+																																																																							    	console.log("transfer the tokens")
+																																																																							    let Manager = await deployedContract()
+																																																																							async function test(contractAddr) {
+																																																																							}
+																																																																							return immutables;
+																																																																						};
+																																																																					maxLiquidityPerTick,
+																																																																			tickSpacing,
+																																																																	fee,
+																																																															token1,
+																																																													token0,
+																																																											factory,
+																																																									const immutables = {
+																																																								]);
+																																																						poolContract.maxLiquidityPerTick(),
+																																																			poolContract.tickSpacing(),
+																																																poolContract.fee(),
+																																													poolContract.token1(),
+																																										poolContract.token0(),
+																																							poolContract.factory(),
+																																				await Promise.all([
+																																		const [factory, token0, token1, fee, tickSpacing, maxLiquidityPerTick] =
+																																	);
+																																ethers.provider
+																														IUniswapV3PoolABI,
+																												poolAddress,
+																										const poolContract = new ethers.Contract(
+																									async function getPoolImmutables(poolAddress) {
+																									}
+																									return contract;
+																								const contract = await Contract.attach(address);
+																							const Contract = await ethers.getContractFactory(name);
+																						async function getContract(name, address) {
+																						}
+																						return interactableContract;
+																					const interactableContract = await getContract(name, contract.address);
+																				console.log(name, "deployed to:", contract.address);
+																			await contract.deployed();
+																		);
+																	WMATIC
+															factory,
+													SwapRouter,
+											NonfungiblePositionManager,
+									const contract = await Contract.deploy(
+								console.log(`Deploying ${name}...`);
+							const Contract = await ethers.getContractFactory(name);
+						// We get the contract to deploy
+					const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
+				const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
+			const SwapRouter = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
+		const NonfungiblePositionManager = "0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
+	const name = "PositionManager";
+async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
+// const { tenderly } = require("hardhat");
+.load scripts/testManager.js
+																																																																							    	                            	                    																							                            await test();
+																																																																							    	                            	                    																							                            }
+																																																																							    	                            	                    																							                            console.log(tx)
+																																																																							    	                            	                    																							                        });
+																																																																							    	                            	                    																							                    gasPrice
+																																																																							    	                            	                    																							            gasLimit: 840000,
+																																																																							    	                            	                    																							    let tx = await Manager.mintNewPosition(functionData, {
+																																																																							    	                            	                    																							];
+																																																																							    	                            	                    																					immutables.tickSpacing,
+																																																																							    	                            	                    																		immutables.token1,
+																																																																							    	                            	                    															immutables.token0,
+																																																																							    	                            	                    												immutables.fee,
+																																																																							    	                            	                    									poolAddress,
+																																																																							    	                            	                    						wethAmount,
+																																																																							    	                            	                    			maticAmount,
+																																																																							    	                            	                    const functionData = [
+																																																																							    	                            	            const gasPrice = await ethers.provider.getGasPrice()
+																																																																							    	                            	        const immutables = await getPoolImmutables(poolAddress)
+																																																																							    	                            	    const poolAddress = "0x167384319B41F7094e62f7506409Eb38079AbfF8";
+																																																																							    	                            	await transfer(WMATIC, Manager.address, maticAmount);
+																																																																							    	                            await transfer(WETH, Manager.address, wethAmount);
+																																																																							    	                        await approve(WMATIC, Manager.address, maticAmount);
+																																																																							    	                    await approve(WETH, Manager.address, wethAmount)
+																																																																							    	                //approve both tokens
+																																																																							    	        const maticAmount = ethers.utils.parseUnits("5", 18);
+																																																																							    	    const wethAmount = ethers.utils.parseUnits("0.01", 18);
+																																																																							    	console.log("transfer the tokens")
+																																																																							    let Manager = await deployedContract()
+																																																																							async function test(contractAddr) {
+																																																																							}
+																																																																							return immutables;
+																																																																						};
+																																																																					maxLiquidityPerTick,
+																																																																			tickSpacing,
+																																																																	fee,
+																																																															token1,
+																																																													token0,
+																																																											factory,
+																																																									const immutables = {
+																																																								]);
+																																																						poolContract.maxLiquidityPerTick(),
+																																																			poolContract.tickSpacing(),
+																																																poolContract.fee(),
+																																													poolContract.token1(),
+																																										poolContract.token0(),
+																																							poolContract.factory(),
+																																				await Promise.all([
+																																		const [factory, token0, token1, fee, tickSpacing, maxLiquidityPerTick] =
+																																	);
+																																ethers.provider
+																														IUniswapV3PoolABI,
+																												poolAddress,
+																										const poolContract = new ethers.Contract(
+																									async function getPoolImmutables(poolAddress) {
+																									}
+																									return contract;
+																								const contract = await Contract.attach(address);
+																							const Contract = await ethers.getContractFactory(name);
+																						async function getContract(name, address) {
+																						}
+																						return interactableContract;
+																					const interactableContract = await getContract(name, contract.address);
+																				console.log(name, "deployed to:", contract.address);
+																			await contract.deployed();
+																		);
+																	WMATIC
+															factory,
+													SwapRouter,
+											NonfungiblePositionManager,
+									const contract = await Contract.deploy(
+								console.log(`Deploying ${name}...`);
+							const Contract = await ethers.getContractFactory(name);
+						// We get the contract to deploy
+					const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
+				const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
+			const SwapRouter = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
+		const NonfungiblePositionManager = "0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
+	const name = "PositionManager";
+async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
+// const { tenderly } = require("hardhat");
+.load scripts/testManager.js
+																																																																							    	                            	                    																							                            await test();
+																																																																							    	                            	                    																							                            }
+																																																																							    	                            	                    																							                            console.log(tx)
+																																																																							    	                            	                    																							                        });
+																																																																							    	                            	                    																							                    gasPrice
+																																																																							    	                            	                    																							            gasLimit: 840000,
+																																																																							    	                            	                    																							    let tx = await Manager.mintNewPosition(functionData, {
+																																																																							    	                            	                    																							];
+																																																																							    	                            	                    																					immutables.tickSpacing,
+																																																																							    	                            	                    																		immutables.token1,
+																																																																							    	                            	                    															immutables.token0,
+																																																																							    	                            	                    												immutables.fee,
+																																																																							    	                            	                    									poolAddress,
+																																																																							    	                            	                    						wethAmount,
+																																																																							    	                            	                    			maticAmount,
+																																																																							    	                            	                    const functionData = [
+																																																																							    	                            	            const gasPrice = await ethers.provider.getGasPrice()
+																																																																							    	                            	        const immutables = await getPoolImmutables(poolAddress)
+																																																																							    	                            	    const poolAddress = "0x167384319B41F7094e62f7506409Eb38079AbfF8";
+																																																																							    	                            	await transfer(WMATIC, Manager.address, maticAmount);
+																																																																							    	                            await transfer(WETH, Manager.address, wethAmount);
+																																																																							    	                        await approve(WMATIC, Manager.address, maticAmount);
+																																																																							    	                    await approve(WETH, Manager.address, wethAmount)
+																																																																							    	                //approve both tokens
+																																																																							    	        const maticAmount = ethers.utils.parseUnits("5", 18);
+																																																																							    	    const wethAmount = ethers.utils.parseUnits("0.05", 18);
+																																																																							    	console.log("transfer the tokens")
+																																																																							    let Manager = await deployedContract()
+																																																																							async function test(contractAddr) {
+																																																																							}
+																																																																							return immutables;
+																																																																						};
+																																																																					maxLiquidityPerTick,
+																																																																			tickSpacing,
+																																																																	fee,
+																																																															token1,
+																																																													token0,
+																																																											factory,
+																																																									const immutables = {
+																																																								]);
+																																																						poolContract.maxLiquidityPerTick(),
+																																																			poolContract.tickSpacing(),
+																																																poolContract.fee(),
+																																													poolContract.token1(),
+																																										poolContract.token0(),
+																																							poolContract.factory(),
+																																				await Promise.all([
+																																		const [factory, token0, token1, fee, tickSpacing, maxLiquidityPerTick] =
+																																	);
+																																ethers.provider
+																														IUniswapV3PoolABI,
+																												poolAddress,
+																										const poolContract = new ethers.Contract(
+																									async function getPoolImmutables(poolAddress) {
+																									}
+																									return contract;
+																								const contract = await Contract.attach(address);
+																							const Contract = await ethers.getContractFactory(name);
+																						async function getContract(name, address) {
+																						}
+																						return interactableContract;
+																					const interactableContract = await getContract(name, contract.address);
+																				console.log(name, "deployed to:", contract.address);
+																			await contract.deployed();
+																		);
+																	WMATIC
+															factory,
+													SwapRouter,
+											NonfungiblePositionManager,
+									const contract = await Contract.deploy(
+								console.log(`Deploying ${name}...`);
+							const Contract = await ethers.getContractFactory(name);
+						// We get the contract to deploy
+					const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
+				const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
+			const SwapRouter = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
+		const NonfungiblePositionManager = "0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
+	const name = "PositionManager";
+async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
+// const { tenderly } = require("hardhat");
+.load scripts/testManager.js
+																																																																							    	                            	                    																							                            await test();
+																																																																							    	                            	                    																							                            }
+																																																																							    	                            	                    																							                            console.log(tx)
+																																																																							    	                            	                    																							                        });
+																																																																							    	                            	                    																							                    gasPrice
+																																																																							    	                            	                    																							            gasLimit: 840000,
+																																																																							    	                            	                    																							    let tx = await Manager.mintNewPosition(functionData, {
+																																																																							    	                            	                    																							];
+																																																																							    	                            	                    																					immutables.tickSpacing,
+																																																																							    	                            	                    																		immutables.token1,
+																																																																							    	                            	                    															immutables.token0,
+																																																																							    	                            	                    												immutables.fee,
+																																																																							    	                            	                    									poolAddress,
+																																																																							    	                            	                    						wethAmount,
+																																																																							    	                            	                    			maticAmount,
+																																																																							    	                            	                    const functionData = [
+																																																																							    	                            	            const gasPrice = await ethers.provider.getGasPrice()
+																																																																							    	                            	        const immutables = await getPoolImmutables(poolAddress)
+																																																																							    	                            	    const poolAddress = "0x167384319B41F7094e62f7506409Eb38079AbfF8";
+																																																																							    	                            	await transfer(WMATIC, Manager.address, maticAmount);
+																																																																							    	                            await transfer(WETH, Manager.address, wethAmount);
+																																																																							    	                        await approve(WMATIC, Manager.address, maticAmount);
+																																																																							    	                    await approve(WETH, Manager.address, wethAmount)
+																																																																							    	                //approve both tokens
+																																																																							    	        const maticAmount = ethers.utils.parseUnits("5", 18);
+																																																																							    	    const wethAmount = ethers.utils.parseUnits("0.05", 18);
+																																																																							    	console.log("transfer the tokens")
+																																																																							    let Manager = await deployedContract()
+																																																																							async function test(contractAddr) {
+																																																																							}
+																																																																							return immutables;
+																																																																						};
+																																																																					maxLiquidityPerTick,
+																																																																			tickSpacing,
+																																																																	fee,
+																																																															token1,
+																																																													token0,
+																																																											factory,
+																																																									const immutables = {
+																																																								]);
+																																																						poolContract.maxLiquidityPerTick(),
+																																																			poolContract.tickSpacing(),
+																																																poolContract.fee(),
+																																													poolContract.token1(),
+																																										poolContract.token0(),
+																																							poolContract.factory(),
+																																				await Promise.all([
+																																		const [factory, token0, token1, fee, tickSpacing, maxLiquidityPerTick] =
+																																	);
+																																ethers.provider
+																														IUniswapV3PoolABI,
+																												poolAddress,
+																										const poolContract = new ethers.Contract(
+																									async function getPoolImmutables(poolAddress) {
+																									}
+																									return contract;
+																								const contract = await Contract.attach(address);
+																							const Contract = await ethers.getContractFactory(name);
+																						async function getContract(name, address) {
+																						}
+																						return interactableContract;
+																					const interactableContract = await getContract(name, contract.address);
+																				console.log(name, "deployed to:", contract.address);
+																			await contract.deployed();
+																		);
+																	WMATIC
+															factory,
+													SwapRouter,
+											NonfungiblePositionManager,
+									const contract = await Contract.deploy(
+								console.log(`Deploying ${name}...`);
+							const Contract = await ethers.getContractFactory(name);
+						// We get the contract to deploy
+					const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
+				const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
+			const SwapRouter = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
+		const NonfungiblePositionManager = "0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
+	const name = "PositionManager";
+async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
+// const { tenderly } = require("hardhat");
+.load scripts/testManager.js
+																																																																							    	                            	                    																							                            await test();
+																																																																							    	                            	                    																							                            }
+																																																																							    	                            	                    																							                            console.log(tx)
+																																																																							    	                            	                    																							                        });
+																																																																							    	                            	                    																							                    gasPrice
+																																																																							    	                            	                    																							            gasLimit: 840000,
+																																																																							    	                            	                    																							    let tx = await Manager.mintNewPosition(functionData, {
+																																																																							    	                            	                    																							];
+																																																																							    	                            	                    																					immutables.tickSpacing,
+																																																																							    	                            	                    																		immutables.token1,
+																																																																							    	                            	                    															immutables.token0,
+																																																																							    	                            	                    												immutables.fee,
+																																																																							    	                            	                    									poolAddress,
+																																																																							    	                            	                    						wethAmount,
+																																																																							    	                            	                    			maticAmount,
+																																																																							    	                            	                    const functionData = [
+																																																																							    	                            	            const gasPrice = await ethers.provider.getGasPrice()
+																																																																							    	                            	        const immutables = await getPoolImmutables(poolAddress)
+																																																																							    	                            	    const poolAddress = "0x167384319B41F7094e62f7506409Eb38079AbfF8";
+																																																																							    	                            	await transfer(WMATIC, Manager.address, token1Amount);
+																																																																							    	                            await transfer(WETH, Manager.address, wethAmount);
+																																																																							    	                        await approve(WMATIC, Manager.address, maticAmount);
+																																																																							    	                    await approve(WETH, Manager.address, wethAmount)
+																																																																							    	                //approve both tokens
+																																																																							    	        const maticAmount = ethers.utils.parseUnits("5", 18);
+																																																																							    	    const wethAmount = ethers.utils.parseUnits("0.05", 18);
+																																																																							    	console.log("transfer the tokens")
+																																																																							    let Manager = await deployedContract()
+																																																																							async function test(contractAddr) {
+																																																																							}
+																																																																							return immutables;
+																																																																						};
+																																																																					maxLiquidityPerTick,
+																																																																			tickSpacing,
+																																																																	fee,
+																																																															token1,
+																																																													token0,
+																																																											factory,
+																																																									const immutables = {
+																																																								]);
+																																																						poolContract.maxLiquidityPerTick(),
+																																																			poolContract.tickSpacing(),
+																																																poolContract.fee(),
+																																													poolContract.token1(),
+																																										poolContract.token0(),
+																																							poolContract.factory(),
+																																				await Promise.all([
+																																		const [factory, token0, token1, fee, tickSpacing, maxLiquidityPerTick] =
+																																	);
+																																ethers.provider
+																														IUniswapV3PoolABI,
+																												poolAddress,
+																										const poolContract = new ethers.Contract(
+																									async function getPoolImmutables(poolAddress) {
+																									}
+																									return contract;
+																								const contract = await Contract.attach(address);
+																							const Contract = await ethers.getContractFactory(name);
+																						async function getContract(name, address) {
+																						}
+																						return interactableContract;
+																					const interactableContract = await getContract(name, contract.address);
+																				console.log(name, "deployed to:", contract.address);
+																			await contract.deployed();
+																		);
+																	WMATIC
+															factory,
+													SwapRouter,
+											NonfungiblePositionManager,
+									const contract = await Contract.deploy(
+								console.log(`Deploying ${name}...`);
+							const Contract = await ethers.getContractFactory(name);
+						// We get the contract to deploy
+					const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
+				const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
+			const SwapRouter = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
+		const NonfungiblePositionManager = "0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
+	const name = "PositionManager";
+async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
+// const { tenderly } = require("hardhat");
+.load scripts/testManager.js
+																																																																							    	                            	                    																							                            await test();
+																																																																							    	                            	                    																							                            }
+																																																																							    	                            	                    																							                            console.log(tx)
+																																																																							    	                            	                    																							                        });
+																																																																							    	                            	                    																							                    gasPrice
+																																																																							    	                            	                    																							            gasLimit: 840000,
+																																																																							    	                            	                    																							    let tx = await Manager.mintNewPosition(functionData, {
+																																																																							    	                            	                    																							];
+																																																																							    	                            	                    																					immutables.tickSpacing,
+																																																																							    	                            	                    																		immutables.token1,
+																																																																							    	                            	                    															immutables.token0,
+																																																																							    	                            	                    												immutables.fee,
+																																																																							    	                            	                    									poolAddress,
+																																																																							    	                            	                    						wethAmount,
+																																																																							    	                            	                    			maticAmount,
+																																																																							    	                            	                    const functionData = [
+																																																																							    	                            	            const gasPrice = await ethers.provider.getGasPrice()
+																																																																							    	                            	        const immutables = await getPoolImmutables(poolAddress)
+																																																																							    	                            	    const poolAddress = "0x167384319B41F7094e62f7506409Eb38079AbfF8";
+																																																																							    	                            	// await transfer(WMATIC, Manager.address, token1Amount);
+																																																																							    	                            // await transfer(WETH, Manager.address, wethAmount);
+																																																																							    	                        await approve(WMATIC, Manager.address, maticAmount);
+																																																																							    	                    await approve(WETH, Manager.address, wethAmount)
+																																																																							    	                //approve both tokens
+																																																																							    	        const maticAmount = ethers.utils.parseUnits("5", 18);
+																																																																							    	    const wethAmount = ethers.utils.parseUnits("0.05", 18);
+																																																																							    	console.log("transfer the tokens")
+																																																																							    let Manager = await deployedContract()
+																																																																							async function test(contractAddr) {
+																																																																							}
+																																																																							return immutables;
+																																																																						};
+																																																																					maxLiquidityPerTick,
+																																																																			tickSpacing,
+																																																																	fee,
+																																																															token1,
+																																																													token0,
+																																																											factory,
+																																																									const immutables = {
+																																																								]);
+																																																						poolContract.maxLiquidityPerTick(),
+																																																			poolContract.tickSpacing(),
+																																																poolContract.fee(),
+																																													poolContract.token1(),
+																																										poolContract.token0(),
+																																							poolContract.factory(),
+																																				await Promise.all([
+																																		const [factory, token0, token1, fee, tickSpacing, maxLiquidityPerTick] =
+																																	);
+																																ethers.provider
+																														IUniswapV3PoolABI,
+																												poolAddress,
+																										const poolContract = new ethers.Contract(
+																									async function getPoolImmutables(poolAddress) {
+																									}
+																									return contract;
+																								const contract = await Contract.attach(address);
+																							const Contract = await ethers.getContractFactory(name);
+																						async function getContract(name, address) {
+																						}
+																						return interactableContract;
+																					const interactableContract = await getContract(name, contract.address);
+																				console.log(name, "deployed to:", contract.address);
+																			await contract.deployed();
+																		);
+																	WMATIC
+															factory,
+													SwapRouter,
+											NonfungiblePositionManager,
+									const contract = await Contract.deploy(
+								console.log(`Deploying ${name}...`);
+							const Contract = await ethers.getContractFactory(name);
+						// We get the contract to deploy
+					const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
+				const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
+			const SwapRouter = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
+		const NonfungiblePositionManager = "0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
 	const name = "PositionManager";
 async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
 // const { tenderly } = require("hardhat");
@@ -244,7 +841,6 @@ async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
 async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
 // const { tenderly } = require("hardhat");
 .load scripts/testManager.js
-.load scripts testManager.js
 																																																																								    	                            	                    																							                            await test();
 																																																																								    	                            	                    																							                            }
 																																																																								    	                            	                    																							                            console.log(tx)
@@ -401,21 +997,7 @@ async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
 									// We get the contract to deploy
 								"0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
 						const NonfungiblePositionManager =
-					const WETH = "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619";
-				const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
-			const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
-		// const routerAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
-	const name = "PositionManager";
-async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
-// const { tenderly } = require("hardhat");
-.load scripts/testManager.js
-																																																																								    	                            	                    																							                            await test();
-																																																																								    	                            	                    																							                            }
-																																																																								    	                            	                    																							                            console.log(tx)
-																																																																								    	                            	                    																							                        });
-																																																																								    	                            	                    																							                    gasPrice
-																																																																								    	                            	                    																							            gasLimit: 840000,
-																																																																								    	                            	                    																							    let tx = await Manager.mintNewPosition(functionData, {
+					const WETH = "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619";onst WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";23631AE4a59f267346ea31F984";e3Edee1F18E0157C05861564";              	                    																							    let tx = await Manager.mintNewPosition(functionData, {
 																																																																								    	                            	                    																							];
 																																																																								    	                            	                    																					immutables.tickSpacing,
 																																																																								    	                            	                    																		immutables.token1,
@@ -431,570 +1013,4 @@ async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
 																																																																								    	                            	// await transfer(WMATIC, Manager.address, token1Amount);
 																																																																								    	                            // await transfer(WETH, Manager.address, wethAmount);
 																																																																								    	                        await approve(WMATIC, Manager.address, maticAmount);
-																																																																								    	                    await approve(WETH, Manager.address, wethAmount)
-																																																																								    	                //approve both tokens
-																																																																								    	        const maticAmount = ethers.utils.parseUnits("5", 18);
-																																																																								    	    const wethAmount = ethers.utils.parseUnits("0.05", 18);
-																																																																								    	console.log("transfer the tokens")
-																																																																								    let Manager = await deployedContract()
-																																																																								async function test(contractAddr) {
-																																																																								}
-																																																																								return immutables;
-																																																																							};
-																																																																						maxLiquidityPerTick,
-																																																																				tickSpacing,
-																																																																		fee,
-																																																																token1,
-																																																														token0,
-																																																												factory,
-																																																										const immutables = {
-																																																									]);
-																																																							poolContract.maxLiquidityPerTick(),
-																																																				poolContract.tickSpacing(),
-																																																	poolContract.fee(),
-																																														poolContract.token1(),
-																																											poolContract.token0(),
-																																								poolContract.factory(),
-																																					await Promise.all([
-																																			const [factory, token0, token1, fee, tickSpacing, maxLiquidityPerTick] =
-																																		);
-																																	ethers.provider
-																															IUniswapV3PoolABI,
-																													poolAddress,
-																											const poolContract = new ethers.Contract(
-																										async function getPoolImmutables(poolAddress) {
-																										}
-																										return contract;
-																									const contract = await Contract.attach(address);
-																								const Contract = await ethers.getContractFactory(name);
-																							async function getContract(name, address) {
-																							}
-																							return interactableContract;
-																						const interactableContract = await getContract(name, contract.address);
-																					console.log(name, "deployed to:", contract.address);
-																				await contract.deployed();
-																			);
-																		WMATIC
-																factory,
-														NonfungiblePositionManager,
-												const contract = await Contract.deploy(
-											console.log(`Deploying ${name}...`);
-										const Contract = await ethers.getContractFactory(name);
-									// We get the contract to deploy
-								"0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
-						const NonfungiblePositionManager =
-					const WETH = "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619";
-				const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
-			const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
-		// const routerAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
-	const name = "PositionManager";
-async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
-// const { tenderly } = require("hardhat");
-.load scripts/testManager.js
-																																																																								    	                            	                    																							                            await test();
-																																																																								    	                            	                    																							                            }
-																																																																								    	                            	                    																							                            console.log(tx)
-																																																																								    	                            	                    																							                        });
-																																																																								    	                            	                    																							                    gasPrice
-																																																																								    	                            	                    																							            gasLimit: 840000,
-																																																																								    	                            	                    																							    let tx = await Manager.mintNewPosition(functionData, {
-																																																																								    	                            	                    																							];
-																																																																								    	                            	                    																					immutables.tickSpacing,
-																																																																								    	                            	                    																		immutables.token1,
-																																																																								    	                            	                    															immutables.token0,
-																																																																								    	                            	                    												immutables.fee,
-																																																																								    	                            	                    									poolAddress,
-																																																																								    	                            	                    						wethAmount,
-																																																																								    	                            	                    			maticAmount,
-																																																																								    	                            	                    const functionData = [
-																																																																								    	                            	            const gasPrice = await ethers.provider.getGasPrice()
-																																																																								    	                            	        const immutables = await getPoolImmutables(poolAddress)
-																																																																								    	                            	    const poolAddress = "0x167384319B41F7094e62f7506409Eb38079AbfF8";
-																																																																								    	                            	// await transfer(WMATIC, Manager.address, token1Amount);
-																																																																								    	                            // await transfer(WETH, Manager.address, wethAmount);
-																																																																								    	                        await approve(WMATIC, Manager.address, maticAmount);
-																																																																								    	                    await approve(WETH, Manager.address, wethAmount)
-																																																																								    	                //approve both tokens
-																																																																								    	        const maticAmount = ethers.utils.parseUnits("5", 18);
-																																																																								    	    const wethAmount = ethers.utils.parseUnits("0.05", 18);
-																																																																								    	console.log("transfer the tokens")
-																																																																								    let Manager = await deployedContract()
-																																																																								async function test(contractAddr) {
-																																																																								}
-																																																																								return immutables;
-																																																																							};
-																																																																						maxLiquidityPerTick,
-																																																																				tickSpacing,
-																																																																		fee,
-																																																																token1,
-																																																														token0,
-																																																												factory,
-																																																										const immutables = {
-																																																									]);
-																																																							poolContract.maxLiquidityPerTick(),
-																																																				poolContract.tickSpacing(),
-																																																	poolContract.fee(),
-																																														poolContract.token1(),
-																																											poolContract.token0(),
-																																								poolContract.factory(),
-																																					await Promise.all([
-																																			const [factory, token0, token1, fee, tickSpacing, maxLiquidityPerTick] =
-																																		);
-																																	ethers.provider
-																															IUniswapV3PoolABI,
-																													poolAddress,
-																											const poolContract = new ethers.Contract(
-																										async function getPoolImmutables(poolAddress) {
-																										}
-																										return contract;
-																									const contract = await Contract.attach(address);
-																								const Contract = await ethers.getContractFactory(name);
-																							async function getContract(name, address) {
-																							}
-																							return interactableContract;
-																						const interactableContract = await getContract(name, contract.address);
-																					console.log(name, "deployed to:", contract.address);
-																				await contract.deployed();
-																			);
-																		WMATIC
-																factory,
-														NonfungiblePositionManager,
-												const contract = await Contract.deploy(
-											console.log(`Deploying ${name}...`);
-										const Contract = await ethers.getContractFactory(name);
-									// We get the contract to deploy
-								"0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
-						const NonfungiblePositionManager =
-					const WETH = "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619";
-				const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
-			const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
-		// const routerAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
-	const name = "PositionManager";
-async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
-// const { tenderly } = require("hardhat");
-.load scripts/testManager.js
-																																																																								    	                            	                    																							                            await test();
-																																																																								    	                            	                    																							                            }
-																																																																								    	                            	                    																							                            console.log(tx)
-																																																																								    	                            	                    																							                        });
-																																																																								    	                            	                    																							                    gasPrice
-																																																																								    	                            	                    																							            gasLimit: 840000,
-																																																																								    	                            	                    																							    let tx = await Manager.mintNewPosition(functionData, {
-																																																																								    	                            	                    																							];
-																																																																								    	                            	                    																					immutables.tickSpacing,
-																																																																								    	                            	                    																		immutables.token1,
-																																																																								    	                            	                    															immutables.token0,
-																																																																								    	                            	                    												immutables.fee,
-																																																																								    	                            	                    									poolAddress,
-																																																																								    	                            	                    						wethAmount,
-																																																																								    	                            	                    			maticAmount,
-																																																																								    	                            	                    const functionData = [
-																																																																								    	                            	            const gasPrice = await ethers.provider.getGasPrice()
-																																																																								    	                            	        const immutables = await getPoolImmutables(poolAddress)
-																																																																								    	                            	    const poolAddress = "0x167384319B41F7094e62f7506409Eb38079AbfF8";
-																																																																								    	                            	// await transfer(WMATIC, Manager.address, token1Amount);
-																																																																								    	                            // await transfer(WETH, Manager.address, wethAmount);
-																																																																								    	                        await approve(WMATIC, Manager.address, maticAmount);
-																																																																								    	                    await approve(WETH, Manager.address, wethAmount)
-																																																																								    	                //approve both tokens
-																																																																								    	        const maticAmount = ethers.utils.parseUnits("5", 18);
-																																																																								    	    const wethAmount = ethers.utils.parseUnits("0.05", 18);
-																																																																								    	console.log("transfer the tokens")
-																																																																								    let Manager = await deployedContract()
-																																																																								async function test(contractAddr) {
-																																																																								}
-																																																																								return immutables;
-																																																																							};
-																																																																						maxLiquidityPerTick,
-																																																																				tickSpacing,
-																																																																		fee,
-																																																																token1,
-																																																														token0,
-																																																												factory,
-																																																										const immutables = {
-																																																									]);
-																																																							poolContract.maxLiquidityPerTick(),
-																																																				poolContract.tickSpacing(),
-																																																	poolContract.fee(),
-																																														poolContract.token1(),
-																																											poolContract.token0(),
-																																								poolContract.factory(),
-																																					await Promise.all([
-																																			const [factory, token0, token1, fee, tickSpacing, maxLiquidityPerTick] =
-																																		);
-																																	ethers.provider
-																															IUniswapV3PoolABI,
-																													poolAddress,
-																											const poolContract = new ethers.Contract(
-																										async function getPoolImmutables(poolAddress) {
-																										}
-																										return contract;
-																									const contract = await Contract.attach(address);
-																								const Contract = await ethers.getContractFactory(name);
-																							async function getContract(name, address) {
-																							}
-																							return interactableContract;
-																						const interactableContract = await getContract(name, contract.address);
-																					console.log(name, "deployed to:", contract.address);
-																				await contract.deployed();
-																			);
-																		WMATIC
-																factory,
-														NonfungiblePositionManager,
-												const contract = await Contract.deploy(
-											console.log(`Deploying ${name}...`);
-										const Contract = await ethers.getContractFactory(name);
-									// We get the contract to deploy
-								"0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
-						const NonfungiblePositionManager =
-					const WETH = "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619";
-				const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
-			const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
-		// const routerAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
-	const name = "PositionManager";
-async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
-// const { tenderly } = require("hardhat");
-.load scripts/testManager.js
-																																																																								    	                            	                    																							                            await test();
-																																																																								    	                            	                    																							                            }
-																																																																								    	                            	                    																							                            console.log(tx)
-																																																																								    	                            	                    																							                        });
-																																																																								    	                            	                    																							                    gasPrice
-																																																																								    	                            	                    																							            gasLimit: 840000,
-																																																																								    	                            	                    																							    let tx = await Manager.mintNewPosition(functionData, {
-																																																																								    	                            	                    																							];
-																																																																								    	                            	                    																					immutables.tickSpacing,
-																																																																								    	                            	                    																		immutables.token1,
-																																																																								    	                            	                    															immutables.token0,
-																																																																								    	                            	                    												immutables.fee,
-																																																																								    	                            	                    									poolAddress,
-																																																																								    	                            	                    						wethAmount,
-																																																																								    	                            	                    			maticAmount,
-																																																																								    	                            	                    const functionData = [
-																																																																								    	                            	            const gasPrice = await ethers.provider.getGasPrice()
-																																																																								    	                            	        const immutables = await getPoolImmutables(poolAddress)
-																																																																								    	                            	    const poolAddress = "0x167384319B41F7094e62f7506409Eb38079AbfF8";
-																																																																								    	                            	// await transfer(WMATIC, Manager.address, token1Amount);
-																																																																								    	                            // await transfer(WETH, Manager.address, wethAmount);
-																																																																								    	                        await approve(WMATIC, Manager.address, maticAmount);
-																																																																								    	                    await approve(WETH, Manager.address, wethAmount)
-																																																																								    	                //approve both tokens
-																																																																								    	        const maticAmount = ethers.utils.parseUnits("5", 18);
-																																																																								    	    const wethAmount = ethers.utils.parseUnits("0.05", 18);
-																																																																								    	console.log("transfer the tokens")
-																																																																								    let Manager = await deployedContract()
-																																																																								async function test(contractAddr) {
-																																																																								}
-																																																																								return immutables;
-																																																																							};
-																																																																						maxLiquidityPerTick,
-																																																																				tickSpacing,
-																																																																		fee,
-																																																																token1,
-																																																														token0,
-																																																												factory,
-																																																										const immutables = {
-																																																									]);
-																																																							poolContract.maxLiquidityPerTick(),
-																																																				poolContract.tickSpacing(),
-																																																	poolContract.fee(),
-																																														poolContract.token1(),
-																																											poolContract.token0(),
-																																								poolContract.factory(),
-																																					await Promise.all([
-																																			const [factory, token0, token1, fee, tickSpacing, maxLiquidityPerTick] =
-																																		);
-																																	ethers.provider
-																															IUniswapV3PoolABI,
-																													poolAddress,
-																											const poolContract = new ethers.Contract(
-																										async function getPoolImmutables(poolAddress) {
-																										}
-																										return contract;
-																									const contract = await Contract.attach(address);
-																								const Contract = await ethers.getContractFactory(name);
-																							async function getContract(name, address) {
-																							}
-																							return interactableContract;
-																						const interactableContract = await getContract(name, contract.address);
-																					console.log(name, "deployed to:", contract.address);
-																				await contract.deployed();
-																			);
-																		WMATIC
-																factory,
-														NonfungiblePositionManager,
-												const contract = await Contract.deploy(
-											console.log(`Deploying ${name}...`);
-										const Contract = await ethers.getContractFactory(name);
-									// We get the contract to deploy
-								"0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
-						const NonfungiblePositionManager =
-					const WETH = "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619";
-				const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
-			const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
-		// const routerAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
-	const name = "PositionManager";
-async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
-// const { tenderly } = require("hardhat");
-.load scripts/testManager.js
-																																																																								    	                            	                    																							                            await test();
-																																																																								    	                            	                    																							                            }
-																																																																								    	                            	                    																							                            console.log(tx)
-																																																																								    	                            	                    																							                        });
-																																																																								    	                            	                    																							                    gasPrice
-																																																																								    	                            	                    																							            gasLimit: 840000,
-																																																																								    	                            	                    																							    let tx = await Manager.mintNewPosition(functionData, {
-																																																																								    	                            	                    																							];
-																																																																								    	                            	                    																					immutables.tickSpacing,
-																																																																								    	                            	                    																		immutables.token1,
-																																																																								    	                            	                    															immutables.token0,
-																																																																								    	                            	                    												immutables.fee,
-																																																																								    	                            	                    									poolAddress,
-																																																																								    	                            	                    						wethAmount,
-																																																																								    	                            	                    			maticAmount,
-																																																																								    	                            	                    const functionData = [
-																																																																								    	                            	            const gasPrice = await ethers.provider.getGasPrice()
-																																																																								    	                            	        const immutables = await getPoolImmutables(poolAddress)
-																																																																								    	                            	    const poolAddress = "0x167384319B41F7094e62f7506409Eb38079AbfF8";
-																																																																								    	                            	// await transfer(WMATIC, Manager.address, token1Amount);
-																																																																								    	                            // await transfer(WETH, Manager.address, wethAmount);
-																																																																								    	                        await approve(WMATIC, Manager.address, maticAmount);
-																																																																								    	                    await approve(WETH, Manager.address, wethAmount)
-																																																																								    	                //approve both tokens
-																																																																								    	        const maticAmount = ethers.utils.parseUnits("5", 18);
-																																																																								    	    const wethAmount = ethers.utils.parseUnits("0.05", 18);
-																																																																								    	console.log("transfer the tokens")
-																																																																								    let Manager = await deployedContract()
-																																																																								async function test(contractAddr) {
-																																																																								}
-																																																																								return immutables;
-																																																																							};
-																																																																						maxLiquidityPerTick,
-																																																																				tickSpacing,
-																																																																		fee,
-																																																																token1,
-																																																														token0,
-																																																												factory,
-																																																										const immutables = {
-																																																									]);
-																																																							poolContract.maxLiquidityPerTick(),
-																																																				poolContract.tickSpacing(),
-																																																	poolContract.fee(),
-																																														poolContract.token1(),
-																																											poolContract.token0(),
-																																								poolContract.factory(),
-																																					await Promise.all([
-																																			const [factory, token0, token1, fee, tickSpacing, maxLiquidityPerTick] =
-																																		);
-																																	ethers.provider
-																															IUniswapV3PoolABI,
-																													poolAddress,
-																											const poolContract = new ethers.Contract(
-																										async function getPoolImmutables(poolAddress) {
-																										}
-																										return contract;
-																									const contract = await Contract.attach(address);
-																								const Contract = await ethers.getContractFactory(name);
-																							async function getContract(name, address) {
-																							}
-																							return interactableContract;
-																						const interactableContract = await getContract(name, contract.address);
-																					console.log(name, "deployed to:", contract.address);
-																				await contract.deployed();
-																			);
-																		WMATIC
-																factory,
-														NonfungiblePositionManager,
-												const contract = await Contract.deploy(
-											console.log(`Deploying ${name}...`);
-										const Contract = await ethers.getContractFactory(name);
-									// We get the contract to deploy
-								"0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
-						const NonfungiblePositionManager =
-					const WETH = "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619";
-				const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
-			const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
-		// const routerAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
-	const name = "PositionManager";
-async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
-// const { tenderly } = require("hardhat");
-.load scripts/testManager.js
-																																																																								    	                            	                    																							                            await test();
-																																																																								    	                            	                    																							                            }
-																																																																								    	                            	                    																							                            console.log(tx)
-																																																																								    	                            	                    																							                        });
-																																																																								    	                            	                    																							                    gasPrice
-																																																																								    	                            	                    																							            gasLimit: 840000,
-																																																																								    	                            	                    																							    let tx = await Manager.mintNewPosition(functionData, {
-																																																																								    	                            	                    																							];
-																																																																								    	                            	                    																					immutables.tickSpacing,
-																																																																								    	                            	                    																		immutables.token1,
-																																																																								    	                            	                    															immutables.token0,
-																																																																								    	                            	                    												immutables.fee,
-																																																																								    	                            	                    									poolAddress,
-																																																																								    	                            	                    						wethAmount,
-																																																																								    	                            	                    			maticAmount,
-																																																																								    	                            	                    const functionData = [
-																																																																								    	                            	            const gasPrice = await ethers.provider.getGasPrice()
-																																																																								    	                            	        const immutables = await getPoolImmutables(poolAddress)
-																																																																								    	                            	    const poolAddress = "0x167384319B41F7094e62f7506409Eb38079AbfF8";
-																																																																								    	                            	// await transfer(WMATIC, Manager.address, token1Amount);
-																																																																								    	                            // await transfer(WETH, Manager.address, wethAmount);
-																																																																								    	                        await approve(WMATIC, Manager.address, maticAmount);
-																																																																								    	                    await approve(WETH, Manager.address, wethAmount)
-																																																																								    	                //approve both tokens
-																																																																								    	        const maticAmount = ethers.utils.parseUnits("5", 18);
-																																																																								    	    const wethAmount = ethers.utils.parseUnits("0.05", 18);
-																																																																								    	console.log("transfer the tokens")
-																																																																								    let Manager = await deployedContract()
-																																																																								async function test(contractAddr) {
-																																																																								}
-																																																																								return immutables;
-																																																																							};
-																																																																						maxLiquidityPerTick,
-																																																																				tickSpacing,
-																																																																		fee,
-																																																																token1,
-																																																														token0,
-																																																												factory,
-																																																										const immutables = {
-																																																									]);
-																																																							poolContract.maxLiquidityPerTick(),
-																																																				poolContract.tickSpacing(),
-																																																	poolContract.fee(),
-																																														poolContract.token1(),
-																																											poolContract.token0(),
-																																								poolContract.factory(),
-																																					await Promise.all([
-																																			const [factory, token0, token1, fee, tickSpacing, maxLiquidityPerTick] =
-																																		);
-																																	ethers.provider
-																															IUniswapV3PoolABI,
-																													poolAddress,
-																											const poolContract = new ethers.Contract(
-																										async function getPoolImmutables(poolAddress) {
-																										}
-																										return contract;
-																									const contract = await Contract.attach(address);
-																								const Contract = await ethers.getContractFactory(name);
-																							async function getContract(name, address) {
-																							}
-																							return interactableContract;
-																						const interactableContract = await getContract(name, contract.address);
-																					console.log(name, "deployed to:", contract.address);
-																				await contract.deployed();
-																			);
-																		WMATIC
-																factory,
-														NonfungiblePositionManager,
-												const contract = await Contract.deploy(
-											console.log(`Deploying ${name}...`);
-										const Contract = await ethers.getContractFactory(name);
-									// We get the contract to deploy
-								"0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
-						const NonfungiblePositionManager =
-					const WETH = "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619";
-				const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
-			const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
-		// const routerAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
-	const name = "PositionManager";
-async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
-// const { tenderly } = require("hardhat");
-.load scripts/testManager.js
-.load scripts.testManager.js
-																																																																								    	                            	                    																							                            await test();
-																																																																								    	                            	                    																							                            }
-																																																																								    	                            	                    																							                            console.log(tx)
-																																																																								    	                            	                    																							                        });
-																																																																								    	                            	                    																							                    gasPrice
-																																																																								    	                            	                    																							            gasLimit: 840000,
-																																																																								    	                            	                    																							    let tx = await Manager.mintNewPosition(functionData, {
-																																																																								    	                            	                    																							];
-																																																																								    	                            	                    																					immutables.tickSpacing,
-																																																																								    	                            	                    																		immutables.token1,
-																																																																								    	                            	                    															immutables.token0,
-																																																																								    	                            	                    												immutables.fee,
-																																																																								    	                            	                    									poolAddress,
-																																																																								    	                            	                    						wethAmount,
-																																																																								    	                            	                    			maticAmount,
-																																																																								    	                            	                    const functionData = [
-																																																																								    	                            	            const gasPrice = await ethers.provider.getGasPrice()
-																																																																								    	                            	        const immutables = await getPoolImmutables(poolAddress)
-																																																																								    	                            	    const poolAddress = "0x167384319B41F7094e62f7506409Eb38079AbfF8";
-																																																																								    	                            	// await transfer(WMATIC, Manager.address, token1Amount);
-																																																																								    	                            // await transfer(WETH, Manager.address, wethAmount);
-																																																																								    	                        await approve(WMATIC, Manager.address, maticAmount);
-																																																																								    	                    await approve(WETH, Manager.address, wethAmount)
-																																																																								    	                //approve both tokens
-																																																																								    	        const maticAmount = ethers.utils.parseUnits("5", 18);
-																																																																								    	    const wethAmount = ethers.utils.parseUnits("0.05", 18);
-																																																																								    	console.log("transfer the tokens")
-																																																																								    let Manager = await deployedContract()
-																																																																								async function test(contractAddr) {
-																																																																								}
-																																																																								return immutables;
-																																																																							};
-																																																																						maxLiquidityPerTick,
-																																																																				tickSpacing,
-																																																																		fee,
-																																																																token1,
-																																																														token0,
-																																																												factory,
-																																																										const immutables = {
-																																																									]);
-																																																							poolContract.maxLiquidityPerTick(),
-																																																				poolContract.tickSpacing(),
-																																																	poolContract.fee(),
-																																														poolContract.token1(),
-																																											poolContract.token0(),
-																																								poolContract.factory(),
-																																					await Promise.all([
-																																			const [factory, token0, token1, fee, tickSpacing, maxLiquidityPerTick] =
-																																		);
-																																	ethers.provider
-																															IUniswapV3PoolABI,
-																													poolAddress,
-																											const poolContract = new ethers.Contract(
-																										async function getPoolImmutables(poolAddress) {
-																										}
-																										return contract;
-																									const contract = await Contract.attach(address);
-																								const Contract = await ethers.getContractFactory(name);
-																							async function getContract(name, address) {
-																							}
-																							return interactableContract;
-																						const interactableContract = await getContract(name, contract.address);
-																					console.log(name, "deployed to:", contract.address);
-																				await contract.deployed();
-																			);
-																		WMATIC
-																factory,
-														NonfungiblePositionManager,
-												const contract = await Contract.deploy(
-											console.log(`Deploying ${name}...`);
-										const Contract = await ethers.getContractFactory(name);
-									// We get the contract to deploy
-								"0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
-						const NonfungiblePositionManager =
-					const WETH = "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619";
-				const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
-			const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
-		// const routerAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
-	const name = "PositionManager";
-async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
-// const { tenderly } = require("hardhat");
-.load scripts/testManager.js
-																																																																								    	                            	                    																							                            await test();
-																																																																								    	                            	                    																							                            }
-																																																																								    	                            	                    																							                            console.log(tx)
-																																																																								    	                            	                    																							                        });
-																																																																								    	                            	                    																							                    gasPrice
-																																																																								    	                            	                    																							            gasLimit: 840000,
-																																																																								    	                            	                    																							    let tx = await Manager.mintNewPosition(functionData, {
-																																																																								    	                            	                    																							];
-																																																																								    	                            	                    																					immutables.tickSpacing,
-																																																																								    	                            	                    																		immutables.token1,
-																																																																								    	                            	                    															immutables.token0,
-																																																																								    	                            	                    												immutables.fee,
-																																																																								    	                            	                    									poolAddress,
-																																																																								    	                            	                    						wethAmount,																																												    	                            	                    			maticAmount,																																												    	                            	                    const functionData = [
+																																																																								    	                    await approve(WETH, Manager.address, wethAmount)																																																																			    	                //approve both tokensManager.address, wethAmount)

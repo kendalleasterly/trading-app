@@ -9,9 +9,11 @@ import '@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol';
 import '@uniswap/v3-periphery/contracts/interfaces/INonfungiblePositionManager.sol';
 import '@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol';
 import '@uniswap/v3-periphery/contracts/base/LiquidityManagement.sol';
+import '@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol';
 
 import "hardhat/console.sol";
 import "./RatioCalculator.sol";
+import "./Swapper.sol";
 
 contract PositionManager is IERC721Receiver, LiquidityManagement {
 
@@ -25,6 +27,7 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
     // uint24 public constant poolFee = 3000;
 
     INonfungiblePositionManager public immutable nonfungiblePositionManager;
+    ISwapRouter public immutable swapRouter;
 
     struct Deposit {
         address owner;
@@ -37,13 +40,15 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
 
     constructor (
         INonfungiblePositionManager _nonfungiblePositionManager,
+        ISwapRouter _swaprouter,
         address _factory,
         address _WETH9
     ) PeripheryImmutableState(_factory, _WETH9) {
         nonfungiblePositionManager = _nonfungiblePositionManager;
+        swapRouter = _swaprouter;
     }
 
-    function refund(address token, uint256 amount) external {
+    function tokenReturn(address token, uint256 amount) external {
         _safeTransfer(token, msg.sender, amount);
     }
 
@@ -63,7 +68,16 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
         address token0;
         address token1;
         int24 tickSpacing;
+        int24 spacingMultiplier;
         }
+    struct RefundParams {
+        uint256 amount0; 
+        uint256 amount1;
+        uint256 amount0ToMint; 
+        uint256 amount1ToMint; 
+        address token0; 
+        address token1;
+    }
 
     function mintNewPosition(MintParams memory mintParams)
         external
@@ -79,18 +93,10 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
         
         (uint160 sqrtPriceX96, int24 tick, , , , , ) = pool.slot0(); 
 
-        //can be put in call params
-        // uint24 poolFee = pool.fee();
-        // address token0 = pool.token0();
-        // address token1 = pool.token1();
-        // int24 tickSpacing = pool.tickSpacing();
-
-        // int24 nearestTick = 
-
         (uint256 amount0Desired, uint256 amount1Desired) = swap(mintParams, tick, sqrtPriceX96);
 
-        _safeApprove(mintParams.token0, address(nonfungiblePositionManager), mintParams.amount0ToMint);
-        _safeApprove(mintParams.token1, address(nonfungiblePositionManager), mintParams.amount1ToMint);
+        _safeApprove(mintParams.token0, address(nonfungiblePositionManager), amount0Desired);
+        _safeApprove(mintParams.token1, address(nonfungiblePositionManager), amount1Desired);
 
         console.logInt(_nearestUsableTick(tick, mintParams.tickSpacing) - mintParams.tickSpacing);
         console.logInt(_nearestUsableTick(tick, mintParams.tickSpacing) + mintParams.tickSpacing);
@@ -100,10 +106,10 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
                 token0: mintParams.token0,
                 token1: mintParams.token1,
                 fee: mintParams.poolFee,
-                tickLower: _nearestUsableTick(tick, mintParams.tickSpacing) - mintParams.tickSpacing,
-                tickUpper: _nearestUsableTick(tick, mintParams.tickSpacing) + mintParams.tickSpacing,
-                amount0Desired: mintParams.amount0ToMint, //these values don't need to be an exact ratio
-                amount1Desired: mintParams.amount1ToMint,
+                tickLower: _nearestUsableTick(tick, mintParams.tickSpacing) - (mintParams.tickSpacing * mintParams.spacingMultiplier),
+                tickUpper: _nearestUsableTick(tick, mintParams.tickSpacing) + (mintParams.tickSpacing * mintParams.spacingMultiplier),
+                amount0Desired: amount0Desired, //these values don't need to be an exact ratio
+                amount1Desired: amount1Desired,
                 amount0Min: 0, //TODO: Slippage tolerance the input value
                 amount1Min: 0, //TODO: Slippage tolerance the input value,
                 recipient: msg.sender,
@@ -115,10 +121,44 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
 
         // deposits[tokenId] = Deposit({owner: msg.sender, liquidity: liquidity, token0: token0, token1: token1});
 
-        refund(amount0, amount1, mintParams, mintParams.token0, mintParams.token1);
+        RefundParams memory refundParams = RefundParams({
+            amount0: amount0,
+            amount1: amount1,
+            amount0ToMint: amount0Desired,
+            amount1ToMint: amount1Desired,
+            token0: mintParams.token0,
+            token1: mintParams.token1
+        });
+
+        refund(refundParams);
     }
 
-    function swap(MintParams memory mintParams, int24 tick, uint160 sqrtRatioX96) private returns (uint256 amount0Desired, uint256 amount1Desired) {
+    function swap(MintParams memory mintParams, int24 tick, uint160 sqrtRatioX96) private returns (uint256 amount0Out, uint256 amount1Out) {
+
+        (bool zeroForOne, uint256 amountToSwap) = getAmountToSwap(mintParams, tick, sqrtRatioX96);
+
+        console.log("zero for one", zeroForOne);
+        console.log("amountToSwap", amountToSwap);
+
+        Swapper.SwapParams memory params = Swapper.SwapParams({
+            swapRouter: swapRouter,
+            tokenIn: zeroForOne ? mintParams.token0 : mintParams.token1,
+            tokenOut: zeroForOne ? mintParams.token1 : mintParams.token0,
+            amountIn: amountToSwap
+        });
+
+        uint256 amountOut = Swapper.swapExactInputSingle(params);
+        console.log("amount Out", amountOut);
+
+        amount0Out = zeroForOne ? mintParams.amount0ToMint - amountToSwap : mintParams.amount0ToMint + amountOut;
+        amount1Out = zeroForOne ? mintParams.amount1ToMint + amountOut : mintParams.amount1ToMint - amountToSwap;
+        
+        console.log("amount0Out", amount0Out);
+        console.log("amount1Out", amount1Out);
+
+    }
+
+    function getAmountToSwap(MintParams memory mintParams, int24 tick, uint160 sqrtRatioX96) private view returns (bool zeroForOne, uint256 amountToSwap) {
 
         RatioCalculator.Position memory ratioParams = 
             RatioCalculator.Position({
@@ -127,75 +167,38 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
                 currentSqrtPriceX96:sqrtRatioX96
             });
 
-        
-
         //this function can assume zeroForOne is true, and we can do the inversion afterwards
         uint256 ratioX64 = RatioCalculator.calculateOptimalRatio(ratioParams);
 
         uint256 balanceRatioX64 = (mintParams.amount0ToMint * 2**64) / mintParams.amount1ToMint; 
-        bool zeroForOne = balanceRatioX64 > ratioX64;
-        console.log("ratioX64", ratioX64);
+        zeroForOne = balanceRatioX64 > ratioX64;
         if (!zeroForOne) {
             ratioX64 = uint256(2**128) / ratioX64;
-            console.log("ratioX64 inverted", ratioX64);
         }
 
         (uint256 inputBalance, uint256 outputBalance) = zeroForOne ? (mintParams.amount0ToMint, mintParams.amount1ToMint) : (mintParams.amount1ToMint, mintParams.amount0ToMint);
 
         //exchange rate will be calculated here using the sqrtPriceX96
-        console.log("sqrtRatioX96", uint256(sqrtRatioX96)); 
         uint256 exchangeRateX64 = (uint256(sqrtRatioX96) ** 2 / 2 ** 128); //divided by X128 becuse 192 - 64 = 128
-        console.log("exchange rate", exchangeRateX64);
         if (!zeroForOne) {
             exchangeRateX64 = 2**128 / exchangeRateX64 ;
-            console.log("inverted exchange rate", exchangeRateX64);
         }
 
-
-// 2177.57718448
-// 2174.19608647
-// 0.00045994
-// 0.00045923
-
-//0.00045994 bare math with sqrt: as clean as this gets
-// 0.00045923 what the sdk says
-
-        console.log("input", inputBalance);
-        console.log("output", outputBalance);
-        
-        //ratio = 0.00031218
-        //exchangeRate = 2166.30091795
-
-        //outputBlanace = 5000000000000000000
-        //inputBalance = 50000000000000000        
-
-        //(inputBalance - (optimalRatio * outputBalance)) / ((optimalRatio * inputTokenPrice) + 1))
-        //(50000000000000000 - 1560900000000000) / ((0.67627582) + 1)
-
-
-        uint256 productX128 = ratioX64 * exchangeRateX64;
-
-        console.log("t2X128", productX128);
-        console.log("t3", (productX128 + 2**64) / 2**64);
-
-        uint256 amountToSwap = (inputBalance - (ratioX64 * outputBalance / 2**64)) * 2**128 / (productX128 + 2**128) ; //we add 2**128 to add 1 without it being outside of the parenthesis. 
-        console.log("amount to swap", amountToSwap); 
-
-        amount0Desired = mintParams.amount0ToMint;
-        amount1Desired = mintParams.amount0ToMint;
+        amountToSwap = (inputBalance - (ratioX64 * outputBalance / 2**64)) * 2**128 / ((ratioX64 * exchangeRateX64) + 2**128) ; //we add 2**128 to add 1. 
+        console.log("amount to swap", amountToSwap);
     }
 
-    function refund(uint256 amount0, uint256 amount1, MintParams memory mintParams, address token0, address token1) private {
-        if (amount0 < mintParams.amount0ToMint) {
+    function refund(RefundParams memory refundParams) private {
+        if (refundParams.amount0 < refundParams.amount0ToMint) {
 
-            uint256 refund0 = mintParams.amount0ToMint - amount0;
-            _safeTransfer(token0, msg.sender, refund0);
+            uint256 refund0 = refundParams.amount0ToMint - refundParams.amount0;
+            _safeTransfer(refundParams.token0, msg.sender, refund0);
         }
 
-        if (amount1 < mintParams.amount1ToMint) {
+        if (refundParams.amount1 < refundParams.amount1ToMint) {
 
-            uint256 refund1 = mintParams.amount1ToMint - amount1;
-            _safeTransfer(token1, msg.sender, refund1);
+            uint256 refund1 = refundParams.amount1ToMint - refundParams.amount1;
+            _safeTransfer(refundParams.token1, msg.sender, refund1);
         }
     }
 

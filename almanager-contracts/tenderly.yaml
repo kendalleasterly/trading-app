@@ -1,22 +1,22 @@
 account_id: a90dd048-191a-4e1c-995e-016ca7bd7e18
 exports:
   polgon fork:
-    project_slug: qfletcher89/project
-    rpc_address: 127.0.0.1:8545
-    protocol: ""
-    forked_network: Polygon
     chain_config:
-      homestead_block: 0
+      berlin_block: 0
+      byzantium_block: 0
+      constantinople_block: 0
       eip150_block: 0
       eip150_hash: "0x0000000000000000000000000000000000000000000000000000000000000000"
       eip155_block: 0
       eip158_block: 0
-      byzantium_block: 0
-      constantinople_block: 0
-      petersburg_block: 0
+      homestead_block: 0
       istanbul_block: 0
-      berlin_block: 0
       london_block: 0
+      petersburg_block: 0
+    forked_network: Polygon
+    project_slug: qfletcher89/project
+    protocol: ""
+    rpc_address: 127.0.0.1:8545
   polygon:
     chain_config:
       berlin_block: 0
@@ -34,5 +34,22 @@ exports:
     project_slug: qfletcher89/project
     protocol: ""
     rpc_address: 127.0.0.1:8545
+  polygon fork:
+    project_slug: qfletcher89/project
+    rpc_address: 127.0.0.1:8545
+    protocol: ""
+    forked_network: Polygon
+    chain_config:
+      homestead_block: 0
+      eip150_block: 0
+      eip150_hash: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      eip155_block: 0
+      eip158_block: 0
+      byzantium_block: 0
+      constantinople_block: 0
+      petersburg_block: 0
+      istanbul_block: 0
+      berlin_block: 0
+      london_block: 0
 project_slug: project
 provider: ""

@@ -3,18 +3,17 @@
 async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
 	const name = "PositionManager";
 
-	// const routerAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
+	const NonfungiblePositionManager = "0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
+	const SwapRouter = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
 	const factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
 	const WMATIC = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
-	const WETH = "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619";
-	const NonfungiblePositionManager =
-		"0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
 
 	// We get the contract to deploy
 	const Contract = await ethers.getContractFactory(name);
 	console.log(`Deploying ${name}...`);
 	const contract = await Contract.deploy(
 		NonfungiblePositionManager,
+		SwapRouter,
 		factory,
 		WMATIC
 	);
@@ -65,15 +64,15 @@ async function test(contractAddr) {
     let Manager = await deployedContract()
 	console.log("transfer the tokens")
 
-    const wethAmount = ethers.utils.parseUnits("0.05", 18);
+    const wethAmount = ethers.utils.parseUnits("0.01", 18);
     const maticAmount = ethers.utils.parseUnits("5", 18);
     
     //approve both tokens
 
     await approve(WETH, Manager.address, wethAmount)
     await approve(WMATIC, Manager.address, maticAmount);
-    // await transfer(WETH, Manager.address, wethAmount);
-	// await transfer(WMATIC, Manager.address, token1Amount);
+    await transfer(WETH, Manager.address, wethAmount);
+	await transfer(WMATIC, Manager.address, maticAmount);
 
     const poolAddress = "0x167384319B41F7094e62f7506409Eb38079AbfF8";
 

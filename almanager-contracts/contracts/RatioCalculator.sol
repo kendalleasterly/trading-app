@@ -17,7 +17,7 @@ library RatioCalculator {
 
     }
 
-    function calculateOptimalRatio(Position memory position) internal view returns (uint256 ratioX64)  {
+    function calculateOptimalRatio(Position memory position) internal pure returns (uint256 ratioX64)  {
 
         uint160 upperSqrtRatioX96 = TickMath.getSqrtRatioAtTick(position.tickUpper);
         uint160 lowerSqrtRatioX96 = TickMath.getSqrtRatioAtTick(position.tickLower);
@@ -36,10 +36,7 @@ library RatioCalculator {
             usableLiquidity, 
             true);
 
-        console.log("numerator", numerator);
-        console.log("denominator", denominator);
-
-        ratioX64 = (numerator * 2**64)  / (denominator); //percision is lackng 2^32
+        ratioX64 = (numerator * 2**64)  / denominator; 
 
     }
 
