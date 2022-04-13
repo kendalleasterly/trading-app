@@ -62,19 +62,18 @@ async function getPoolImmutables(poolAddress) {
 async function test(contractAddr) {
 
     let Manager = await deployedContract()
-	console.log("transfer the tokens")
 
+	const usdcAmount = ethers.utils.parseUnits("5", 6);
     const wethAmount = ethers.utils.parseUnits("0.01", 18);
-    const maticAmount = ethers.utils.parseUnits("5", 18);
     
     //approve both tokens
 
-    await approve(WETH, Manager.address, wethAmount)
-    await approve(WMATIC, Manager.address, maticAmount);
-    await transfer(WETH, Manager.address, wethAmount);
-	await transfer(WMATIC, Manager.address, maticAmount);
+    await approve(USDC, Manager.address, usdcAmount);
+    await approve(WETH, Manager.address, wethAmount);
+    await transfer(USDC, Manager.address, usdcAmount);
+	await transfer(WETH, Manager.address, wethAmount);
 
-    const poolAddress = "0x167384319B41F7094e62f7506409Eb38079AbfF8";
+    const poolAddress = "0x0e44cEb592AcFC5D3F09D996302eB4C499ff8c10";
 
     const immutables = await getPoolImmutables(poolAddress)
 
@@ -82,13 +81,14 @@ async function test(contractAddr) {
     
 
     const functionData = [
-			maticAmount,
+			usdcAmount,
 			wethAmount,
 			poolAddress,
 			immutables.fee,
 			immutables.token0,
 			immutables.token1,
 			immutables.tickSpacing,
+			2
 		];
 
     let tx = await Manager.mintNewPosition(functionData, {

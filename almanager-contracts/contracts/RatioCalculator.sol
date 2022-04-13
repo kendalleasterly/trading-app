@@ -17,7 +17,11 @@ library RatioCalculator {
 
     }
 
-    function calculateOptimalRatio(Position memory position) internal pure returns (uint256 ratioX64)  {
+    function calculateOptimalRatio(Position memory position) internal view returns (uint256 ratioX64)  {
+
+        console.log("upper / lower:");
+        console.logInt(position.tickUpper);
+        console.logInt(position.tickLower);
 
         uint160 upperSqrtRatioX96 = TickMath.getSqrtRatioAtTick(position.tickUpper);
         uint160 lowerSqrtRatioX96 = TickMath.getSqrtRatioAtTick(position.tickLower);

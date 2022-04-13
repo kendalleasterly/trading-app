@@ -184,8 +184,8 @@
       ]
     },
     "/Users/kendalleasterly/Documents/Web3 Development/trading-app/almanager-contracts/contracts/PositionManager.sol": {
-      "lastModificationDate": 1649826286833,
-      "contentHash": "d2993e07b7c4e0ca0513149554791760",
+      "lastModificationDate": 1649882085482,
+      "contentHash": "e6fe18e4a4075158c1dd1507bf049779",
       "sourceName": "contracts/PositionManager.sol",
       "solcConfig": {
         "version": "0.7.6",
@@ -1475,8 +1475,8 @@
       ]
     },
     "/Users/kendalleasterly/Documents/Web3 Development/trading-app/almanager-contracts/contracts/RatioCalculator.sol": {
-      "lastModificationDate": 1649818588968,
-      "contentHash": "400489486c34b9cc67ae8fdb4d5276fd",
+      "lastModificationDate": 1649882106687,
+      "contentHash": "18f7825257d6c4d20638934dd8bd3ac5",
       "sourceName": "contracts/RatioCalculator.sol",
       "solcConfig": {
         "version": "0.7.6",

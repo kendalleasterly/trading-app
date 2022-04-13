@@ -93,13 +93,13 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
         
         (uint160 sqrtPriceX96, int24 tick, , , , , ) = pool.slot0(); 
 
+        console.logInt(_nearestUsableTick(tick, mintParams.tickSpacing));
+        console.logInt(mintParams.spacingMultiplier);
         (uint256 amount0Desired, uint256 amount1Desired) = swap(mintParams, tick, sqrtPriceX96);
 
         _safeApprove(mintParams.token0, address(nonfungiblePositionManager), amount0Desired);
         _safeApprove(mintParams.token1, address(nonfungiblePositionManager), amount1Desired);
-
-        console.logInt(_nearestUsableTick(tick, mintParams.tickSpacing) - mintParams.tickSpacing);
-        console.logInt(_nearestUsableTick(tick, mintParams.tickSpacing) + mintParams.tickSpacing);
+        
         
         INonfungiblePositionManager.MintParams memory params = 
             INonfungiblePositionManager.MintParams({
@@ -162,8 +162,8 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
 
         RatioCalculator.Position memory ratioParams = 
             RatioCalculator.Position({
-                tickUpper: _nearestUsableTick(tick, mintParams.tickSpacing) + mintParams.tickSpacing,
-                tickLower: _nearestUsableTick(tick, mintParams.tickSpacing) - mintParams.tickSpacing,
+                tickUpper: _nearestUsableTick(tick, mintParams.tickSpacing) + (mintParams.tickSpacing * mintParams.spacingMultiplier),
+                tickLower: _nearestUsableTick(tick, mintParams.tickSpacing) - (mintParams.tickSpacing * mintParams.spacingMultiplier),
                 currentSqrtPriceX96:sqrtRatioX96
             });
 
@@ -210,19 +210,35 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
         TransferHelper.safeApprove(token, to, amount);
     }
 
-    function _nearestUsableTick(int24 tick, int24 tickSpacing) private pure returns (int24 nearestTick) {
+    function _nearestUsableTick(int24 tick, int24 tickSpacing) private view returns (int24 nearestTick) {
 
         //find the difference between the upper nearest tick and the current tick, and the difference between the lower nearest tick and the current tick
         //see which difference is the least
 
-        int24 upper = tick / tickSpacing; 
-        upper = upper * tickSpacing; 
-        int24 lower = upper - tickSpacing;
+        if (tick > 0) {
+            //test diff and one directly above
 
-        if ((upper - tick) < (tick - lower)) {
-            nearestTick = upper;
+            int24 lower = tick / tickSpacing;
+            lower = lower * tickSpacing;
+            int24 upper = lower + tickSpacing;
+
+            if ((upper - tick) < (tick - lower)) { //the difference between the upper and the tick is less, so use that one since it's closer.
+                nearestTick = upper;
+            } else {
+                nearestTick = lower;
+            }
         } else {
-            nearestTick = lower;
+            //test diff and one directly below
+
+            int24 upper = tick / tickSpacing;
+            upper = upper * tickSpacing;
+            int24 lower = upper - tickSpacing;
+
+            if (upper - tick < tick - lower) { //diff between upper and tick was lower, meaning it was closer.
+                nearestTick = upper;
+            } else {
+                nearestTick = lower;
+            }
         }
         //possibility that either of these values may end up being greater than TickMath.MAX_TICK (or vice versa), just subtract (or add) the tickSpacing
     }
