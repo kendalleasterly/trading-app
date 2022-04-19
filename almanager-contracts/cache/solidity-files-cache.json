@@ -1,44 +1,6 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/Users/kendalleasterly/Documents/Web3 Development/trading-app/almanager-contracts/contracts/Swapper.sol": {
-      "lastModificationDate": 1649821321114,
-      "contentHash": "a98d65bb98e43ef477bb2a0e47313de1",
-      "sourceName": "contracts/Swapper.sol",
-      "solcConfig": {
-        "version": "0.7.6",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol",
-        "@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol"
-      ],
-      "versionPragmas": [
-        "=0.7.6"
-      ],
-      "artifacts": [
-        "Swapper"
-      ]
-    },
     "/Users/kendalleasterly/Documents/Web3 Development/trading-app/almanager-contracts/node_modules/@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol": {
       "lastModificationDate": 1646493547602,
       "contentHash": "ffd42687b3db01d30c24213d961fcf9f",
@@ -184,8 +146,8 @@
       ]
     },
     "/Users/kendalleasterly/Documents/Web3 Development/trading-app/almanager-contracts/contracts/PositionManager.sol": {
-      "lastModificationDate": 1649882085482,
-      "contentHash": "e6fe18e4a4075158c1dd1507bf049779",
+      "lastModificationDate": 1650330663282,
+      "contentHash": "67c7e3e6665c79fd569ce84924b4ed72",
       "sourceName": "contracts/PositionManager.sol",
       "solcConfig": {
         "version": "0.7.6",
@@ -214,14 +176,15 @@
         "@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol",
         "@uniswap/v3-core/contracts/libraries/TickMath.sol",
         "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
         "@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol",
         "@uniswap/v3-periphery/contracts/interfaces/INonfungiblePositionManager.sol",
         "@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol",
         "@uniswap/v3-periphery/contracts/base/LiquidityManagement.sol",
         "@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol",
         "hardhat/console.sol",
-        "./RatioCalculator.sol",
-        "./Swapper.sol"
+        "./libraries/RatioCalculator.sol",
+        "./libraries/Swapper.sol"
       ],
       "versionPragmas": [
         "=0.7.6"
@@ -1474,10 +1437,10 @@
         "UnsafeMath"
       ]
     },
-    "/Users/kendalleasterly/Documents/Web3 Development/trading-app/almanager-contracts/contracts/RatioCalculator.sol": {
-      "lastModificationDate": 1649882106687,
+    "/Users/kendalleasterly/Documents/Web3 Development/trading-app/almanager-contracts/contracts/libraries/RatioCalculator.sol": {
+      "lastModificationDate": 1650212684524,
       "contentHash": "18f7825257d6c4d20638934dd8bd3ac5",
-      "sourceName": "contracts/RatioCalculator.sol",
+      "sourceName": "contracts/libraries/RatioCalculator.sol",
       "solcConfig": {
         "version": "0.7.6",
         "settings": {
@@ -1511,6 +1474,44 @@
       ],
       "artifacts": [
         "RatioCalculator"
+      ]
+    },
+    "/Users/kendalleasterly/Documents/Web3 Development/trading-app/almanager-contracts/contracts/libraries/Swapper.sol": {
+      "lastModificationDate": 1650212684557,
+      "contentHash": "a98d65bb98e43ef477bb2a0e47313de1",
+      "sourceName": "contracts/libraries/Swapper.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol",
+        "@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol"
+      ],
+      "versionPragmas": [
+        "=0.7.6"
+      ],
+      "artifacts": [
+        "Swapper"
       ]
     }
   }

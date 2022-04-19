@@ -5,6 +5,7 @@ pragma abicoder v2;
 import '@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol';
 import '@uniswap/v3-core/contracts/libraries/TickMath.sol';
 import '@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol';
+import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import '@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol';
 import '@uniswap/v3-periphery/contracts/interfaces/INonfungiblePositionManager.sol';
 import '@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol';
@@ -12,31 +13,13 @@ import '@uniswap/v3-periphery/contracts/base/LiquidityManagement.sol';
 import '@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol';
 
 import "hardhat/console.sol";
-import "./RatioCalculator.sol";
-import "./Swapper.sol";
+import "./libraries/RatioCalculator.sol";
+import "./libraries/Swapper.sol";
 
 contract PositionManager is IERC721Receiver, LiquidityManagement {
 
-    //this contract has custody of the nft. 
-    //this is optimal because if the nft is given to the user,
-    //then they will have to make a separate transaction to give the nft back to the contract each time.
-
-    // address public constant WETH = 0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619;
-    // address public constant DAI = 0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063;
-
-    // uint24 public constant poolFee = 3000;
-
     INonfungiblePositionManager public immutable nonfungiblePositionManager;
     ISwapRouter public immutable swapRouter;
-
-    struct Deposit {
-        address owner;
-        uint128 liquidity;
-        address token0;
-        address token1;
-    }
-
-    mapping(uint256 => Deposit) public deposits;
 
     constructor (
         INonfungiblePositionManager _nonfungiblePositionManager,
@@ -70,17 +53,9 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
         int24 tickSpacing;
         int24 spacingMultiplier;
         }
-    struct RefundParams {
-        uint256 amount0; 
-        uint256 amount1;
-        uint256 amount0ToMint; 
-        uint256 amount1ToMint; 
-        address token0; 
-        address token1;
-    }
 
     function mintNewPosition(MintParams memory mintParams)
-        external
+        private
         returns (
             uint256 tokenId,
             uint128 liquidity,
@@ -93,13 +68,10 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
         
         (uint160 sqrtPriceX96, int24 tick, , , , , ) = pool.slot0(); 
 
-        console.logInt(_nearestUsableTick(tick, mintParams.tickSpacing));
-        console.logInt(mintParams.spacingMultiplier);
         (uint256 amount0Desired, uint256 amount1Desired) = swap(mintParams, tick, sqrtPriceX96);
 
         _safeApprove(mintParams.token0, address(nonfungiblePositionManager), amount0Desired);
         _safeApprove(mintParams.token1, address(nonfungiblePositionManager), amount1Desired);
-        
         
         INonfungiblePositionManager.MintParams memory params = 
             INonfungiblePositionManager.MintParams({
@@ -112,33 +84,19 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
                 amount1Desired: amount1Desired,
                 amount0Min: 0, //TODO: Slippage tolerance the input value
                 amount1Min: 0, //TODO: Slippage tolerance the input value,
-                recipient: msg.sender,
+                recipient: address(this),
                 deadline: block.timestamp + 30 //30 seconds
             });
-
         
         (tokenId, liquidity, amount0, amount1) = nonfungiblePositionManager.mint(params);
+        console.log("liquidity", liquidity);
+        console.log("tokenID", tokenId);
 
-        // deposits[tokenId] = Deposit({owner: msg.sender, liquidity: liquidity, token0: token0, token1: token1});
-
-        RefundParams memory refundParams = RefundParams({
-            amount0: amount0,
-            amount1: amount1,
-            amount0ToMint: amount0Desired,
-            amount1ToMint: amount1Desired,
-            token0: mintParams.token0,
-            token1: mintParams.token1
-        });
-
-        refund(refundParams);
     }
 
     function swap(MintParams memory mintParams, int24 tick, uint160 sqrtRatioX96) private returns (uint256 amount0Out, uint256 amount1Out) {
 
         (bool zeroForOne, uint256 amountToSwap) = getAmountToSwap(mintParams, tick, sqrtRatioX96);
-
-        console.log("zero for one", zeroForOne);
-        console.log("amountToSwap", amountToSwap);
 
         Swapper.SwapParams memory params = Swapper.SwapParams({
             swapRouter: swapRouter,
@@ -148,14 +106,9 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
         });
 
         uint256 amountOut = Swapper.swapExactInputSingle(params);
-        console.log("amount Out", amountOut);
 
         amount0Out = zeroForOne ? mintParams.amount0ToMint - amountToSwap : mintParams.amount0ToMint + amountOut;
         amount1Out = zeroForOne ? mintParams.amount1ToMint + amountOut : mintParams.amount1ToMint - amountToSwap;
-        
-        console.log("amount0Out", amount0Out);
-        console.log("amount1Out", amount1Out);
-
     }
 
     function getAmountToSwap(MintParams memory mintParams, int24 tick, uint160 sqrtRatioX96) private view returns (bool zeroForOne, uint256 amountToSwap) {
@@ -185,21 +138,15 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
         }
 
         amountToSwap = (inputBalance - (ratioX64 * outputBalance / 2**64)) * 2**128 / ((ratioX64 * exchangeRateX64) + 2**128) ; //we add 2**128 to add 1. 
-        console.log("amount to swap", amountToSwap);
     }
 
-    function refund(RefundParams memory refundParams) private {
-        if (refundParams.amount0 < refundParams.amount0ToMint) {
-
-            uint256 refund0 = refundParams.amount0ToMint - refundParams.amount0;
-            _safeTransfer(refundParams.token0, msg.sender, refund0);
-        }
-
-        if (refundParams.amount1 < refundParams.amount1ToMint) {
-
-            uint256 refund1 = refundParams.amount1ToMint - refundParams.amount1;
-            _safeTransfer(refundParams.token1, msg.sender, refund1);
-        }
+    struct RefundParams {
+        uint256 amount0; 
+        uint256 amount1;
+        uint256 amount0ToMint; 
+        uint256 amount1ToMint; 
+        address token0; 
+        address token1;
     }
 
     function _safeTransfer(address token, address to, uint256 amount) private {
@@ -210,7 +157,7 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
         TransferHelper.safeApprove(token, to, amount);
     }
 
-    function _nearestUsableTick(int24 tick, int24 tickSpacing) private view returns (int24 nearestTick) {
+    function _nearestUsableTick(int24 tick, int24 tickSpacing) private pure returns (int24 nearestTick) {
 
         //find the difference between the upper nearest tick and the current tick, and the difference between the lower nearest tick and the current tick
         //see which difference is the least
@@ -241,5 +188,62 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
             }
         }
         //possibility that either of these values may end up being greater than TickMath.MAX_TICK (or vice versa), just subtract (or add) the tickSpacing
+    }
+
+    function mint(MintParams memory mintParams) public {
+
+        uint256 token0Balance = IERC20(mintParams.token0).balanceOf(address(this));
+        uint256 token1Balance = IERC20(mintParams.token1).balanceOf(address(this));
+
+        mintParams.amount0ToMint = token0Balance;
+        mintParams.amount1ToMint = token1Balance;
+
+        console.log(mintParams.amount0ToMint, mintParams.amount1ToMint);
+
+        //transfer the amounts
+
+        mintNewPosition(mintParams);
+
+        //edit mintParams using these values
+    }
+
+    struct RemoveLiquidityParams {
+        uint256 tokenId;
+        uint128 liquidity;
+        address token0; 
+        address token1;
+    }
+
+    function removeLiquidity(RemoveLiquidityParams memory removeLiquidityParams) public {
+        //decrease the stuff
+        
+        INonfungiblePositionManager.DecreaseLiquidityParams memory decreaseLiquidityParams = 
+            INonfungiblePositionManager.DecreaseLiquidityParams({
+                tokenId: removeLiquidityParams.tokenId,
+                liquidity: removeLiquidityParams.liquidity,
+                amount0Min: 0, //TODO: make this a slippage tolerance thing
+                amount1Min: 0,
+                deadline: block.timestamp + 30 //30 seconds
+            });
+
+        nonfungiblePositionManager.decreaseLiquidity(decreaseLiquidityParams);
+
+        //now collect
+
+        INonfungiblePositionManager.CollectParams memory collectParams = 
+            INonfungiblePositionManager.CollectParams({
+                tokenId: removeLiquidityParams.tokenId,
+                recipient: address(this),
+                amount0Max: type(uint128).max,
+                amount1Max: type(uint128).max
+            });
+        
+        nonfungiblePositionManager.collect(collectParams);
+    }
+
+    function resetPosition(RemoveLiquidityParams memory removeParams, MintParams memory mintParams) external {
+        removeLiquidity(removeParams);
+
+        mint(mintParams);
     }
 }

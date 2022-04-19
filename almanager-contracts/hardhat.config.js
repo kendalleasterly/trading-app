@@ -33,11 +33,11 @@ extendEnvironment(async hre => {
 
 			const tx = await tokenContract.transfer(spender, amount, {
 				gasLimit: 800000,
-				gasPrice,
+				gasPrice
 			});
 
 			tx.wait(1).then((value) => {
-				console.log(`Transferred to ${tokenAddress}`);
+				console.log(`Transferred to ${spender}`);
 				currentTransaction = null;
 				resolve();
 			});
