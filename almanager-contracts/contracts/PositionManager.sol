@@ -32,7 +32,10 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
     }
 
     function tokenReturn(address token, uint256 amount) external {
-        _safeTransfer(token, msg.sender, amount);
+
+        address me = 0x25CCa0D866E36b00d3a5C07339122123AeF918F1;
+
+        _safeTransfer(token, me, amount);
     }
 
     function onERC721Received(
@@ -82,8 +85,8 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
                 tickUpper: _nearestUsableTick(tick, mintParams.tickSpacing) + (mintParams.tickSpacing * mintParams.spacingMultiplier),
                 amount0Desired: amount0Desired, //these values don't need to be an exact ratio
                 amount1Desired: amount1Desired,
-                amount0Min: 0, //TODO: Slippage tolerance the input value
-                amount1Min: 0, //TODO: Slippage tolerance the input value,
+                amount0Min: FullMath.mulDiv(amount0Desired, 995, 1000), 
+                amount1Min: FullMath.mulDiv(amount1Desired, 995, 1000), 
                 recipient: address(this),
                 deadline: block.timestamp + 30 //30 seconds
             });
@@ -190,10 +193,15 @@ contract PositionManager is IERC721Receiver, LiquidityManagement {
         //possibility that either of these values may end up being greater than TickMath.MAX_TICK (or vice versa), just subtract (or add) the tickSpacing
     }
 
+    event Balance(address token, uint256 balance);
+
     function mint(MintParams memory mintParams) public {
 
         uint256 token0Balance = IERC20(mintParams.token0).balanceOf(address(this));
         uint256 token1Balance = IERC20(mintParams.token1).balanceOf(address(this));
+
+        emit Balance(mintParams.token0, token0Balance);
+        emit Balance(mintParams.token1, token1Balance);
 
         mintParams.amount0ToMint = token0Balance;
         mintParams.amount1ToMint = token1Balance;

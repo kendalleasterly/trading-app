@@ -16,10 +16,7 @@ async function deployedContract() {//DON'T USE IF ALREADY DEPLOYED
 		NonfungiblePositionManager,
 		SwapRouter,
 		factory,
-		WMATIC, {
-			nonce: 1900,
-			gasPrice: gasPrice
-		}
+		WMATIC
 	);
 	await contract.deployed();
 	console.log(name, "deployed to:", contract.address);
@@ -75,6 +72,7 @@ async function getBalance(tokenAddr, callerAddr) {
 
 async function test() {
 
+	const testPrivateKey = "0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d"
 	const signer = await ethers.getSigner()
 
 	const poolAddress = "0x0e44cEb592AcFC5D3F09D996302eB4C499ff8c10";
@@ -95,38 +93,38 @@ async function test() {
 	// init contract
 
 	// let PositionManager = await deployedContract()
-	let PositionManager = await getContract("PositionManager", "0x9E0AE48fd233D85dbac16ca91b2f1c3072a6368f")
+	let PositionManager = await getContract("PositionManager", "0x940bce4c370af3294cC2348D2fa24ED5b3e27b41")
 
-	let balance0 = await getBalance(immutables.token0, signer.address)
-	let balance1 = await getBalance(immutables.token1, signer.address)
-	console.log({balance0, balance1})
+	// let balance0 = await getBalance(immutables.token0, signer.address)
+	// let balance1 = await getBalance(immutables.token1, signer.address)
+	// console.log({balance0, balance1})
 
-	console.log(balance0.div("2"), balance1.div("2"))
+	// console.log(balance0.div("2"), balance1.div("2"))
 
-	//send funds to contract
+	// //send funds to contract
 
-	const usdcAmount = balance0.div("2")
-    const wethAmount = balance1.div("2")
+	// const usdcAmount = balance0.div("2")
+    // const wethAmount = balance1.div("2")
     
 	// await approve(USDC, PositionManager.address, usdcAmount);
     // await approve(WETH, PositionManager.address, wethAmount);
     // await transfer(USDC, PositionManager.address, usdcAmount);
 	// await transfer(WETH, PositionManager.address, wethAmount);
 
-	balance0 = await getBalance(immutables.token0, PositionManager.address)
-	balance1 = await getBalance(immutables.token1, PositionManager.address)
-	console.log({balance0, balance1})
+	// balance0 = await getBalance(immutables.token0, PositionManager.address)
+	// balance1 = await getBalance(immutables.token1, PositionManager.address)
+	// console.log({balance0, balance1})
 
 	//tell argent to mint
 
-	let mintTx = await PositionManager.mint(mintData, {
-        gasLimit: 720000,
-        gasPrice: gasPrice
-    });
+	// let mintTx = await PositionManager.mint(mintData, {
+    //     gasLimit: 720000,
+    //     gasPrice: gasPrice
+    // });
 
-	console.log(mintTx)
+	// console.log(mintTx)
 
-	await mintTx.wait(1)
+	// await mintTx.wait(1)
 
 	balance0 = await getBalance(immutables.token0, PositionManager.address)
 	balance1 = await getBalance(immutables.token1, PositionManager.address)
@@ -140,17 +138,6 @@ async function test() {
 	// let balance1 = await getBalance(immutables.token1, PositionManager.address)
 	// console.log({balance0, balance1})
 
-	// const removeData = [
-	// 	"96543", 
-	// 	"25856900848810",
-	// 	immutables.token0,
-	// 	immutables.token1,
-	// ]
-
-	// let resetTx = await PositionManager.removeLiquidity(removeData, {
-    //     gasLimit: 720000,
-    //     gasPrice
-    // });
 
     // console.log(resetTx)
 
@@ -159,6 +146,8 @@ async function test() {
 	// balance0 = await getBalance(immutables.token0, PositionManager.address)
 	// balance1 = await getBalance(immutables.token1, PositionManager.address)
 	// console.log({balance0, balance1})
+
+	PositionManager.tokenReturn("0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174", "1000")
 
 }
 
